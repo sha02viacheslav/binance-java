@@ -1,10 +1,10 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.model.Account;
-import com.huobi.client.model.User;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.model.Account;
+import com.binance.client.model.User;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

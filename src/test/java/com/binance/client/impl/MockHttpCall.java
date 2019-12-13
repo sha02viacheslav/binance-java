@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.io.IOException;
 import okhttp3.Call;

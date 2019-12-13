@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -11,8 +11,8 @@ import java.util.Base64;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.UrlParamsBuilder;
 
 class ApiSignatureV2 {
 

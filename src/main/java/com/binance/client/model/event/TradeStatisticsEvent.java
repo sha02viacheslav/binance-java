@@ -1,6 +1,6 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
-import com.huobi.client.model.TradeStatistics;
+import com.binance.client.model.TradeStatistics;
 
 /**
  * The 24H trade statistics received by subscription of trade statistics.

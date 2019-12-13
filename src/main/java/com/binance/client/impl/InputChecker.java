@@ -1,6 +1,6 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.exception.HuobiApiException;
 
 import java.util.List;
 import java.util.regex.Matcher;

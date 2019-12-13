@@ -1,18 +1,18 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
-import com.huobi.client.SubscriptionClient;
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.examples.constants.Constants;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.BalanceMode;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.request.AccountHistoryRequest;
-import com.huobi.client.model.request.CandlestickRequest;
-import com.huobi.client.model.request.CrossMarginLoanOrderRequest;
-import com.huobi.client.model.request.LoanOrderRequest;
-import com.huobi.client.model.request.OpenOrderRequest;
-import com.huobi.client.model.request.OrdersRequest;
+import com.binance.client.SubscriptionClient;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.examples.constants.Constants;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.BalanceMode;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.request.AccountHistoryRequest;
+import com.binance.client.model.request.CandlestickRequest;
+import com.binance.client.model.request.CrossMarginLoanOrderRequest;
+import com.binance.client.model.request.LoanOrderRequest;
+import com.binance.client.model.request.OpenOrderRequest;
+import com.binance.client.model.request.OrdersRequest;
 
 public class TestExamples {
 

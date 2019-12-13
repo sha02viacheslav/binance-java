@@ -1,21 +1,21 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.examples.constants.Constants;
-import com.huobi.client.model.Account;
-import com.huobi.client.model.AccountHistory;
-import com.huobi.client.model.Deposit;
-import com.huobi.client.model.DepositAddress;
-import com.huobi.client.model.Withdraw;
-import com.huobi.client.model.WithdrawQuota;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.request.AccountHistoryRequest;
-import com.huobi.client.model.request.WithdrawRequest;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.examples.constants.Constants;
+import com.binance.client.model.Account;
+import com.binance.client.model.AccountHistory;
+import com.binance.client.model.Deposit;
+import com.binance.client.model.DepositAddress;
+import com.binance.client.model.Withdraw;
+import com.binance.client.model.WithdrawQuota;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.request.AccountHistoryRequest;
+import com.binance.client.model.request.WithdrawRequest;
 
 
 public class WalletExamples {

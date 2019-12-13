@@ -1,6 +1,6 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
-import com.huobi.client.model.Trade;
+import com.binance.client.model.Trade;
 import java.util.List;
 
 /**

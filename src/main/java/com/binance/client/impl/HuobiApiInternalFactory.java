@@ -1,10 +1,10 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.AsyncRequestClient;
-import com.huobi.client.RequestOptions;
-import com.huobi.client.SubscriptionClient;
-import com.huobi.client.SubscriptionOptions;
-import com.huobi.client.SyncRequestClient;
+import com.binance.client.AsyncRequestClient;
+import com.binance.client.RequestOptions;
+import com.binance.client.SubscriptionClient;
+import com.binance.client.SubscriptionOptions;
+import com.binance.client.SyncRequestClient;
 import java.net.URI;
 
 public final class HuobiApiInternalFactory {

@@ -1,8 +1,8 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
 import java.util.List;
 
-import com.huobi.client.model.DepthEntry;
+import com.binance.client.model.DepthEntry;
 
 public class MarketDepthMBPEvent {
 

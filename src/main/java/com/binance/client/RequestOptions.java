@@ -1,6 +1,6 @@
-package com.huobi.client;
+package com.binance.client;
 
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.exception.HuobiApiException;
 import java.net.URL;
 
 /**

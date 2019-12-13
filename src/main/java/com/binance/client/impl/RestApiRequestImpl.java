@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -10,102 +10,95 @@ import java.util.Map;
 
 import okhttp3.Request;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.impl.utils.JsonWrapperArray;
-import com.huobi.client.impl.utils.UrlParamsBuilder;
-import com.huobi.client.model.Account;
-import com.huobi.client.model.AccountHistory;
-import com.huobi.client.model.Balance;
-import com.huobi.client.model.BatchCancelResult;
-import com.huobi.client.model.BestQuote;
-import com.huobi.client.model.Candlestick;
-import com.huobi.client.model.CompleteSubAccountInfo;
-import com.huobi.client.model.CrossMarginAccount;
-import com.huobi.client.model.CrossMarginLoanOrder;
-import com.huobi.client.model.Currency;
-import com.huobi.client.model.Deposit;
-import com.huobi.client.model.DepositAddress;
-import com.huobi.client.model.DepthEntry;
-import com.huobi.client.model.EtfSwapConfig;
-import com.huobi.client.model.EtfSwapHistory;
-import com.huobi.client.model.FeeRate;
-import com.huobi.client.model.Loan;
-import com.huobi.client.model.MarginBalanceDetail;
-import com.huobi.client.model.MatchResult;
-import com.huobi.client.model.Order;
-import com.huobi.client.model.PriceDepth;
-import com.huobi.client.model.Symbol;
-import com.huobi.client.model.Trade;
-import com.huobi.client.model.TradeStatistics;
-import com.huobi.client.model.UnitPrice;
-import com.huobi.client.model.Withdraw;
-import com.huobi.client.model.WithdrawQuota;
-import com.huobi.client.model.enums.AccountState;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.BalanceType;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.enums.CrossMarginTransferType;
-import com.huobi.client.model.enums.DealRole;
-import com.huobi.client.model.enums.DepositState;
-import com.huobi.client.model.enums.EtfStatus;
-import com.huobi.client.model.enums.EtfSwapType;
-import com.huobi.client.model.enums.LoanOrderStates;
-import com.huobi.client.model.enums.OrderSource;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
-import com.huobi.client.model.enums.QueryDirection;
-import com.huobi.client.model.enums.StopOrderOperator;
-import com.huobi.client.model.enums.TradeDirection;
-import com.huobi.client.model.enums.WithdrawState;
-import com.huobi.client.model.request.AccountHistoryRequest;
-import com.huobi.client.model.request.CancelOpenOrderRequest;
-import com.huobi.client.model.request.CrossMarginApplyLoanRequest;
-import com.huobi.client.model.request.CrossMarginLoanOrderRequest;
-import com.huobi.client.model.request.CrossMarginRepayLoanRequest;
-import com.huobi.client.model.request.CrossMarginTransferRequest;
-import com.huobi.client.model.request.HistoricalOrdersRequest;
-import com.huobi.client.model.request.LoanOrderRequest;
-import com.huobi.client.model.request.MatchResultRequest;
-import com.huobi.client.model.request.NewOrderRequest;
-import com.huobi.client.model.request.OpenOrderRequest;
-import com.huobi.client.model.request.OrdersHistoryRequest;
-import com.huobi.client.model.request.OrdersRequest;
-import com.huobi.client.model.request.TransferFuturesRequest;
-import com.huobi.client.model.request.TransferMasterRequest;
-import com.huobi.client.model.request.TransferRequest;
-import com.huobi.client.model.request.WithdrawRequest;
+import com.binance.client.RequestOptions;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapperArray;
+import com.binance.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.model.Account;
+import com.binance.client.model.AccountHistory;
+import com.binance.client.model.Balance;
+import com.binance.client.model.BatchCancelResult;
+import com.binance.client.model.BestQuote;
+import com.binance.client.model.Candlestick;
+import com.binance.client.model.CompleteSubAccountInfo;
+import com.binance.client.model.CrossMarginAccount;
+import com.binance.client.model.CrossMarginLoanOrder;
+import com.binance.client.model.Currency;
+import com.binance.client.model.Deposit;
+import com.binance.client.model.DepositAddress;
+import com.binance.client.model.DepthEntry;
+import com.binance.client.model.EtfSwapConfig;
+import com.binance.client.model.EtfSwapHistory;
+import com.binance.client.model.FeeRate;
+import com.binance.client.model.Loan;
+import com.binance.client.model.MarginBalanceDetail;
+import com.binance.client.model.MatchResult;
+import com.binance.client.model.Order;
+import com.binance.client.model.PriceDepth;
+import com.binance.client.model.Symbol;
+import com.binance.client.model.Trade;
+import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.UnitPrice;
+import com.binance.client.model.Withdraw;
+import com.binance.client.model.WithdrawQuota;
+import com.binance.client.model.enums.AccountState;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.BalanceType;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.enums.CrossMarginTransferType;
+import com.binance.client.model.enums.DealRole;
+import com.binance.client.model.enums.DepositState;
+import com.binance.client.model.enums.EtfStatus;
+import com.binance.client.model.enums.EtfSwapType;
+import com.binance.client.model.enums.LoanOrderStates;
+import com.binance.client.model.enums.OrderSource;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
+import com.binance.client.model.enums.QueryDirection;
+import com.binance.client.model.enums.StopOrderOperator;
+import com.binance.client.model.enums.TradeDirection;
+import com.binance.client.model.enums.WithdrawState;
+import com.binance.client.model.request.AccountHistoryRequest;
+import com.binance.client.model.request.CancelOpenOrderRequest;
+import com.binance.client.model.request.CrossMarginApplyLoanRequest;
+import com.binance.client.model.request.CrossMarginLoanOrderRequest;
+import com.binance.client.model.request.CrossMarginRepayLoanRequest;
+import com.binance.client.model.request.CrossMarginTransferRequest;
+import com.binance.client.model.request.HistoricalOrdersRequest;
+import com.binance.client.model.request.LoanOrderRequest;
+import com.binance.client.model.request.MatchResultRequest;
+import com.binance.client.model.request.NewOrderRequest;
+import com.binance.client.model.request.OpenOrderRequest;
+import com.binance.client.model.request.OrdersHistoryRequest;
+import com.binance.client.model.request.OrdersRequest;
+import com.binance.client.model.request.TransferFuturesRequest;
+import com.binance.client.model.request.TransferMasterRequest;
+import com.binance.client.model.request.TransferRequest;
+import com.binance.client.model.request.WithdrawRequest;
 
 class RestApiRequestImpl {
 
   private String apiKey;
   private String secretKey;
-  private String marketQueryUrl = "https://api.huobi.pro:443";
-  private String tradingUrl = "https://api.huobi.pro:443";
+  private String serverUrl;
   private RequestOptions options;
   private String tradingHost;
 
   RestApiRequestImpl(String apiKey, String secretKey, RequestOptions options) {
     this.apiKey = apiKey;
     this.secretKey = secretKey;
+    this.serverUrl = this.options.getUrl();
     this.options = options;
     try {
       String host = new URL(this.options.getUrl()).getHost();
       this.tradingHost = host;
-      if (host.indexOf("api") == 0) {
-        this.marketQueryUrl = "https://" + host;
-        this.tradingUrl = "https://" + host;
-      } else {
-        this.marketQueryUrl = "https://" + host + "/api";
-        this.tradingUrl = "https://" + host + "/api";
-      }
     } catch (Exception e) {
     }
   }
 
   private Request createRequestByGet(String address, UrlParamsBuilder builder) {
-    return createRequestByGet(marketQueryUrl, address, builder);
+    return createRequestByGet(serverUrl, address, builder);
   }
 
   private Request createRequestByGet(String url, String address, UrlParamsBuilder builder) {
@@ -150,11 +143,11 @@ class RestApiRequestImpl {
   }
 
   private Request createRequestByPostWithSignature(String address, UrlParamsBuilder builder) {
-    return createRequestWithSignature(tradingUrl, address, tradingHost, builder.setPostMode(true));
+    return createRequestWithSignature(serverUrl, address, tradingHost, builder.setPostMode(true));
   }
 
   private Request createRequestByGetWithSignature(String address, UrlParamsBuilder builder) {
-    return createRequestWithSignature(tradingUrl, address, tradingHost, builder);
+    return createRequestWithSignature(serverUrl, address, tradingHost, builder);
   }
 
   RestApiRequest<Long> getExchangeTimestamp() {

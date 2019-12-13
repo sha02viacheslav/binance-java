@@ -1,9 +1,9 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
 import java.util.List;
 
 
-import com.huobi.client.model.Account;
+import com.binance.client.model.Account;
 
 /**
  * The account list event information received by request of account list.

@@ -1,8 +1,8 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
 import java.util.List;
 
-import com.huobi.client.model.Order;
+import com.binance.client.model.Order;
 
 /**
  * The order received by subscription of order list request.

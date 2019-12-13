@@ -1,24 +1,24 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.examples.constants.Constants;
-import com.huobi.client.model.FeeRate;
-import com.huobi.client.model.MatchResult;
-import com.huobi.client.model.Order;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
-import com.huobi.client.model.enums.StopOrderOperator;
-import com.huobi.client.model.request.HistoricalOrdersRequest;
-import com.huobi.client.model.request.MatchResultRequest;
-import com.huobi.client.model.request.NewOrderRequest;
-import com.huobi.client.model.request.OpenOrderRequest;
-import com.huobi.client.model.request.OrdersHistoryRequest;
-import com.huobi.client.model.request.OrdersRequest;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.examples.constants.Constants;
+import com.binance.client.model.FeeRate;
+import com.binance.client.model.MatchResult;
+import com.binance.client.model.Order;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
+import com.binance.client.model.enums.StopOrderOperator;
+import com.binance.client.model.request.HistoricalOrdersRequest;
+import com.binance.client.model.request.MatchResultRequest;
+import com.binance.client.model.request.NewOrderRequest;
+import com.binance.client.model.request.OpenOrderRequest;
+import com.binance.client.model.request.OrdersHistoryRequest;
+import com.binance.client.model.request.OrdersRequest;
 
 public class PlaceOrder {
 

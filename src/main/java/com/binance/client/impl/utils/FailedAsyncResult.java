@@ -1,7 +1,7 @@
-package com.huobi.client.impl.utils;
+package com.binance.client.impl.utils;
 
-import com.huobi.client.AsyncResult;
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.AsyncResult;
+import com.binance.client.exception.HuobiApiException;
 
 public class FailedAsyncResult<T> implements AsyncResult<T> {
 

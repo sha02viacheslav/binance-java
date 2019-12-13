@@ -1,9 +1,9 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
-import com.huobi.client.SubscriptionListener;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.BalanceMode;
-import com.huobi.client.model.enums.BalanceType;
+import com.binance.client.SubscriptionListener;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.BalanceMode;
+import com.binance.client.model.enums.BalanceType;
 import java.math.BigDecimal;
 
 /**
@@ -39,7 +39,7 @@ public class AccountChange {
 
   /**
    * Get the balance after the change. If the {@link BalanceMode} in {@link
-   * com.huobi.client.SubscriptionClient#subscribeAccountEvent(BalanceMode, SubscriptionListener)}
+   * com.binance.client.SubscriptionClient#subscribeAccountEvent(BalanceMode, SubscriptionListener)}
    * is AVAILABLE, the balance refers to available balance. If the {@link BalanceMode} is TOTAL, the
    * balance refers to total balance for trade sub account (available+frozen)
    *

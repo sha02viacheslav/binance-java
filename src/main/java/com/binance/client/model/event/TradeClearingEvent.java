@@ -1,6 +1,6 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
-import com.huobi.client.model.TradeClearing;
+import com.binance.client.model.TradeClearing;
 
 public class TradeClearingEvent {
 

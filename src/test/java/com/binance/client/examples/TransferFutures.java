@@ -1,11 +1,11 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import java.math.BigDecimal;
 
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.examples.constants.Constants;
-import com.huobi.client.model.enums.TransferFuturesDirection;
-import com.huobi.client.model.request.TransferFuturesRequest;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.examples.constants.Constants;
+import com.binance.client.model.enums.TransferFuturesDirection;
+import com.binance.client.model.request.TransferFuturesRequest;
 
 public class TransferFutures {
 

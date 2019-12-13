@@ -1,8 +1,8 @@
-package com.huobi.client.impl.utils;
+package com.binance.client.impl.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.exception.HuobiApiException;
 import java.math.BigDecimal;
 
 public class JsonWrapperArray {

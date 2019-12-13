@@ -1,9 +1,9 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
-import com.huobi.client.AsyncRequestClient;
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.model.Candlestick;
-import com.huobi.client.model.enums.CandlestickInterval;
+import com.binance.client.AsyncRequestClient;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.model.Candlestick;
+import com.binance.client.model.enums.CandlestickInterval;
 import java.util.List;
 
 public class GetCandlestickData {

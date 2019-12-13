@@ -1,0 +1,154 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-CrossMarginExamples<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.CrossMarginExamples",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Get24HTradeStatistics<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.Get24HTradeStatistics",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-GetCandlestickData<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.GetCandlestickData",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-GetExchangeInfo<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.GetExchangeInfo",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-GetHistoricalTrade<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.GetHistoricalTrade",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-GetPriceDepth<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.GetPriceDepth",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-OrderBookCacheExamples<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.OrderBookCacheExamples",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PlaceOrder<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.PlaceOrder",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SortByTicker<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SortByTicker",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Subscribe24HTradeStatistics<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.Subscribe24HTradeStatistics",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SubscribeAccountChange<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SubscribeAccountChange",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SubscribeCandlestickEvent<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SubscribeCandlestickEvent",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SubscribeMarketBBO<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SubscribeMarketBBO",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SubscribeMarketDepth<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SubscribeMarketDepth",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SubscribeMarketDepthMBP<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SubscribeMarketDepthMBP",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SubscribeOrderUpdate<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SubscribeOrderUpdate",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SubscribeTradeEvent<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.SubscribeTradeEvent",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestExamples<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.TestExamples",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TransferFutures<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.TransferFutures",
+            "projectName": "binance-client"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-WalletExamples<binance-client>",
+            "request": "launch",
+            "mainClass": "com.binance.client.examples.WalletExamples",
+            "projectName": "binance-client"
+        }
+    ]
+}

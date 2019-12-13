@@ -1,8 +1,8 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.SubscriptionErrorHandler;
-import com.huobi.client.SubscriptionListener;
-import com.huobi.client.impl.utils.Handler;
+import com.binance.client.SubscriptionErrorHandler;
+import com.binance.client.SubscriptionListener;
+import com.binance.client.impl.utils.Handler;
 
 class WebsocketRequest<T> {
 

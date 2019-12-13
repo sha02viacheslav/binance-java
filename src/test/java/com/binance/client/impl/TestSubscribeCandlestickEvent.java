@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.event.CandlestickEvent;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.event.CandlestickEvent;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

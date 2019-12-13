@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,13 +13,13 @@ import okio.ByteString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.huobi.client.SubscriptionOptions;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.InternalUtils;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.SubscriptionOptions;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.InternalUtils;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.UrlParamsBuilder;
 
-import static com.huobi.client.impl.utils.InternalUtils.decode;
+import static com.binance.client.impl.utils.InternalUtils.decode;
 
 public class WebSocketConnection extends WebSocketListener {
 
@@ -65,8 +65,8 @@ public class WebSocketConnection extends WebSocketListener {
   private final int connectionId;
   private final boolean autoClose;
 
-  private String subscriptionMarketUrl = "wss://api.huobi.pro/ws";
-  private String subscriptionTradingUrl = "wss://api.huobi.pro/ws/v1";
+  private String subscriptionMarketUrl = "wss://api.binance.pro/ws";
+  private String subscriptionTradingUrl = "wss://api.binance.pro/ws/v1";
   private String tradingHost;
 
   WebSocketConnection(

@@ -1,9 +1,9 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
 import java.util.List;
 
-import com.huobi.client.model.Candlestick;
-import com.huobi.client.model.enums.CandlestickInterval;
+import com.binance.client.model.Candlestick;
+import com.binance.client.model.enums.CandlestickInterval;
 
 /**
  * The candlestick/kline data received by subscription of candlestick/kline.

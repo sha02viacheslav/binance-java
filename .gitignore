@@ -6,5 +6,5 @@ target
 .project
 *.iml
 *.tmp
-src/main/java/com/huobi/.DS_Store
-src/main/java/com/huobi/client/.DS_Store
+src/main/java/com/binance/.DS_Store
+src/main/java/com/binance/client/.DS_Store

@@ -1,8 +1,8 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
-import com.huobi.client.SubscriptionClient;
-import com.huobi.client.SubscriptionOptions;
-import com.huobi.client.model.enums.CandlestickInterval;
+import com.binance.client.SubscriptionClient;
+import com.binance.client.SubscriptionOptions;
+import com.binance.client.model.enums.CandlestickInterval;
 
 public class SubscribeCandlestickEvent {
   public static void main(String[] args) {

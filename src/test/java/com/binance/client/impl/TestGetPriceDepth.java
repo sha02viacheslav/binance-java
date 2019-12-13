@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.math.BigDecimal;
 
@@ -8,11 +8,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.model.PriceDepth;
-import com.huobi.client.model.User;
+import com.binance.client.RequestOptions;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.model.PriceDepth;
+import com.binance.client.model.User;
 
 import static org.junit.Assert.assertEquals;
 

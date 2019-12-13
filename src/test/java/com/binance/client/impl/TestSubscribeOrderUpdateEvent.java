@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -12,13 +12,13 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.model.Account;
-import com.huobi.client.model.User;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.OrderSource;
-import com.huobi.client.model.enums.OrderType;
-import com.huobi.client.model.event.OrderUpdateEvent;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.model.Account;
+import com.binance.client.model.User;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.OrderSource;
+import com.binance.client.model.enums.OrderType;
+import com.binance.client.model.event.OrderUpdateEvent;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

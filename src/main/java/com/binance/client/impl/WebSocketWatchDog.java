@@ -1,7 +1,7 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.SubscriptionOptions;
-import com.huobi.client.impl.WebSocketConnection.ConnectionState;
+import com.binance.client.SubscriptionOptions;
+import com.binance.client.impl.WebSocketConnection.ConnectionState;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executors;

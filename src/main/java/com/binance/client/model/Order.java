@@ -1,10 +1,10 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.OrderSource;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
-import com.huobi.client.model.enums.StopOrderOperator;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.OrderSource;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
+import com.binance.client.model.enums.StopOrderOperator;
 
 import java.math.BigDecimal;
 

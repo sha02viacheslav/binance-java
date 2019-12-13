@@ -1,4 +1,4 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
 public class DepositAddress {
 

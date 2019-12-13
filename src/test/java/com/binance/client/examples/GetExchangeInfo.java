@@ -1,14 +1,14 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 
-import com.huobi.client.AsyncRequestClient;
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.model.Currency;
-import com.huobi.client.model.ExchangeInfo;
-import com.huobi.client.model.Symbol;
+import com.binance.client.AsyncRequestClient;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.model.Currency;
+import com.binance.client.model.ExchangeInfo;
+import com.binance.client.model.Symbol;
 
 public class GetExchangeInfo {
   public static void main(String[] args) {

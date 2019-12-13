@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -6,9 +6,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import com.huobi.client.SubscriptionErrorHandler;
-import com.huobi.client.SubscriptionListener;
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.SubscriptionErrorHandler;
+import com.binance.client.SubscriptionListener;
+import com.binance.client.exception.HuobiApiException;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 

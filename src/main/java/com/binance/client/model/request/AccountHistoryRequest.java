@@ -1,10 +1,10 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
 import java.util.List;
 
 
-import com.huobi.client.model.enums.QuerySort;
-import com.huobi.client.model.enums.TransactType;
+import com.binance.client.model.enums.QuerySort;
+import com.binance.client.model.enums.TransactType;
 
 public class AccountHistoryRequest {
 

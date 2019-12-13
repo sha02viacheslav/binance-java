@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.io.IOException;
 
@@ -12,13 +12,13 @@ import okhttp3.WebSocketListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.huobi.client.AsyncResult;
-import com.huobi.client.ResponseCallback;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.EtfResult;
-import com.huobi.client.impl.utils.FailedAsyncResult;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.impl.utils.SucceededAsyncResult;
+import com.binance.client.AsyncResult;
+import com.binance.client.ResponseCallback;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.EtfResult;
+import com.binance.client.impl.utils.FailedAsyncResult;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.SucceededAsyncResult;
 
 abstract class RestApiInvoker {
 

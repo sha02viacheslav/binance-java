@@ -1,4 +1,4 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,12 +6,12 @@ import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import com.huobi.client.SubscriptionClient;
-import com.huobi.client.examples.constants.Constants;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
-import com.huobi.client.model.enums.QueryDirection;
-import com.huobi.client.model.request.OrdersRequest;
+import com.binance.client.SubscriptionClient;
+import com.binance.client.examples.constants.Constants;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
+import com.binance.client.model.enums.QueryDirection;
+import com.binance.client.model.request.OrdersRequest;
 
 public class SubscribeOrderUpdate {
 

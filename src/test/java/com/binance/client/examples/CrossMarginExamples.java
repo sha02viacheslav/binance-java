@@ -1,4 +1,4 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -6,16 +6,16 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.examples.constants.Constants;
-import com.huobi.client.model.CrossMarginAccount;
-import com.huobi.client.model.CrossMarginLoanOrder;
-import com.huobi.client.model.enums.CrossMarginTransferType;
-import com.huobi.client.model.enums.QueryDirection;
-import com.huobi.client.model.request.CrossMarginApplyLoanRequest;
-import com.huobi.client.model.request.CrossMarginLoanOrderRequest;
-import com.huobi.client.model.request.CrossMarginRepayLoanRequest;
-import com.huobi.client.model.request.CrossMarginTransferRequest;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.examples.constants.Constants;
+import com.binance.client.model.CrossMarginAccount;
+import com.binance.client.model.CrossMarginLoanOrder;
+import com.binance.client.model.enums.CrossMarginTransferType;
+import com.binance.client.model.enums.QueryDirection;
+import com.binance.client.model.request.CrossMarginApplyLoanRequest;
+import com.binance.client.model.request.CrossMarginLoanOrderRequest;
+import com.binance.client.model.request.CrossMarginRepayLoanRequest;
+import com.binance.client.model.request.CrossMarginTransferRequest;
 
 public class CrossMarginExamples {
 

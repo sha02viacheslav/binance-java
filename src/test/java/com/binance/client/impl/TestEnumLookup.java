@@ -1,9 +1,9 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.EnumLookup;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.EnumLookup;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

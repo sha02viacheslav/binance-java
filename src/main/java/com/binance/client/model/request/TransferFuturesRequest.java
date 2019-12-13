@@ -1,9 +1,9 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
 import java.math.BigDecimal;
 
 
-import com.huobi.client.model.enums.TransferFuturesDirection;
+import com.binance.client.model.enums.TransferFuturesDirection;
 
 public class TransferFuturesRequest {
 

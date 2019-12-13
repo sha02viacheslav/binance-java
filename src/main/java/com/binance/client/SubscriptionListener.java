@@ -1,4 +1,4 @@
-package com.huobi.client;
+package com.binance.client;
 
 /**
  * You must implement the SubscriptionListener interface. <br> The server will push any update to

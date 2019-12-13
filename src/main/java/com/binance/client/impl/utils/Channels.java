@@ -1,12 +1,12 @@
-package com.huobi.client.impl.utils;
+package com.binance.client.impl.utils;
 
 import com.alibaba.fastjson.JSONObject;
 
-import com.huobi.client.model.enums.AccountChangeModeEnum;
-import com.huobi.client.model.enums.BalanceMode;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.enums.DepthStep;
-import com.huobi.client.model.enums.MBPLevelEnums;
+import com.binance.client.model.enums.AccountChangeModeEnum;
+import com.binance.client.model.enums.BalanceMode;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.enums.DepthStep;
+import com.binance.client.model.enums.MBPLevelEnums;
 
 public abstract class Channels {
 

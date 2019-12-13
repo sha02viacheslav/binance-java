@@ -1,9 +1,9 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
-import com.huobi.client.AsyncRequestClient;
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.model.DepthEntry;
-import com.huobi.client.model.PriceDepth;
+import com.binance.client.AsyncRequestClient;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.model.DepthEntry;
+import com.binance.client.model.PriceDepth;
 
 public class GetPriceDepth {
   public static void main(String[] args) {

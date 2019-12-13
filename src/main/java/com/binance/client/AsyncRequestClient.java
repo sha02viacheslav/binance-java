@@ -1,44 +1,44 @@
-package com.huobi.client;
+package com.binance.client;
 
-import com.huobi.client.impl.HuobiApiInternalFactory;
-import com.huobi.client.model.Account;
-import com.huobi.client.model.Balance;
-import com.huobi.client.model.BatchCancelResult;
-import com.huobi.client.model.BestQuote;
-import com.huobi.client.model.Candlestick;
-import com.huobi.client.model.CompleteSubAccountInfo;
-import com.huobi.client.model.Deposit;
-import com.huobi.client.model.EtfSwapConfig;
-import com.huobi.client.model.EtfSwapHistory;
-import com.huobi.client.model.ExchangeInfo;
-import com.huobi.client.model.FeeRate;
-import com.huobi.client.model.LastTradeAndBestQuote;
-import com.huobi.client.model.Loan;
-import com.huobi.client.model.MarginBalanceDetail;
-import com.huobi.client.model.MatchResult;
-import com.huobi.client.model.Order;
-import com.huobi.client.model.PriceDepth;
-import com.huobi.client.model.Symbol;
-import com.huobi.client.model.enums.EtfSwapType;
-import com.huobi.client.model.enums.QueryDirection;
-import com.huobi.client.model.request.OrdersHistoryRequest;
-import com.huobi.client.model.request.OrdersRequest;
-import com.huobi.client.model.request.TransferFuturesRequest;
-import com.huobi.client.model.request.TransferMasterRequest;
-import com.huobi.client.model.Trade;
-import com.huobi.client.model.TradeStatistics;
-import com.huobi.client.model.Withdraw;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.request.CancelOpenOrderRequest;
-import com.huobi.client.model.request.CandlestickRequest;
-import com.huobi.client.model.request.HistoricalOrdersRequest;
-import com.huobi.client.model.request.LoanOrderRequest;
-import com.huobi.client.model.request.MatchResultRequest;
-import com.huobi.client.model.request.NewOrderRequest;
-import com.huobi.client.model.request.OpenOrderRequest;
-import com.huobi.client.model.request.TransferRequest;
-import com.huobi.client.model.request.WithdrawRequest;
+import com.binance.client.impl.HuobiApiInternalFactory;
+import com.binance.client.model.Account;
+import com.binance.client.model.Balance;
+import com.binance.client.model.BatchCancelResult;
+import com.binance.client.model.BestQuote;
+import com.binance.client.model.Candlestick;
+import com.binance.client.model.CompleteSubAccountInfo;
+import com.binance.client.model.Deposit;
+import com.binance.client.model.EtfSwapConfig;
+import com.binance.client.model.EtfSwapHistory;
+import com.binance.client.model.ExchangeInfo;
+import com.binance.client.model.FeeRate;
+import com.binance.client.model.LastTradeAndBestQuote;
+import com.binance.client.model.Loan;
+import com.binance.client.model.MarginBalanceDetail;
+import com.binance.client.model.MatchResult;
+import com.binance.client.model.Order;
+import com.binance.client.model.PriceDepth;
+import com.binance.client.model.Symbol;
+import com.binance.client.model.enums.EtfSwapType;
+import com.binance.client.model.enums.QueryDirection;
+import com.binance.client.model.request.OrdersHistoryRequest;
+import com.binance.client.model.request.OrdersRequest;
+import com.binance.client.model.request.TransferFuturesRequest;
+import com.binance.client.model.request.TransferMasterRequest;
+import com.binance.client.model.Trade;
+import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.Withdraw;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.request.CancelOpenOrderRequest;
+import com.binance.client.model.request.CandlestickRequest;
+import com.binance.client.model.request.HistoricalOrdersRequest;
+import com.binance.client.model.request.LoanOrderRequest;
+import com.binance.client.model.request.MatchResultRequest;
+import com.binance.client.model.request.NewOrderRequest;
+import com.binance.client.model.request.OpenOrderRequest;
+import com.binance.client.model.request.TransferRequest;
+import com.binance.client.model.request.WithdrawRequest;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -130,7 +130,7 @@ public interface AsyncRequestClient {
       ResponseCallback<AsyncResult<TradeStatistics>> callback);
 
   /**
-   * Get all the trading assets and currencies supported in huobi. The information of trading instrument, including base currency, quote precision,
+   * Get all the trading assets and currencies supported in binance. The information of trading instrument, including base currency, quote precision,
    * etc.
    *
    * @param callback The callback you should implemented.
@@ -139,14 +139,14 @@ public interface AsyncRequestClient {
 
 
   /**
-   * Get all the trading currencies supported in Huobi.
+   * Get all the trading currencies supported in binance.
    *
    * @return The name of trading currencies .
    */
   void getCurrencies(ResponseCallback<AsyncResult<List<String>>> callback);
 
   /**
-   * Get all the trading symbol supported in Huobi.
+   * Get all the trading symbol supported in binance.
    *
    * @return The information of trading symbol .
    */
@@ -281,7 +281,7 @@ public interface AsyncRequestClient {
   void getAccountBalance(AccountType accountType, ResponseCallback<AsyncResult<Account>> callback);
 
   /**
-   * Make an order in huobi.
+   * Make an order in binance.
    *
    * @param newOrderRequest The request of an order ,including account-id,amount , price ,etc.
    * @param callback The callback you should implemented.
@@ -514,8 +514,8 @@ public interface AsyncRequestClient {
   /**
    * Create the asynchronous client. All interfaces defined in asynchronous client are implemented by asynchronous mode.
    *
-   * @param apiKey The public key applied from Huobi.
-   * @param secretKey The private key applied from Huobi.
+   * @param apiKey The public key applied from binance.
+   * @param secretKey The private key applied from binance.
    * @return The instance of asynchronous client.
    */
   static AsyncRequestClient create(String apiKey, String secretKey) {
@@ -526,8 +526,8 @@ public interface AsyncRequestClient {
   /**
    * Create the asynchronous client. All interfaces defined in asynchronous client are implemented by asynchronous mode.
    *
-   * @param apiKey The public key applied from Huobi.
-   * @param secretKey The private key applied from Huobi.
+   * @param apiKey The public key applied from binance.
+   * @param secretKey The private key applied from binance.
    * @param options The request option.
    * @return The instance of asynchronous client.
    */

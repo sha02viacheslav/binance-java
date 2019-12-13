@@ -1,6 +1,6 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
-import com.huobi.client.model.enums.TransferMasterType;
+import com.binance.client.model.enums.TransferMasterType;
 
 
 import java.math.BigDecimal;

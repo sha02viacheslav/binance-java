@@ -1,8 +1,8 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.SubscriptionOptions;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.JsonWrapper;
+import com.binance.client.SubscriptionOptions;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.JsonWrapper;
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.util.zip.GZIPOutputStream;

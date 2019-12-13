@@ -1,6 +1,6 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
-import com.huobi.client.model.PriceDepth;
+import com.binance.client.model.PriceDepth;
 
 /**
  * The price depth received by subscription of price depth.

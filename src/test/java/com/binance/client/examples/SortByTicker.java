@@ -1,7 +1,7 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
-import com.huobi.client.SyncRequestClient;
-import com.huobi.client.model.TradeStatistics;
+import com.binance.client.SyncRequestClient;
+import com.binance.client.model.TradeStatistics;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

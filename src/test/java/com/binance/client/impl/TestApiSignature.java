@@ -1,8 +1,8 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import com.huobi.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.impl.utils.UrlParamsBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;

@@ -1,8 +1,8 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
 import java.math.BigDecimal;
 
-import com.huobi.client.model.enums.CrossMarginTransferType;
+import com.binance.client.model.enums.CrossMarginTransferType;
 
 public class CrossMarginTransferRequest {
 

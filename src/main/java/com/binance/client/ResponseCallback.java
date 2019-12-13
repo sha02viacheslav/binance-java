@@ -1,4 +1,4 @@
-package com.huobi.client;
+package com.binance.client;
 
 /**
  * The interface for define asynchronous invoking callback.<br> If you want to ues the asynchronous

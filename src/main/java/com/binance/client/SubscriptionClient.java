@@ -1,26 +1,26 @@
-package com.huobi.client;
+package com.binance.client;
 
-import com.huobi.client.impl.HuobiApiInternalFactory;
-import com.huobi.client.model.enums.AccountChangeModeEnum;
-import com.huobi.client.model.enums.BalanceMode;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.enums.DepthStep;
-import com.huobi.client.model.enums.MBPLevelEnums;
-import com.huobi.client.model.event.AccountChangeV2Event;
-import com.huobi.client.model.event.AccountEvent;
-import com.huobi.client.model.event.AccountListEvent;
-import com.huobi.client.model.event.CandlestickEvent;
-import com.huobi.client.model.event.CandlestickReqEvent;
-import com.huobi.client.model.event.MarketBBOEvent;
-import com.huobi.client.model.event.MarketDepthMBPEvent;
-import com.huobi.client.model.event.OrderListEvent;
-import com.huobi.client.model.event.OrderUpdateEvent;
-import com.huobi.client.model.event.OrderUpdateNewEvent;
-import com.huobi.client.model.event.PriceDepthEvent;
-import com.huobi.client.model.event.TradeClearingEvent;
-import com.huobi.client.model.event.TradeEvent;
-import com.huobi.client.model.event.TradeStatisticsEvent;
-import com.huobi.client.model.request.OrdersRequest;
+import com.binance.client.impl.HuobiApiInternalFactory;
+import com.binance.client.model.enums.AccountChangeModeEnum;
+import com.binance.client.model.enums.BalanceMode;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.enums.DepthStep;
+import com.binance.client.model.enums.MBPLevelEnums;
+import com.binance.client.model.event.AccountChangeV2Event;
+import com.binance.client.model.event.AccountEvent;
+import com.binance.client.model.event.AccountListEvent;
+import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.CandlestickReqEvent;
+import com.binance.client.model.event.MarketBBOEvent;
+import com.binance.client.model.event.MarketDepthMBPEvent;
+import com.binance.client.model.event.OrderListEvent;
+import com.binance.client.model.event.OrderUpdateEvent;
+import com.binance.client.model.event.OrderUpdateNewEvent;
+import com.binance.client.model.event.PriceDepthEvent;
+import com.binance.client.model.event.TradeClearingEvent;
+import com.binance.client.model.event.TradeEvent;
+import com.binance.client.model.event.TradeStatisticsEvent;
+import com.binance.client.model.request.OrdersRequest;
 
 /***
  * The subscription client interface, it is used for subscribing any market data update and
@@ -493,8 +493,8 @@ public interface SubscriptionClient {
   /**
    * Create the subscription client to subscribe the update from server.
    *
-   * @param apiKey The public key applied from Huobi.
-   * @param secretKey The private key applied from Huobi.
+   * @param apiKey The public key applied from binance.
+   * @param secretKey The private key applied from binance.
    * @return The instance of synchronous client.
    */
   static SubscriptionClient create(
@@ -506,8 +506,8 @@ public interface SubscriptionClient {
   /**
    * Create the subscription client to subscribe the update from server.
    *
-   * @param apiKey The public key applied from Huobi.
-   * @param secretKey The private key applied from Huobi.
+   * @param apiKey The public key applied from binance.
+   * @param secretKey The private key applied from binance.
    * @param subscriptionOptions The option of subscription connection, see {@link SubscriptionOptions}
    * @return The instance of synchronous client.
    */

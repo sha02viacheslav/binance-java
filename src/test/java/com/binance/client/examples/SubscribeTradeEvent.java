@@ -1,8 +1,8 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import com.alibaba.fastjson.JSON;
 
-import com.huobi.client.SubscriptionClient;
+import com.binance.client.SubscriptionClient;
 
 public class SubscribeTradeEvent {
 

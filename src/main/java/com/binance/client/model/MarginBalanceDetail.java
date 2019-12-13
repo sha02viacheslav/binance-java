@@ -1,7 +1,7 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
-import com.huobi.client.model.enums.AccountState;
-import com.huobi.client.model.enums.AccountType;
+import com.binance.client.model.enums.AccountState;
+import com.binance.client.model.enums.AccountType;
 import java.math.BigDecimal;
 import java.util.List;
 

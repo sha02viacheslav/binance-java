@@ -1,7 +1,7 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.OrderType;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.OrderType;
 import java.util.Date;
 
 

@@ -1,6 +1,6 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
-import com.huobi.client.SubscriptionClient;
+import com.binance.client.SubscriptionClient;
 
 public class SubscribeMarketBBO {
 

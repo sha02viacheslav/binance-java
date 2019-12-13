@@ -1,4 +1,4 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
 import java.math.BigDecimal;
 

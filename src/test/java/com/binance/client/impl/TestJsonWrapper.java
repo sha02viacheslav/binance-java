@@ -1,11 +1,11 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.impl.utils.JsonWrapperArray;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapperArray;
 import java.math.BigDecimal;
 import org.junit.Rule;
 import org.junit.Test;

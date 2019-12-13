@@ -1,13 +1,13 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
-import com.huobi.client.model.enums.QueryDirection;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
+import com.binance.client.model.enums.QueryDirection;
 
 /**
  * The request of historical orders.

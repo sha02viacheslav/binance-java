@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 
 import java.math.BigDecimal;
@@ -16,18 +16,18 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.model.Account;
-import com.huobi.client.model.Order;
-import com.huobi.client.model.User;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.OrderSide;
-import com.huobi.client.model.enums.OrderSource;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
-import com.huobi.client.model.request.OpenOrderRequest;
+import com.binance.client.RequestOptions;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.model.Account;
+import com.binance.client.model.Order;
+import com.binance.client.model.User;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.OrderSide;
+import com.binance.client.model.enums.OrderSource;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
+import com.binance.client.model.request.OpenOrderRequest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

@@ -1,9 +1,9 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
 
-import com.huobi.client.impl.RestApiJsonParser;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.model.MarketBBO;
+import com.binance.client.impl.RestApiJsonParser;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.model.MarketBBO;
 
 /**
  * The Market BBO data received by request of market bbo.

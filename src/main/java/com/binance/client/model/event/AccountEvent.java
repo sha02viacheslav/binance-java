@@ -1,7 +1,7 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
-import com.huobi.client.model.AccountChange;
-import com.huobi.client.model.enums.AccountChangeType;
+import com.binance.client.model.AccountChange;
+import com.binance.client.model.enums.AccountChangeType;
 import java.util.LinkedList;
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.model.CompleteSubAccountInfo;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.BalanceType;
+import com.binance.client.RequestOptions;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.model.CompleteSubAccountInfo;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.BalanceType;
 
 
 import org.junit.Before;

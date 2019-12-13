@@ -1,19 +1,19 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.same;
 import static org.mockito.Mockito.when;
 
-import com.huobi.client.model.BestQuote;
-import com.huobi.client.model.Candlestick;
-import com.huobi.client.model.LastTradeAndBestQuote;
-import com.huobi.client.model.PriceDepth;
-import com.huobi.client.model.Symbol;
-import com.huobi.client.model.Trade;
-import com.huobi.client.model.TradeStatistics;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.request.CandlestickRequest;
+import com.binance.client.model.BestQuote;
+import com.binance.client.model.Candlestick;
+import com.binance.client.model.LastTradeAndBestQuote;
+import com.binance.client.model.PriceDepth;
+import com.binance.client.model.Symbol;
+import com.binance.client.model.Trade;
+import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.request.CandlestickRequest;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;

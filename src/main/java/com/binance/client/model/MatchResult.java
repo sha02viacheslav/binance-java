@@ -1,8 +1,8 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
-import com.huobi.client.model.enums.DealRole;
-import com.huobi.client.model.enums.OrderSource;
-import com.huobi.client.model.enums.OrderType;
+import com.binance.client.model.enums.DealRole;
+import com.binance.client.model.enums.OrderSource;
+import com.binance.client.model.enums.OrderType;
 import java.math.BigDecimal;
 
 

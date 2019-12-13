@@ -1,10 +1,10 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
 import java.util.Date;
 
 
-import com.huobi.client.model.enums.LoanOrderStates;
-import com.huobi.client.model.enums.QueryDirection;
+import com.binance.client.model.enums.LoanOrderStates;
+import com.binance.client.model.enums.QueryDirection;
 
 public class CrossMarginLoanOrderRequest {
 

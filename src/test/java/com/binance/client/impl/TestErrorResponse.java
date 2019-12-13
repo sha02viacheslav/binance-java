@@ -1,8 +1,8 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.exception.HuobiApiException;
-import com.huobi.client.impl.utils.JsonWrapper;
+import com.binance.client.RequestOptions;
+import com.binance.client.exception.HuobiApiException;
+import com.binance.client.impl.utils.JsonWrapper;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

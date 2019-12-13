@@ -1,8 +1,8 @@
-package com.huobi.client.model.request;
+package com.binance.client.model.request;
 
 import java.util.Date;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
 
 /**
  * The request of historical orders.

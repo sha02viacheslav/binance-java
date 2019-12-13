@@ -1,7 +1,7 @@
-package com.huobi.client.impl.utils;
+package com.binance.client.impl.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.exception.HuobiApiException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;

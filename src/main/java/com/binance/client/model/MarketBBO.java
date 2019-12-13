@@ -1,8 +1,8 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
 import java.math.BigDecimal;
 
-import com.huobi.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapper;
 
 /**
  * The market bbo.

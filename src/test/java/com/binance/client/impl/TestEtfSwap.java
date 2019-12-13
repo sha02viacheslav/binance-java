@@ -1,11 +1,11 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.model.enums.EtfSwapType;
+import com.binance.client.RequestOptions;
+import com.binance.client.model.enums.EtfSwapType;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

@@ -1,6 +1,6 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
-import com.huobi.client.model.enums.DepositState;
+import com.binance.client.model.enums.DepositState;
 import java.math.BigDecimal;
 
 /**

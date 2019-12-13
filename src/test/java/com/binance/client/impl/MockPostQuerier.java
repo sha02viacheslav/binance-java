@@ -1,9 +1,9 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import com.huobi.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapper;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;

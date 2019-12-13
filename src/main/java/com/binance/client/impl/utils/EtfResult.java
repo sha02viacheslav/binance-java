@@ -1,4 +1,4 @@
-package com.huobi.client.impl.utils;
+package com.binance.client.impl.utils;
 
 public abstract class EtfResult {
 

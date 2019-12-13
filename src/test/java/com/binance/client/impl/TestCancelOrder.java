@@ -1,11 +1,11 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.RequestOptions;
+import com.binance.client.exception.HuobiApiException;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Before;

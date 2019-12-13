@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -9,12 +9,12 @@ import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
-import com.huobi.client.AsyncResult;
-import com.huobi.client.ResponseCallback;
-import com.huobi.client.impl.utils.SucceededAsyncResult;
-import com.huobi.client.model.ExchangeInfo;
-import com.huobi.client.model.Symbol;
-import com.huobi.client.model.Trade;
+import com.binance.client.AsyncResult;
+import com.binance.client.ResponseCallback;
+import com.binance.client.impl.utils.SucceededAsyncResult;
+import com.binance.client.model.ExchangeInfo;
+import com.binance.client.model.Symbol;
+import com.binance.client.model.Trade;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.huobi.client.model.enums;
+package com.binance.client.model.enums;
 
 /**
  * The balance mode used for subscribing the balance notification.

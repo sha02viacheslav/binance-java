@@ -1,56 +1,56 @@
-package com.huobi.client;
+package com.binance.client;
 
-import com.huobi.client.impl.HuobiApiInternalFactory;
-import com.huobi.client.model.Account;
-import com.huobi.client.model.AccountHistory;
-import com.huobi.client.model.Balance;
-import com.huobi.client.model.BatchCancelResult;
-import com.huobi.client.model.BestQuote;
-import com.huobi.client.model.Candlestick;
-import com.huobi.client.model.CompleteSubAccountInfo;
-import com.huobi.client.model.CrossMarginAccount;
-import com.huobi.client.model.CrossMarginLoanOrder;
-import com.huobi.client.model.Currency;
-import com.huobi.client.model.Deposit;
-import com.huobi.client.model.DepositAddress;
-import com.huobi.client.model.EtfSwapConfig;
-import com.huobi.client.model.EtfSwapHistory;
-import com.huobi.client.model.ExchangeInfo;
-import com.huobi.client.model.FeeRate;
-import com.huobi.client.model.LastTradeAndBestQuote;
-import com.huobi.client.model.Loan;
-import com.huobi.client.model.MarginBalanceDetail;
-import com.huobi.client.model.MatchResult;
-import com.huobi.client.model.Order;
-import com.huobi.client.model.PriceDepth;
+import com.binance.client.impl.HuobiApiInternalFactory;
+import com.binance.client.model.Account;
+import com.binance.client.model.AccountHistory;
+import com.binance.client.model.Balance;
+import com.binance.client.model.BatchCancelResult;
+import com.binance.client.model.BestQuote;
+import com.binance.client.model.Candlestick;
+import com.binance.client.model.CompleteSubAccountInfo;
+import com.binance.client.model.CrossMarginAccount;
+import com.binance.client.model.CrossMarginLoanOrder;
+import com.binance.client.model.Currency;
+import com.binance.client.model.Deposit;
+import com.binance.client.model.DepositAddress;
+import com.binance.client.model.EtfSwapConfig;
+import com.binance.client.model.EtfSwapHistory;
+import com.binance.client.model.ExchangeInfo;
+import com.binance.client.model.FeeRate;
+import com.binance.client.model.LastTradeAndBestQuote;
+import com.binance.client.model.Loan;
+import com.binance.client.model.MarginBalanceDetail;
+import com.binance.client.model.MatchResult;
+import com.binance.client.model.Order;
+import com.binance.client.model.PriceDepth;
 
-import com.huobi.client.model.Symbol;
-import com.huobi.client.model.Trade;
-import com.huobi.client.model.TradeStatistics;
-import com.huobi.client.model.Withdraw;
-import com.huobi.client.model.WithdrawQuota;
-import com.huobi.client.model.enums.AccountType;
-import com.huobi.client.model.enums.CandlestickInterval;
-import com.huobi.client.model.enums.QueryDirection;
-import com.huobi.client.model.request.AccountHistoryRequest;
-import com.huobi.client.model.request.CancelOpenOrderRequest;
-import com.huobi.client.model.request.CandlestickRequest;
-import com.huobi.client.model.enums.EtfSwapType;
-import com.huobi.client.model.request.CrossMarginApplyLoanRequest;
-import com.huobi.client.model.request.CrossMarginLoanOrderRequest;
-import com.huobi.client.model.request.CrossMarginRepayLoanRequest;
-import com.huobi.client.model.request.CrossMarginTransferRequest;
-import com.huobi.client.model.request.HistoricalOrdersRequest;
-import com.huobi.client.model.request.LoanOrderRequest;
-import com.huobi.client.model.request.MatchResultRequest;
-import com.huobi.client.model.request.NewOrderRequest;
-import com.huobi.client.model.request.OpenOrderRequest;
-import com.huobi.client.model.request.OrdersHistoryRequest;
-import com.huobi.client.model.request.OrdersRequest;
-import com.huobi.client.model.request.TransferFuturesRequest;
-import com.huobi.client.model.request.TransferMasterRequest;
-import com.huobi.client.model.request.TransferRequest;
-import com.huobi.client.model.request.WithdrawRequest;
+import com.binance.client.model.Symbol;
+import com.binance.client.model.Trade;
+import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.Withdraw;
+import com.binance.client.model.WithdrawQuota;
+import com.binance.client.model.enums.AccountType;
+import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.enums.QueryDirection;
+import com.binance.client.model.request.AccountHistoryRequest;
+import com.binance.client.model.request.CancelOpenOrderRequest;
+import com.binance.client.model.request.CandlestickRequest;
+import com.binance.client.model.enums.EtfSwapType;
+import com.binance.client.model.request.CrossMarginApplyLoanRequest;
+import com.binance.client.model.request.CrossMarginLoanOrderRequest;
+import com.binance.client.model.request.CrossMarginRepayLoanRequest;
+import com.binance.client.model.request.CrossMarginTransferRequest;
+import com.binance.client.model.request.HistoricalOrdersRequest;
+import com.binance.client.model.request.LoanOrderRequest;
+import com.binance.client.model.request.MatchResultRequest;
+import com.binance.client.model.request.NewOrderRequest;
+import com.binance.client.model.request.OpenOrderRequest;
+import com.binance.client.model.request.OrdersHistoryRequest;
+import com.binance.client.model.request.OrdersRequest;
+import com.binance.client.model.request.TransferFuturesRequest;
+import com.binance.client.model.request.TransferMasterRequest;
+import com.binance.client.model.request.TransferRequest;
+import com.binance.client.model.request.WithdrawRequest;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -61,7 +61,7 @@ import java.util.Map;
  * Synchronous request interface, invoking Huobi RestAPI via synchronous method.<br> All methods in
  * this interface will be blocked until the RestAPI response.
  * <p>
- * If the invoking failed or timeout, the {@link com.huobi.client.exception.HuobiApiException} will
+ * If the invoking failed or timeout, the {@link com.binance.client.exception.HuobiApiException} will
  * be thrown.
  */
 public interface SyncRequestClient {
@@ -138,7 +138,7 @@ public interface SyncRequestClient {
   TradeStatistics get24HTradeStatistics(String symbol);
 
   /**
-   * Get all the trading assets and currencies supported in huobi. The information of trading
+   * Get all the trading assets and currencies supported in binance. The information of trading
    * instrument, including base currency, quote precision, etc.
    *
    * @return The information of trading instrument and currencies, see {@link ExchangeInfo}
@@ -146,20 +146,20 @@ public interface SyncRequestClient {
   ExchangeInfo getExchangeInfo();
 
   /**
-   * Get all the trading currencies supported in Huobi.
+   * Get all the trading currencies supported in binance.
    * @return The name of trading currencies .
    */
   List<String> getCurrencies();
 
   /**
-   * Get the trading currency information detail in huobi.
+   * Get the trading currency information detail in binance.
    * @param currency The name of currency
    * @param authorizedUser if user authorized
    * @return
    */
   List<Currency> getCurrencyInfo(String currency, Boolean authorizedUser);
   /**
-   * Get all the trading symbol supported in Huobi.
+   * Get all the trading symbol supported in binance.
    * @return The information of trading symbol .
    */
   List<Symbol> getSymbols();
@@ -316,7 +316,7 @@ public interface SyncRequestClient {
   List<AccountHistory> getAccountHistory(AccountHistoryRequest request);
 
   /**
-   * Make an order in huobi.
+   * Make an order in binance.
    *
    * @param newOrderRequest The request of an order ,including account-id,amount , price ,etc.
    * @return The order id.
@@ -545,8 +545,8 @@ public interface SyncRequestClient {
    * Create the synchronous client. All interfaces defined in synchronous client are implemented by
    * synchronous mode.
    *
-   * @param apiKey The public key applied from Huobi.
-   * @param secretKey The private key applied from Huobi.
+   * @param apiKey The public key applied from binance.
+   * @param secretKey The private key applied from binance.
    * @return The instance of synchronous client.
    */
   static SyncRequestClient create(String apiKey, String secretKey) {
@@ -558,8 +558,8 @@ public interface SyncRequestClient {
    * Create the synchronous client. All interfaces defined in synchronous client are implemented by
    * synchronous mode.
    *
-   * @param apiKey The public key applied from Huobi.
-   * @param secretKey The private key applied from Huobi.
+   * @param apiKey The public key applied from binance.
+   * @param secretKey The private key applied from binance.
    * @param options The request option.
    * @return The instance of synchronous client.
    */

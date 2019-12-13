@@ -1,7 +1,7 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 
-import com.huobi.client.SubscriptionOptions;
+import com.binance.client.SubscriptionOptions;
 
 public class StubWebsocketConnection extends WebSocketConnection {
 

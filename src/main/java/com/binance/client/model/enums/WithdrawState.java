@@ -1,6 +1,6 @@
-package com.huobi.client.model.enums;
+package com.binance.client.model.enums;
 
-import com.huobi.client.impl.utils.EnumLookup;
+import com.binance.client.impl.utils.EnumLookup;
 
 
 /**

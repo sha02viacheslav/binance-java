@@ -1,6 +1,6 @@
-//package com.huobi.client.model;
+//package com.binance.client.model;
 //
-//import com.huobi.client.model.enums.TradeOrFrozen;
+//import com.binance.client.model.enums.TradeOrFrozen;
 //
 ///**
 // * summary sub-account info

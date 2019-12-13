@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -8,8 +8,8 @@ import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
-import com.huobi.client.AsyncResult;
-import com.huobi.client.ResponseCallback;
+import com.binance.client.AsyncResult;
+import com.binance.client.ResponseCallback;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;

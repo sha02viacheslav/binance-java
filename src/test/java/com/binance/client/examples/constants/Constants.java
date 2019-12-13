@@ -1,4 +1,4 @@
-package com.huobi.client.examples.constants;
+package com.binance.client.examples.constants;
 
 public class Constants {
 

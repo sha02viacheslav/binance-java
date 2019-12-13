@@ -1,9 +1,9 @@
-package com.huobi.client.examples;
+package com.binance.client.examples;
 
 import com.alibaba.fastjson.JSON;
 
-import com.huobi.client.SubscriptionClient;
-import com.huobi.client.model.enums.MBPLevelEnums;
+import com.binance.client.SubscriptionClient;
+import com.binance.client.model.enums.MBPLevelEnums;
 
 public class SubscribeMarketDepthMBP {
 

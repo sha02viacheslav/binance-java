@@ -1,6 +1,6 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
-import com.huobi.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapper;
 
 @FunctionalInterface
 public interface RestApiJsonParser<T> {

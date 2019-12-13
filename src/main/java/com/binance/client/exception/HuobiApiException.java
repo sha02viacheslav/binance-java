@@ -1,4 +1,4 @@
-package com.huobi.client.exception;
+package com.binance.client.exception;
 
 public class HuobiApiException extends RuntimeException {
 

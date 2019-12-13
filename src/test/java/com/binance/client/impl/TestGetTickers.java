@@ -1,4 +1,4 @@
-package com.huobi.client.impl;
+package com.binance.client.impl;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -7,9 +7,9 @@ import okhttp3.Request;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.huobi.client.RequestOptions;
-import com.huobi.client.impl.utils.JsonWrapper;
-import com.huobi.client.model.TradeStatistics;
+import com.binance.client.RequestOptions;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.model.TradeStatistics;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

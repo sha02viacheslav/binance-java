@@ -1,7 +1,7 @@
-package com.huobi.client.model.event;
+package com.binance.client.model.event;
 
-import com.huobi.client.model.Order;
-import com.huobi.client.model.OrderUpdate;
+import com.binance.client.model.Order;
+import com.binance.client.model.OrderUpdate;
 
 /**
  * The order update received by subscription of order update.

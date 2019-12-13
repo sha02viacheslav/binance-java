@@ -1,4 +1,4 @@
-package com.huobi.client.impl.utils;
+package com.binance.client.impl.utils;
 
 import java.util.EnumSet;
 import java.util.HashMap;

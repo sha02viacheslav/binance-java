@@ -1,6 +1,6 @@
-package com.huobi.client.impl.utils;
+package com.binance.client.impl.utils;
 
-import com.huobi.client.exception.HuobiApiException;
+import com.binance.client.exception.HuobiApiException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

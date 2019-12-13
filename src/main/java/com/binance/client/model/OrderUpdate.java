@@ -1,11 +1,11 @@
-package com.huobi.client.model;
+package com.binance.client.model;
 
 import java.math.BigDecimal;
 
 
-import com.huobi.client.model.enums.DealRole;
-import com.huobi.client.model.enums.OrderState;
-import com.huobi.client.model.enums.OrderType;
+import com.binance.client.model.enums.DealRole;
+import com.binance.client.model.enums.OrderState;
+import com.binance.client.model.enums.OrderType;
 
 public class OrderUpdate {
 
