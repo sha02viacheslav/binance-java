@@ -1,0 +1,10 @@
+.idea/
+.settings/
+logs/
+target
+.classpath
+.project
+*.iml
+*.tmp
+src/main/java/com/huobi/.DS_Store
+src/main/java/com/huobi/client/.DS_Store
