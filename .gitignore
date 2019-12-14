@@ -8,3 +8,4 @@ target
 *.tmp
 src/main/java/com/binance/.DS_Store
 src/main/java/com/binance/client/.DS_Store
+src/test/java/com/binance/client/examples/constants/PrivateConfig.java
