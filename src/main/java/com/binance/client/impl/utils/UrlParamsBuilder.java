@@ -1,7 +1,7 @@
 package com.binance.client.impl.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.binance.client.exception.HuobiApiException;
+import com.binance.client.exception.BinanceApiException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
@@ -24,7 +24,7 @@ public class UrlParamsBuilder {
     void put(String name, String value) {
 
       if (name == null || "".equals(name)) {
-        throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+        throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
             "[URL] Key can not be null");
       }
       if (value == null || "".equals(value)) {
@@ -198,7 +198,7 @@ public class UrlParamsBuilder {
     try {
       return URLEncoder.encode(s, "UTF-8").replaceAll("\\+", "%20");
     } catch (UnsupportedEncodingException e) {
-      throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+      throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
           "[URL] UTF-8 encoding not supported!");
     }
   }

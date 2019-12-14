@@ -1,6 +1,6 @@
 package com.binance.client.exception;
 
-public class HuobiApiException extends RuntimeException {
+public class BinanceApiException extends RuntimeException {
 
 
   public static final String RUNTIME_ERROR = "RuntimeError";
@@ -12,12 +12,12 @@ public class HuobiApiException extends RuntimeException {
   public static final String EXEC_ERROR = "ExecuteError";
   private final String errCode;
 
-  public HuobiApiException(String errType, String errMsg) {
+  public BinanceApiException(String errType, String errMsg) {
     super(errMsg);
     this.errCode = errType;
   }
 
-  public HuobiApiException(String errType, String errMsg, Throwable e) {
+  public BinanceApiException(String errType, String errMsg, Throwable e) {
     super(errMsg, e);
     this.errCode = errType;
   }

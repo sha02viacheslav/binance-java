@@ -2,7 +2,7 @@ package com.binance.client.impl.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.binance.client.exception.HuobiApiException;
+import com.binance.client.exception.BinanceApiException;
 import java.math.BigDecimal;
 
 public class JsonWrapperArray {
@@ -17,12 +17,12 @@ public class JsonWrapperArray {
     if (array != null && array.size() > index) {
       JSONObject object = (JSONObject) array.get(index);
       if (object == null) {
-        throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+        throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
             "[Json] Cannot get object at index " + index + " in array");
       }
       return new JsonWrapper(object);
     } else {
-      throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+      throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
           "[Json] Index is out of bound or array is null");
     }
   }
@@ -31,12 +31,12 @@ public class JsonWrapperArray {
     if (array != null && array.size() > index) {
       JSONArray newArray = (JSONArray) array.get(index);
       if (newArray == null) {
-        throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+        throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
             "[Json] Cannot get array at index " + index + " in array");
       }
       return new JsonWrapperArray(newArray);
     } else {
-      throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+      throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
           "[Json] Index is out of bound or array is null");
     }
   }
@@ -45,7 +45,7 @@ public class JsonWrapperArray {
     if (array != null && array.size() > index) {
       return array.get(index);
     } else {
-      throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+      throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
           "[Json] Index is out of bound or array is null");
     }
   }
@@ -54,7 +54,7 @@ public class JsonWrapperArray {
     try {
       return (Long) getObjectAt(index);
     } catch (Exception e) {
-      throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+      throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
           "[Json] Cannot get long at index " + index + " in array: " + e.getMessage());
     }
 
@@ -65,7 +65,7 @@ public class JsonWrapperArray {
     try {
       return new BigDecimal(((BigDecimal) getObjectAt(index)).stripTrailingZeros().toPlainString());
     } catch (RuntimeException e) {
-      throw new HuobiApiException(null, e.getMessage());
+      throw new BinanceApiException(null, e.getMessage());
     }
 
   }
@@ -75,7 +75,7 @@ public class JsonWrapperArray {
     try {
       return (String) getObjectAt(index);
     } catch (RuntimeException e) {
-      throw new HuobiApiException(null, e.getMessage());
+      throw new BinanceApiException(null, e.getMessage());
     }
 
   }
@@ -83,7 +83,7 @@ public class JsonWrapperArray {
   public void forEach(Handler<JsonWrapper> objectHandler) {
     array.forEach((object) -> {
       if (!(object instanceof JSONObject)) {
-        throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+        throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
             "[Json] Parse array error in forEach");
       }
       objectHandler.handle(new JsonWrapper((JSONObject) object));
@@ -93,7 +93,7 @@ public class JsonWrapperArray {
   public void forEachAsArray(Handler<JsonWrapperArray> objectHandler) {
     array.forEach((object) -> {
       if (!(object instanceof JSONArray)) {
-        throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+        throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
             "[Json] Parse array error in forEachAsArray");
       }
       objectHandler.handle(new JsonWrapperArray((JSONArray) object));
@@ -103,7 +103,7 @@ public class JsonWrapperArray {
   public void forEachAsString(Handler<String> objectHandler) {
     array.forEach((object) -> {
       if (!(object instanceof String)) {
-        throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+        throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
             "[Json] Parse array error in forEachAsString");
       }
       objectHandler.handle((String) object);

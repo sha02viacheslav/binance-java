@@ -1,6 +1,6 @@
 package com.binance.client;
 
-import com.binance.client.exception.HuobiApiException;
+import com.binance.client.exception.BinanceApiException;
 import java.net.URL;
 
 /**
@@ -8,7 +8,7 @@ import java.net.URL;
  */
 public class RequestOptions {
 
-  private String url = "https://api.huobi.pro";
+  private String url = "https://api.binance.com";
 
   public RequestOptions() {
   }
@@ -27,8 +27,8 @@ public class RequestOptions {
       URL u = new URL(url);
     } catch (Exception e)
     {
-      throw new HuobiApiException(
-          HuobiApiException.INPUT_ERROR, "The URI is incorrect: " + e.getMessage());
+      throw new BinanceApiException(
+          BinanceApiException.INPUT_ERROR, "The URI is incorrect: " + e.getMessage());
     }
     this.url = url;
   }

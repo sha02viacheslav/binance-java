@@ -1,6 +1,6 @@
 package com.binance.client.impl.utils;
 
-import com.binance.client.exception.HuobiApiException;
+import com.binance.client.exception.BinanceApiException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,11 +30,11 @@ public abstract class InternalUtils {
     gis.close();
   }
 
-  public static void await(long n) throws HuobiApiException {
+  public static void await(long n) throws BinanceApiException {
     try {
       Thread.sleep(n);
     } catch (InterruptedException e) {
-      throw new HuobiApiException(HuobiApiException.SYS_ERROR, "Error when sleep", e);
+      throw new BinanceApiException(BinanceApiException.SYS_ERROR, "Error when sleep", e);
     }
   }
 }

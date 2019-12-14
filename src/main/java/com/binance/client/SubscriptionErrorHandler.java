@@ -1,6 +1,6 @@
 package com.binance.client;
 
-import com.binance.client.exception.HuobiApiException;
+import com.binance.client.exception.BinanceApiException;
 
 /**
  * The error handler for the subscription.
@@ -8,5 +8,5 @@ import com.binance.client.exception.HuobiApiException;
 @FunctionalInterface
 public interface SubscriptionErrorHandler {
 
-  void onError(HuobiApiException exception);
+  void onError(BinanceApiException exception);
 }

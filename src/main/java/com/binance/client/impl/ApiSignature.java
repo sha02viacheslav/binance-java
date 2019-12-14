@@ -1,6 +1,6 @@
 package com.binance.client.impl;
 
-import com.binance.client.exception.HuobiApiException;
+import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -34,7 +34,7 @@ class ApiSignature {
     StringBuilder sb = new StringBuilder(1024);
 
     if (accessKey == null || "".equals(accessKey) || secretKey == null || "".equals(secretKey)) {
-      throw new HuobiApiException(HuobiApiException.KEY_MISSING,
+      throw new BinanceApiException(BinanceApiException.KEY_MISSING,
           "API key and secret key are required");
     }
 
@@ -55,10 +55,10 @@ class ApiSignature {
           signatureMethodValue);
       hmacSha256.init(secKey);
     } catch (NoSuchAlgorithmException e) {
-      throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+      throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
           "[Signature] No such algorithm: " + e.getMessage());
     } catch (InvalidKeyException e) {
-      throw new HuobiApiException(HuobiApiException.RUNTIME_ERROR,
+      throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
           "[Signature] Invalid key: " + e.getMessage());
     }
     String payload = sb.toString();
