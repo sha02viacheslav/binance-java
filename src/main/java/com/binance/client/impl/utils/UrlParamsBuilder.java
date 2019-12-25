@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.LinkedHashMap;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -18,7 +18,7 @@ public class UrlParamsBuilder {
 
   class ParamsMap {
 
-    final Map<String, String> map = new HashMap<>();
+    final Map<String, String> map = new LinkedHashMap<>();
     final Map<String, List> stringListMap = new HashMap<>();
 
     void put(String name, String value) {
@@ -140,14 +140,14 @@ public class UrlParamsBuilder {
   }
 
   public String buildUrl() {
-    Map<String, String> map = new TreeMap<>(paramsMap.map);
+    Map<String, String> map = new LinkedHashMap<>(paramsMap.map);
     StringBuilder head = new StringBuilder("");
     return "?" + AppendUrl(map, head);
 
   }
 
   public String buildSignature() {
-    Map<String, String> map = new TreeMap<>(paramsMap.map);
+    Map<String, String> map = new LinkedHashMap<>(paramsMap.map);
     StringBuilder head = new StringBuilder();
     return AppendUrl(map, head);
 
