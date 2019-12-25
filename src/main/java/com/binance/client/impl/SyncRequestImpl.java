@@ -1,7 +1,6 @@
 package com.binance.client.impl;
 
 import com.binance.client.SyncRequestClient;
-import com.binance.client.exception.BinanceApiException;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
@@ -10,9 +9,7 @@ import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class SyncRequestImpl implements SyncRequestClient {
 

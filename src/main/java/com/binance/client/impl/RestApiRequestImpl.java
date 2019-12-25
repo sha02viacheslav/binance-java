@@ -1,18 +1,13 @@
 package com.binance.client.impl;
 
-import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Request;
 
 import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
-import com.binance.client.impl.utils.JsonWrapper;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.CoinInformation;

@@ -9,9 +9,7 @@ import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Synchronous request interface, invoking Huobi RestAPI via synchronous
