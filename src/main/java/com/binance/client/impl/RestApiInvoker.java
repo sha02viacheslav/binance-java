@@ -50,10 +50,6 @@ abstract class RestApiInvoker {
             log.debug("Request URL " + request.request.url());
             Response response = client.newCall(request.request).execute();
             // System.out.println(response.body().string());
-            if (response.code() != 200) {
-                throw new BinanceApiException(BinanceApiException.EXEC_ERROR,
-                        "[Invoking] Response Status Error : " + response.code() + " message:" + response.message());
-            }
             if (response != null && response.body() != null) {
                 str = response.body().string();
                 response.close();

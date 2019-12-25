@@ -76,12 +76,16 @@ class RestApiRequestImpl {
             new ApiSignature().createSignature(apiKey, secretKey, "POST", host, address, builder);
             requestUrl += builder.buildUrl();
             return new Request.Builder().url(requestUrl).post(builder.buildPostBody())
-                    .addHeader("Content-Type", "application/json").build();
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("X-MBX-APIKEY", apiKey)
+                    .build();
         } else {
             new ApiSignature().createSignature(apiKey, secretKey, "GET", host, address, builder);
             requestUrl += builder.buildUrl();
-            return new Request.Builder().url(requestUrl).addHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .addHeader("X-MBX-APIKEY", apiKey).build();
+            return new Request.Builder().url(requestUrl)
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("X-MBX-APIKEY", apiKey)
+                    .build();
         }
     }
 
@@ -186,6 +190,25 @@ class RestApiRequestImpl {
                 element.setNetworkList(networkList);
                 result.add(element);
             });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<Long> postWithdrawSapi(String coin, String address, String amount, String network, String addressTag,
+            String name) {
+        RestApiRequest<Long> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("coin", coin)
+                .putToUrl("address", address)
+                .putToUrl("amount", amount)
+                .putToUrl("network", network)
+                .putToUrl("addressTag", addressTag)
+                .putToUrl("name", name);
+        request.request = createRequestByPostWithSignature("/sapi/v1/capital/withdraw/apply", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Long result = jsonWrapper.getLong("id");
             return result;
         });
         return request;

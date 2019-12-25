@@ -32,4 +32,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<CoinInformation> getAllCoinsInformation() {
         return RestApiInvoker.callSync(requestImpl.getAllCoinsInformation());
     }
+
+    @Override
+    public Long postWithdrawSapi(String coin, String address, String amount, String network, String addressTag,
+            String name) {
+        return RestApiInvoker.callSync(requestImpl.postWithdrawSapi(coin, address, amount, network, addressTag, name));
+    }
 }
