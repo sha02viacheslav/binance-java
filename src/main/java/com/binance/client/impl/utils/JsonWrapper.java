@@ -13,7 +13,12 @@ public class JsonWrapper {
 
     public static JsonWrapper parseFromString(String text) {
         try {
-            JSONObject jsonObject = (JSONObject) JSON.parse(text);
+            JSONObject jsonObject;
+            if(JSON.parse(text) instanceof JSONArray) {
+                jsonObject = (JSONObject) JSON.parse("{data:" + text + "}");
+            } else {
+                jsonObject = (JSONObject) JSON.parse(text);
+            }
             if (jsonObject != null) {
                 return new JsonWrapper(jsonObject);
             } else {

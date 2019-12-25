@@ -1,6 +1,7 @@
 package com.binance.client;
 
 import com.binance.client.impl.BinanceApiInternalFactory;
+import com.binance.client.model.CoinInformation;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
 
@@ -67,5 +68,12 @@ public interface SyncRequestClient {
      * @return System status.
      */
     SystemStatus getSystemStatus();
+
+    /**
+     * Get all coins' information for user.
+     *
+     * @return All coins' information.
+     */
+    List<CoinInformation> getAllCoinsInformation();
 
 }

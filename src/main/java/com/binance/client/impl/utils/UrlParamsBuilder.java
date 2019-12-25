@@ -140,9 +140,9 @@ public class UrlParamsBuilder {
   }
 
   public String buildUrl() {
-    Map<String, String> map = new HashMap<>(paramsMap.map);
-    StringBuilder head = new StringBuilder("?");
-    return AppendUrl(map, head);
+    Map<String, String> map = new TreeMap<>(paramsMap.map);
+    StringBuilder head = new StringBuilder("");
+    return "?" + AppendUrl(map, head);
 
   }
 

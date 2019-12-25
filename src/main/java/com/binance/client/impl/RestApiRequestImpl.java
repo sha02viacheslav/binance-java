@@ -13,7 +13,10 @@ import okhttp3.Request;
 import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.model.CoinInformation;
+import com.binance.client.model.Network;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
 
@@ -78,7 +81,7 @@ class RestApiRequestImpl {
             new ApiSignature().createSignature(apiKey, secretKey, "GET", host, address, builder);
             requestUrl += builder.buildUrl();
             return new Request.Builder().url(requestUrl).addHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .build();
+                    .addHeader("X-MBX-APIKEY", apiKey).build();
         }
     }
 
@@ -95,7 +98,7 @@ class RestApiRequestImpl {
         RestApiRequest<TradeStatistics> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build().putToUrl("symbol", symbol);
         request.request = createRequestByGet("/api/v3/ticker/24hr", builder);
-        
+
         request.jsonParser = (jsonWrapper -> {
             TradeStatistics result = new TradeStatistics();
             result.setSymbol(jsonWrapper.getString("symbol"));
@@ -131,6 +134,58 @@ class RestApiRequestImpl {
             SystemStatus result = new SystemStatus();
             result.setStatus(jsonWrapper.getString("status"));
             result.setMsg(jsonWrapper.getString("msg"));
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<CoinInformation>> getAllCoinsInformation() {
+        RestApiRequest<List<CoinInformation>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/sapi/v1/capital/config/getall", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<CoinInformation> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                CoinInformation element = new CoinInformation();
+                element.setCoin(item.getString("coin"));
+                element.setDepositAllEnable(item.getBoolean("depositAllEnable"));
+                element.setFree(item.getBigDecimal("free"));
+                element.setFreeze(item.getBigDecimal("freeze"));
+                element.setIpoable(item.getBigDecimal("ipoable"));
+                element.setIpoing(item.getBigDecimal("ipoing"));
+                element.setIsLegalMoney(item.getBoolean("isLegalMoney"));
+                element.setLocked(item.getBigDecimal("locked"));
+                element.setName(item.getString("name"));
+                element.setStorage(item.getBigDecimal("storage"));
+                element.setTrading(item.getBoolean("trading"));
+                element.setWithdrawAllEnable(item.getBoolean("withdrawAllEnable"));
+                element.setWithdrawing(item.getBigDecimal("withdrawing"));
+                List<Network> networkList = new LinkedList<>();
+                JsonWrapperArray list = item.getJsonArray("networkList");
+                list.forEach((val) -> {
+                    Network network = new Network();
+                    network.setAddressRegex(val.getString("addressRegex"));
+                    network.setCoin(val.getString("coin"));
+                    network.setDepositDesc(val.getString("depositDesc"));
+                    network.setDepositEnable(val.getBoolean("depositEnable"));
+                    network.setIsDefault(val.getBoolean("isDefault"));
+                    network.setMemoRegex(val.getString("memoRegex"));
+                    network.setName(val.getString("name"));
+                    network.setNetwork(val.getString("network"));
+                    network.setResetAddressStatus(val.getBoolean("resetAddressStatus"));
+                    network.setSpecialTips(val.getStringOrDefault("specialTips", ""));
+                    network.setWithdrawDesc(val.getString("withdrawDesc"));
+                    network.setWithdrawEnable(val.getBoolean("withdrawEnable"));
+                    network.setWithdrawFee(val.getBigDecimalOrDefault("withdrawFee", null));
+                    network.setWithdrawIntegerMultiple(val.getBigDecimal("withdrawIntegerMultiple"));
+                    network.setWithdrawMin(val.getBigDecimalOrDefault("withdrawMin", null));
+                    networkList.add(network);
+                });
+                element.setNetworkList(networkList);
+                result.add(element);
+            });
             return result;
         });
         return request;

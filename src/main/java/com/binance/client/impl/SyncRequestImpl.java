@@ -2,6 +2,7 @@ package com.binance.client.impl;
 
 import com.binance.client.SyncRequestClient;
 import com.binance.client.exception.BinanceApiException;
+import com.binance.client.model.CoinInformation;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
 
@@ -25,5 +26,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public SystemStatus getSystemStatus() {
         return RestApiInvoker.callSync(requestImpl.getSystemStatus());
+    }
+
+    @Override
+    public List<CoinInformation> getAllCoinsInformation() {
+        return RestApiInvoker.callSync(requestImpl.getAllCoinsInformation());
     }
 }
