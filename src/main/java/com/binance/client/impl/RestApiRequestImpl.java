@@ -214,4 +214,23 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<Long> postWithdraw(String asset, String address, String amount, String network, 
+            String addressTag, String name) {
+        RestApiRequest<Long> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("address", address)
+                .putToUrl("amount", amount)
+                .putToUrl("network", network)
+                .putToUrl("addressTag", addressTag)
+                .putToUrl("name", name);
+        request.request = createRequestByPostWithSignature("/wapi/v3/withdraw.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Long result = jsonWrapper.getLong("id");
+            return result;
+        });
+        return request;
+    }
+
 }

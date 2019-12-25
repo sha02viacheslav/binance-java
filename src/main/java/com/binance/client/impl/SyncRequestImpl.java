@@ -38,4 +38,9 @@ public class SyncRequestImpl implements SyncRequestClient {
             String name) {
         return RestApiInvoker.callSync(requestImpl.postWithdrawSapi(coin, address, amount, network, addressTag, name));
     }
+
+    @Override
+    public Long postWithdraw(String asset, String address, String amount, String network, String addressTag, String name) {
+        return RestApiInvoker.callSync(requestImpl.postWithdraw(asset, address, amount, network, addressTag, name));
+    }
 }

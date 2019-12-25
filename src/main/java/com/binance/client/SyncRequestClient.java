@@ -83,4 +83,11 @@ public interface SyncRequestClient {
      */
     Long postWithdrawSapi(String coin, String address, String amount, String network, String addressTag, String name);
 
+    /**
+     * Submit a withdraw request.
+     *
+     * @return Transaction ID.
+     */
+    Long postWithdraw(String asset, String address, String amount, String network, String addressTag, String name);
+
 }
