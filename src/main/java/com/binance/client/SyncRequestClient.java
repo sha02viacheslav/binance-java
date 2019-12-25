@@ -1,7 +1,9 @@
 package com.binance.client;
 
 import com.binance.client.impl.BinanceApiInternalFactory;
+import com.binance.client.model.AccountStatus;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
@@ -128,5 +130,19 @@ public interface SyncRequestClient {
      * @return Deposit address.
      */
     DepositAddressSapi getDepositAddressSapi(String coin, String network);
+
+    /**
+     * Fetch deposit address with network.
+     *
+     * @return Deposit address.
+     */
+    DepositAddress getDepositAddress(String asset, String status);
+
+    /**
+     * Fetch account status detail.
+     *
+     * @return Account status detail.
+     */
+    AccountStatus getAccountStatus();
 
 }

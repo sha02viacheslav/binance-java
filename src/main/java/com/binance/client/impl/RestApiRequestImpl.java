@@ -3,6 +3,8 @@ package com.binance.client.impl;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
+import com.alibaba.fastjson.JSONArray;
 
 import okhttp3.Request;
 
@@ -10,7 +12,9 @@ import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.model.AccountStatus;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
@@ -364,6 +368,44 @@ class RestApiRequestImpl {
             result.setCoin(jsonWrapper.getString("coin"));
             result.setTag(jsonWrapper.getString("tag"));
             result.setUrl(jsonWrapper.getString("url"));
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<DepositAddress> getDepositAddress(String asset, String status) {
+        RestApiRequest<DepositAddress> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("status", status);
+        request.request = createRequestByGetWithSignature("/wapi/v3/depositAddress.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            DepositAddress result = new DepositAddress();
+            result.setAddress(jsonWrapper.getString("address"));
+            result.setAddressTag(jsonWrapper.getString("addressTag"));
+            result.setAsset(jsonWrapper.getString("asset"));
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<AccountStatus> getAccountStatus() {
+        RestApiRequest<AccountStatus> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/wapi/v3/accountStatus.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            AccountStatus result = new AccountStatus();
+            result.setMsg(jsonWrapper.getString("msg"));
+            if(jsonWrapper.containKey("objs")) {
+                List<String> data = new ArrayList<>();
+                JsonWrapperArray jsonArray = jsonWrapper.getJsonArray("objs");
+                for (int i = 0; jsonArray.getStringAt(i) != null; i++) {
+                    data.add(jsonArray.getStringAt(i));  
+                }
+                result.setObjs(data);
+            }
             return result;
         });
         return request;
