@@ -1,4 +1,5 @@
 package com.binance.client.model;
+
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.math.BigDecimal;
