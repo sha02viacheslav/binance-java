@@ -2,9 +2,12 @@ package com.binance.client;
 
 import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.WithdrawHistory;
+import com.binance.client.model.WithdrawHistorySapi;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -97,5 +100,27 @@ public interface SyncRequestClient {
      * @return Deposit history.
      */
     List<DepositHistorySapi> getDepositHistorySapi(String coin, Integer status, Long startTime, Long endTime, Integer offset);
+
+    /**
+     * Fetch deposit history.
+     *
+     * @return Deposit history.
+     */
+    List<DepositHistory> getDepositHistory(String asset, Integer status, Long startTime, Long endTime);
+
+    /**
+     * Fetch withdraw history.
+     *
+     * @return Withdraw history.
+     */
+    List<WithdrawHistorySapi> getWithdrawHistorySapi(String coin, Integer status, Integer offset, 
+            Integer limit, Long startTime, Long endTime);
+
+    /**
+     * Fetch withdraw history.
+     *
+     * @return Withdraw history.
+     */
+    List<WithdrawHistory> getWithdrawHistory(String asset, Integer status, Long startTime, Long endTime);
 
 }

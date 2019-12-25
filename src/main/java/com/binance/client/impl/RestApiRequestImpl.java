@@ -16,10 +16,13 @@ import com.binance.client.impl.utils.JsonWrapper;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.Network;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.WithdrawHistory;
+import com.binance.client.model.WithdrawHistorySapi;
 
 class RestApiRequestImpl {
 
@@ -257,6 +260,94 @@ class RestApiRequestImpl {
                 element.setNetwork(item.getString("network"));
                 element.setStatus(item.getInteger("status"));
                 element.setTxId(item.getString("txId"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<DepositHistory>> getDepositHistory(String asset, Integer status, Long startTime, Long endTime) {
+        RestApiRequest<List<DepositHistory>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("status", status)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime);
+        request.request = createRequestByGetWithSignature("/wapi/v3/depositHistory.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<DepositHistory> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("depositList");
+            dataArray.forEach((item) -> {
+                DepositHistory element = new DepositHistory();
+                element.setInsertTime(item.getInteger("insertTime"));
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setAsset(item.getString("asset"));
+                element.setAddress(item.getString("address"));
+                element.setTxId(item.getString("txId"));
+                element.setStatus(item.getInteger("status"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<WithdrawHistorySapi>> getWithdrawHistorySapi(String coin, Integer status, Integer offset, 
+            Integer limit, Long startTime, Long endTime) {
+        RestApiRequest<List<WithdrawHistorySapi>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("coin", coin)
+                .putToUrl("status", status)
+                .putToUrl("offset", offset)
+                .putToUrl("limit", limit)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime);
+        request.request = createRequestByGetWithSignature("/sapi/v1/capital/withdraw/history", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<WithdrawHistorySapi> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                WithdrawHistorySapi element = new WithdrawHistorySapi();
+                element.setAddress(item.getString("address"));
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setApplyTime(item.getString("applyTime"));
+                element.setCoin(item.getString("coin"));
+                element.setId(item.getString("id"));
+                element.setNetwork(item.getString("network"));
+                element.setStatus(item.getInteger("status"));
+                element.setTxId(item.getString("txId"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<WithdrawHistory>> getWithdrawHistory(String asset, Integer status, Long startTime, Long endTime) {
+        RestApiRequest<List<WithdrawHistory>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("status", status)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime);
+        request.request = createRequestByGetWithSignature("/wapi/v3/withdrawHistory.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<WithdrawHistory> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("withdrawList");
+            dataArray.forEach((item) -> {
+                WithdrawHistory element = new WithdrawHistory();
+                element.setId(item.getString("id"));
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setTransactionFee(item.getBigDecimal("transactionFee"));
+                element.setAddress(item.getString("address"));
+                element.setAsset(item.getString("asset"));
+                element.setTxId(item.getString("txId"));
+                element.setApplyTime(item.getInteger("applyTime"));
+                element.setStatus(item.getInteger("status"));
                 result.add(element);
             });
             return result;

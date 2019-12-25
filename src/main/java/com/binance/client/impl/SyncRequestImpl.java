@@ -3,9 +3,12 @@ package com.binance.client.impl;
 import com.binance.client.SyncRequestClient;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.WithdrawHistory;
+import com.binance.client.model.WithdrawHistorySapi;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -48,5 +51,21 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<DepositHistorySapi> getDepositHistorySapi(String coin, Integer status, Long startTime, Long endTime, Integer offset) {
         return RestApiInvoker.callSync(requestImpl.getDepositHistorySapi(coin, status, startTime, endTime, offset));
+    }
+
+    @Override
+    public List<DepositHistory> getDepositHistory(String asset, Integer status, Long startTime, Long endTime) {
+        return RestApiInvoker.callSync(requestImpl.getDepositHistory(asset, status, startTime, endTime));
+    }
+
+    @Override
+    public List<WithdrawHistorySapi> getWithdrawHistorySapi(String coin, Integer status, Integer offset, 
+            Integer limit, Long startTime, Long endTime) {
+        return RestApiInvoker.callSync(requestImpl.getWithdrawHistorySapi(coin, status, offset, limit, startTime, endTime));
+    }
+
+    @Override
+    public List<WithdrawHistory> getWithdrawHistory(String asset, Integer status, Long startTime, Long endTime) {
+        return RestApiInvoker.callSync(requestImpl.getWithdrawHistory(asset, status, startTime, endTime));
     }
 }
