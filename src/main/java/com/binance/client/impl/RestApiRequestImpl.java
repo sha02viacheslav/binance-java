@@ -14,8 +14,8 @@ import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapper;
 import com.binance.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
-
 
 class RestApiRequestImpl {
 
@@ -95,6 +95,7 @@ class RestApiRequestImpl {
         RestApiRequest<TradeStatistics> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build().putToUrl("symbol", symbol);
         request.request = createRequestByGet("/api/v3/ticker/24hr", builder);
+        
         request.jsonParser = (jsonWrapper -> {
             TradeStatistics result = new TradeStatistics();
             result.setSymbol(jsonWrapper.getString("symbol"));
@@ -121,6 +122,18 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<SystemStatus> getSystemStatus() {
+        RestApiRequest<SystemStatus> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGet("/wapi/v3/systemStatus.html", builder);
 
+        request.jsonParser = (jsonWrapper -> {
+            SystemStatus result = new SystemStatus();
+            result.setStatus(jsonWrapper.getString("status"));
+            result.setMsg(jsonWrapper.getString("msg"));
+            return result;
+        });
+        return request;
+    }
 
 }

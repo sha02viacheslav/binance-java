@@ -1,7 +1,7 @@
 package com.binance.client;
 
 import com.binance.client.impl.BinanceApiInternalFactory;
-
+import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
 
 import java.math.BigDecimal;
@@ -60,5 +60,12 @@ public interface SyncRequestClient {
      * @return Trade statistics, see {@link TradeStatistics}
      */
     TradeStatistics get24HTradeStatistics(String symbol);
+
+    /**
+     * Fetch system status.
+     *
+     * @return System status.
+     */
+    SystemStatus getSystemStatus();
 
 }

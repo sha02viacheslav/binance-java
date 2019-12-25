@@ -2,6 +2,7 @@ package com.binance.client.impl;
 
 import com.binance.client.SyncRequestClient;
 import com.binance.client.exception.BinanceApiException;
+import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
 
 import java.math.BigDecimal;
@@ -19,5 +20,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public TradeStatistics get24HTradeStatistics(String symbol) {
         return RestApiInvoker.callSync(requestImpl.get24HTradeStatistics(symbol));
+    }
+
+    @Override
+    public SystemStatus getSystemStatus() {
+        return RestApiInvoker.callSync(requestImpl.getSystemStatus());
     }
 }
