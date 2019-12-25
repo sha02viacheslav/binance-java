@@ -16,6 +16,7 @@ import com.binance.client.impl.utils.JsonWrapper;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.Network;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
@@ -228,6 +229,36 @@ class RestApiRequestImpl {
 
         request.jsonParser = (jsonWrapper -> {
             Long result = jsonWrapper.getLong("id");
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<DepositHistorySapi>> getDepositHistorySapi(String coin, Integer status, Long startTime, Long endTime, Integer offset) {
+        RestApiRequest<List<DepositHistorySapi>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("coin", coin)
+                .putToUrl("status", status)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("offset", offset);
+        request.request = createRequestByGetWithSignature("/sapi/v1/capital/deposit/hisrec", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<DepositHistorySapi> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                DepositHistorySapi element = new DepositHistorySapi();
+                element.setAddress(item.getString("address"));
+                element.setAddressTag(item.getString("addressTag"));
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setCoin(item.getString("coin"));
+                element.setInsertTime(item.getInteger("insertTime"));
+                element.setNetwork(item.getString("network"));
+                element.setStatus(item.getInteger("status"));
+                element.setTxId(item.getString("txId"));
+                result.add(element);
+            });
             return result;
         });
         return request;
