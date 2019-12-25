@@ -2,6 +2,7 @@ package com.binance.client.impl;
 
 import com.binance.client.SyncRequestClient;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.SystemStatus;
@@ -64,5 +65,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<WithdrawHistory> getWithdrawHistory(String asset, Integer status, Long startTime, Long endTime) {
         return RestApiInvoker.callSync(requestImpl.getWithdrawHistory(asset, status, startTime, endTime));
+    }
+
+    @Override
+    public DepositAddressSapi getDepositAddressSapi(String coin, String network) {
+        return RestApiInvoker.callSync(requestImpl.getDepositAddressSapi(coin, network));
     }
 }

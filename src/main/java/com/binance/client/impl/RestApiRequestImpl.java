@@ -11,6 +11,7 @@ import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.Network;
@@ -345,6 +346,24 @@ class RestApiRequestImpl {
                 element.setStatus(item.getInteger("status"));
                 result.add(element);
             });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<DepositAddressSapi> getDepositAddressSapi(String coin, String network) {
+        RestApiRequest<DepositAddressSapi> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("coin", coin)
+                .putToUrl("network", network);
+        request.request = createRequestByGetWithSignature("/sapi/v1/capital/deposit/address", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            DepositAddressSapi result = new DepositAddressSapi();
+            result.setAddress(jsonWrapper.getString("address"));
+            result.setCoin(jsonWrapper.getString("coin"));
+            result.setTag(jsonWrapper.getString("tag"));
+            result.setUrl(jsonWrapper.getString("url"));
             return result;
         });
         return request;

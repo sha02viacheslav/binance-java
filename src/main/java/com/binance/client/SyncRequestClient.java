@@ -2,6 +2,7 @@ package com.binance.client;
 
 import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.CoinInformation;
+import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.SystemStatus;
@@ -120,5 +121,12 @@ public interface SyncRequestClient {
      * @return Withdraw history.
      */
     List<WithdrawHistory> getWithdrawHistory(String asset, Integer status, Long startTime, Long endTime);
+
+    /**
+     * Fetch deposit address with network.
+     *
+     * @return Deposit address.
+     */
+    DepositAddressSapi getDepositAddressSapi(String coin, String network);
 
 }
