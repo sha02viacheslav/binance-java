@@ -28,9 +28,11 @@ import com.binance.client.model.wallet.TradeStatistics;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
 import com.binance.client.model.market.AggregateTrade;
+import com.binance.client.model.market.AveragePrice;
 import com.binance.client.model.market.Candlestick;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
+import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.enums.*;
 
@@ -350,5 +352,19 @@ public interface SyncRequestClient {
      * @return Kline/candlestick bars for a symbol.
      */
     List<Candlestick> getCandlestick(String symbol, CandlestickInterval interval, Long startTime, Long endTime, Integer limit);
+
+    /**
+     * Get current average price for a symbol.
+     *
+     * @return Current average price for a symbol.
+     */
+    AveragePrice getCurrentAveragePrice(String symbol);
+
+    /**
+     * Get 24 hour rolling window price change statistics.
+     *
+     * @return 24 hour rolling window price change statistics.
+     */
+    List<PriceChangeTicker> get24hrTickerPriceChange(String symbol);
 
 }

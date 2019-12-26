@@ -28,9 +28,11 @@ import com.binance.client.model.wallet.TradeStatistics;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
 import com.binance.client.model.market.AggregateTrade;
+import com.binance.client.model.market.AveragePrice;
 import com.binance.client.model.market.Candlestick;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
+import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.enums.*;
 
@@ -239,6 +241,16 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<Candlestick> getCandlestick(String symbol, CandlestickInterval interval, Long startTime, 
             Long endTime, Integer limit) {
         return RestApiInvoker.callSync(requestImpl.getCandlestick(symbol, interval, startTime, endTime, limit));
+    }
+    
+    @Override
+    public AveragePrice getCurrentAveragePrice(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.getCurrentAveragePrice(symbol));
+    }
+    
+    @Override
+    public List<PriceChangeTicker> get24hrTickerPriceChange(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.get24hrTickerPriceChange(symbol));
     }
 
 }

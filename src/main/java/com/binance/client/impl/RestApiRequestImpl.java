@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
+
+import com.alibaba.fastjson.JSONArray;
 import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapper;
@@ -49,12 +51,14 @@ import com.binance.client.model.wallet.TriggerCondition;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
 import com.binance.client.model.market.AggregateTrade;
+import com.binance.client.model.market.AveragePrice;
 import com.binance.client.model.market.Candlestick;
 import com.binance.client.model.market.ExchangeFilter;
 import com.binance.client.model.market.ExchangeInfoEntry;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.OrderBookEntry;
+import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.RateLimit;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.enums.*;
@@ -1243,6 +1247,64 @@ class RestApiRequestImpl {
                 element.setTakerBuyBaseAssetVolume(item.getBigDecimalAt(9));
                 element.setTakerBuyQuoteAssetVolume(item.getBigDecimalAt(10));
                 element.setIgnore(item.getBigDecimalAt(11));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<AveragePrice> getCurrentAveragePrice(String symbol) {
+        RestApiRequest<AveragePrice> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGet("/api/v3/avgPrice", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            AveragePrice result = new AveragePrice();
+            result.setMins(jsonWrapper.getInteger("mins"));
+            result.setPrice(jsonWrapper.getBigDecimal("price"));
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<PriceChangeTicker>> get24hrTickerPriceChange(String symbol) {
+        RestApiRequest<List<PriceChangeTicker>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGet("/api/v3/ticker/24hr", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<PriceChangeTicker> result = new LinkedList<>();
+            JsonWrapperArray dataArray = new JsonWrapperArray(new JSONArray());
+            if(jsonWrapper.containKey("data")) {
+                dataArray = jsonWrapper.getJsonArray("data");
+            } else {
+                dataArray.add(jsonWrapper.convert2JsonObject());
+            }
+            dataArray.forEach((item) -> {
+                PriceChangeTicker element = new PriceChangeTicker();
+                element.setSymbol(item.getString("symbol"));
+                element.setPriceChange(item.getBigDecimal("priceChange"));
+                element.setPriceChangePercent(item.getBigDecimal("priceChangePercent"));
+                element.setWeightedAvgPrice(item.getBigDecimal("weightedAvgPrice"));
+                element.setPrevClosePrice(item.getBigDecimal("prevClosePrice"));
+                element.setLastPrice(item.getBigDecimal("lastPrice"));
+                element.setLastQty(item.getBigDecimal("lastQty"));
+                element.setBidPrice(item.getBigDecimal("bidPrice"));
+                element.setAskPrice(item.getBigDecimal("askPrice"));
+                element.setOpenPrice(item.getBigDecimal("openPrice"));
+                element.setHighPrice(item.getBigDecimal("highPrice"));
+                element.setLowPrice(item.getBigDecimal("lowPrice"));
+                element.setVolume(item.getBigDecimal("volume"));
+                element.setQuoteVolume(item.getBigDecimal("quoteVolume"));
+                element.setOpenTime(item.getInteger("openTime"));
+                element.setCloseTime(item.getInteger("closeTime"));
+                element.setFirstId(item.getInteger("firstId"));
+                element.setLastId(item.getInteger("lastId"));
+                element.setCount(item.getInteger("count"));
                 result.add(element);
             });
             

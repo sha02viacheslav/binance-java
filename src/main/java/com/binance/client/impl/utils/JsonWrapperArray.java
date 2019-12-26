@@ -1,5 +1,6 @@
 package com.binance.client.impl.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.binance.client.exception.BinanceApiException;
@@ -27,6 +28,10 @@ public class JsonWrapperArray {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
                     "[Json] Index is out of bound or array is null");
         }
+    }
+
+    public void add(JSON val) {
+        this.array.add(val);
     }
 
     public JsonWrapperArray getArrayAt(int index) {
