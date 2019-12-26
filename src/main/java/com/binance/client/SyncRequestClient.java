@@ -209,4 +209,11 @@ public interface SyncRequestClient {
      */
     List<Balance> getSubAccountAssets(String email, String symbol);
 
+    /**
+     * Fetch sub-account deposit address.
+     *
+     * @return Sub-account deposit address.
+     */
+    DepositAddressSapi getSubAccountDepositAddress(String email, String coin, String network);
+
 }

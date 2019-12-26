@@ -132,4 +132,9 @@ public class SyncRequestImpl implements SyncRequestClient {
         return RestApiInvoker.callSync(requestImpl.getSubAccountAssets(email, symbol));
     }
 
+    @Override
+    public DepositAddressSapi getSubAccountDepositAddress(String email, String coin, String network) {
+        return RestApiInvoker.callSync(requestImpl.getSubAccountDepositAddress(email, coin, network));
+    }
+
 }

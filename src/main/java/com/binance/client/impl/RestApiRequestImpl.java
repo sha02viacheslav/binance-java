@@ -638,4 +638,23 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<DepositAddressSapi> getSubAccountDepositAddress(String email, String coin, String network) {
+        RestApiRequest<DepositAddressSapi> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email)
+                .putToUrl("coin", coin)
+                .putToUrl("network", network);
+        request.request = createRequestByGetWithSignature("/sapi/v1/capital/deposit/subAddress", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            DepositAddressSapi result = new DepositAddressSapi();
+            result.setAddress(jsonWrapper.getString("address"));
+            result.setCoin(jsonWrapper.getString("coin"));
+            result.setTag(jsonWrapper.getString("tag"));
+            result.setUrl(jsonWrapper.getString("url"));
+            return result;
+        });
+        return request;
+    }
+
 }
