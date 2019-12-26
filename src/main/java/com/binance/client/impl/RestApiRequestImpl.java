@@ -17,6 +17,8 @@ import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
+import com.binance.client.model.DustLog;
+import com.binance.client.model.DustLogEntry;
 import com.binance.client.model.Indicator;
 import com.binance.client.model.IndicatorInfo;
 import com.binance.client.model.Network;
@@ -453,6 +455,41 @@ class RestApiRequestImpl {
             });
             
             result.setIndicators(indicatorList);
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<DustLog>> getDustLog() {
+        RestApiRequest<List<DustLog>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/wapi/v3/userAssetDribbletLog.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<DustLog> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonObject("results").getJsonArray("rows");
+            dataArray.forEach((item) -> {
+                DustLog element = new DustLog();
+                element.setTransferedTotal(item.getBigDecimal("transfered_total"));
+                element.setServiceChargeTotal(item.getBigDecimal("service_charge_total"));
+                element.setTranId(item.getInteger("tran_id"));
+                element.setOperateTime(item.getString("operate_time"));
+                List<DustLogEntry> dustLogEntries = new LinkedList<>();
+                JsonWrapperArray list = item.getJsonArray("logs");
+                list.forEach((val) -> {
+                    DustLogEntry dustLogEntry = new DustLogEntry();
+                    dustLogEntry.setTranId(val.getInteger("tranId"));
+                    dustLogEntry.setServiceChargeAmount(val.getBigDecimal("serviceChargeAmount"));
+                    dustLogEntry.setUid(val.getInteger("uid"));
+                    dustLogEntry.setAmount(val.getBigDecimal("amount"));
+                    dustLogEntry.setOperateTime(val.getString("operateTime"));
+                    dustLogEntry.setTransferedAmount(val.getBigDecimal("transferedAmount"));
+                    dustLogEntry.setFromAsset(val.getString("fromAsset"));
+                    dustLogEntries.add(dustLogEntry);
+                });
+                element.setLogs(dustLogEntries);
+                result.add(element);
+            });
             return result;
         });
         return request;

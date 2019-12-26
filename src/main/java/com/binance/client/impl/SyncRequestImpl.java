@@ -8,6 +8,7 @@ import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
+import com.binance.client.model.DustLog;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
@@ -88,5 +89,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public AccountApiTradingStatus getAccountApiTradingStatus() {
         return RestApiInvoker.callSync(requestImpl.getAccountApiTradingStatus());
+    }
+
+    @Override
+    public List<DustLog> getDustLog() {
+        return RestApiInvoker.callSync(requestImpl.getDustLog());
     }
 }

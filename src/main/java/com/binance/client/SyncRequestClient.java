@@ -8,6 +8,7 @@ import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
+import com.binance.client.model.DustLog;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
@@ -152,5 +153,12 @@ public interface SyncRequestClient {
      * @return Account api trading status detail.
      */
     AccountApiTradingStatus getAccountApiTradingStatus();
+
+    /**
+     * Fetch small amounts of assets exchanged BNB records.
+     *
+     * @return Small amounts of assets exchanged BNB records.
+     */
+    List<DustLog> getDustLog();
 
 }
