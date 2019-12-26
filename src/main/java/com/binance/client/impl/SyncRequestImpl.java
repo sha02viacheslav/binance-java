@@ -10,6 +10,7 @@ import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
 import com.binance.client.model.SystemStatus;
+import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
@@ -94,5 +95,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<DustLog> getDustLog() {
         return RestApiInvoker.callSync(requestImpl.getDustLog());
+    }
+
+    @Override
+    public List<TradeFee> getTradeFee(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.getTradeFee(symbol));
     }
 }

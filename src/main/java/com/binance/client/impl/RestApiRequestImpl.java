@@ -23,6 +23,7 @@ import com.binance.client.model.Indicator;
 import com.binance.client.model.IndicatorInfo;
 import com.binance.client.model.Network;
 import com.binance.client.model.SystemStatus;
+import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.TriggerCondition;
 import com.binance.client.model.WithdrawHistory;
@@ -488,6 +489,27 @@ class RestApiRequestImpl {
                     dustLogEntries.add(dustLogEntry);
                 });
                 element.setLogs(dustLogEntries);
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<TradeFee>> getTradeFee(String symbol) {
+        RestApiRequest<List<TradeFee>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithSignature("/wapi/v3/tradeFee.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<TradeFee> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("tradeFee");
+            dataArray.forEach((item) -> {
+                TradeFee element = new TradeFee();
+                element.setSymbol(item.getString("symbol"));
+                element.setMaker(item.getBigDecimal("maker"));
+                element.setTaker(item.getBigDecimal("taker"));
                 result.add(element);
             });
             return result;

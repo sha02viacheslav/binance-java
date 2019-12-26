@@ -10,6 +10,7 @@ import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
 import com.binance.client.model.SystemStatus;
+import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
@@ -160,5 +161,12 @@ public interface SyncRequestClient {
      * @return Small amounts of assets exchanged BNB records.
      */
     List<DustLog> getDustLog();
+
+    /**
+     * Fetch trade fee.
+     *
+     * @return Trade fee.
+     */
+    List<TradeFee> getTradeFee(String symbol);
 
 }
