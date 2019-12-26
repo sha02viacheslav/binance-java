@@ -10,6 +10,8 @@ import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
+import com.binance.client.model.SubAccount;
+import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
@@ -176,5 +178,27 @@ public interface SyncRequestClient {
      * @return Asset detail.
      */
     List<AssetDetail> getAssetDetail();
+
+    /**
+     * Fetch sub account list.
+     *
+     * @return Sub account list.
+     */
+    List<SubAccount> getSubAccounts(String email, String status, Integer page, Integer limit);
+
+    /**
+     * Fetch transfer history list.
+     *
+     * @return Transfer history.
+     */
+    List<SubAccountTransferHistory> getSubAccountTransferHistory(String email, Long startTime, Long endTime,
+            Integer page, Integer limit);
+
+    /**
+     * Execute sub-account transfer.
+     *
+     * @return Transaction ID.
+     */
+    Long postSubAccountTransfer(String fromEmail, String toEmail, String asset, String amount);
 
 }

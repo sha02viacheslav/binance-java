@@ -23,6 +23,8 @@ import com.binance.client.model.DustLogEntry;
 import com.binance.client.model.Indicator;
 import com.binance.client.model.IndicatorInfo;
 import com.binance.client.model.Network;
+import com.binance.client.model.SubAccount;
+import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
@@ -537,6 +539,77 @@ class RestApiRequestImpl {
                 element.setDepositTip(item.getStringOrDefault("depositTip", null));
                 result.add(element);
             });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<SubAccount>> getSubAccounts(String email, String status, Integer page, Integer limit) {
+        RestApiRequest<List<SubAccount>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email)
+                .putToUrl("status", status)
+                .putToUrl("page", page)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGetWithSignature("/wapi/v3/sub-account/list.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<SubAccount> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("subAccounts");
+            dataArray.forEach((item) -> {
+                SubAccount element = new SubAccount();
+                element.setEmail(item.getString("email"));
+                element.setStatus(item.getString("status"));
+                element.setActivated(item.getBoolean("activated"));
+                element.setMobile(item.getString("mobile"));
+                element.setGAuth(item.getBoolean("gAuth"));
+                element.setCreateTime(item.getInteger("createTime"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<SubAccountTransferHistory>> getSubAccountTransferHistory(String email, Long startTime, Long endTime,
+            Integer page, Integer limit) {
+        RestApiRequest<List<SubAccountTransferHistory>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("page", page)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGetWithSignature("/wapi/v3/sub-account/transfer/history.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<SubAccountTransferHistory> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("transfers");
+            dataArray.forEach((item) -> {
+                SubAccountTransferHistory element = new SubAccountTransferHistory();
+                element.setFromEmail(item.getString("from"));
+                element.setToEmail(item.getString("to"));
+                element.setAsset(item.getBoolean("asset"));
+                element.setQty(item.getString("qty"));
+                element.setTime(item.getInteger("time"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<Long> postSubAccountTransfer(String fromEmail, String toEmail, String asset, String amount) {
+        RestApiRequest<Long> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("fromEmail", fromEmail)
+                .putToUrl("toEmail", toEmail)
+                .putToUrl("asset", asset)
+                .putToUrl("amount", amount);
+        request.request = createRequestByPostWithSignature("/wapi/v3/sub-account/transfer.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Long result = jsonWrapper.getLong("txnId");
             return result;
         });
         return request;
