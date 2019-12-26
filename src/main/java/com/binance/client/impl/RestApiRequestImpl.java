@@ -37,6 +37,7 @@ import com.binance.client.model.SubAccountStatus;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SubAccountMarginDetail;
 import com.binance.client.model.SubAccountFuturesDetailAsset;
+import com.binance.client.model.SubAccountFuturesPositionRisk;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
@@ -896,6 +897,33 @@ class RestApiRequestImpl {
                 elementList.add(element);
             });
             result.setSubAccount(elementList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<SubAccountFuturesPositionRisk>> getSubAccountFuturesPositionRisk(String email) {
+        RestApiRequest<List<SubAccountFuturesPositionRisk>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email);
+        request.request = createRequestByGetWithSignature("/sapi/v1/sub-account/futures/positionRisk", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<SubAccountFuturesPositionRisk> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                SubAccountFuturesPositionRisk element = new SubAccountFuturesPositionRisk();
+                element.setEntryPrice(item.getBigDecimal("entryPrice"));
+                element.setLeverage(item.getBigDecimal("leverage"));
+                element.setMaxNotional(item.getBigDecimal("maxNotional"));
+                element.setLiquidationPrice(item.getBigDecimal("liquidationPrice"));
+                element.setMarkPrice(item.getBigDecimal("markPrice"));
+                element.setPositionAmt(item.getBigDecimal("positionAmt"));
+                element.setSymbol(item.getString("symbol"));
+                element.setUnRealizedProfit(item.getBigDecimal("unRealizedProfit"));
+                result.add(element);
+            });
             
             return result;
         });

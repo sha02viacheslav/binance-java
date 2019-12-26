@@ -16,6 +16,7 @@ import com.binance.client.model.MarginSummary;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
 import com.binance.client.model.SubAccountFuturesDetail;
+import com.binance.client.model.SubAccountFuturesPositionRisk;
 import com.binance.client.model.SubAccountStatus;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SubAccountMarginDetail;
@@ -278,5 +279,12 @@ public interface SyncRequestClient {
      * @return Summary of Sub-account's Futures Account.
      */
     FuturesSummary getSubAccountFuturesSummary();
+
+    /**
+     * Get Futures Postion-Risk of Sub-account.
+     *
+     * @return Futures Postion-Risk of Sub-account.
+     */
+    List<SubAccountFuturesPositionRisk> getSubAccountFuturesPositionRisk(String email);
 
 }
