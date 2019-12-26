@@ -168,4 +168,9 @@ public class SyncRequestImpl implements SyncRequestClient {
         return RestApiInvoker.callSync(requestImpl.getSubAccountMarginSummary());
     }
 
+    @Override
+    public Boolean postEnableFutures(String email) {
+        return RestApiInvoker.callSync(requestImpl.postEnableFutures(email));
+    }
+
 }

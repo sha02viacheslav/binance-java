@@ -256,4 +256,11 @@ public interface SyncRequestClient {
      */
     MarginSummary getSubAccountMarginSummary();
 
+    /**
+     * Enable Futures for Sub-account.
+     *
+     * @return Sub-account futures status.
+     */
+    Boolean postEnableFutures(String email);
+
 }

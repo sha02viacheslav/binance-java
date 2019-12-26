@@ -800,4 +800,18 @@ class RestApiRequestImpl {
         });
         return request;
     }
+
+    RestApiRequest<Boolean> postEnableFutures(String email) {
+        RestApiRequest<Boolean> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email);
+        request.request = createRequestByPostWithSignature("/sapi/v1/sub-account/futures/enable", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Boolean result = jsonWrapper.getBoolean("isFuturesEnabled");
+            return result;
+        });
+        return request;
+    }
+
 }
