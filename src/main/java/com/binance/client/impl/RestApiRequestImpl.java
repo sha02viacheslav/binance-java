@@ -26,6 +26,7 @@ import com.binance.client.model.IndicatorInfo;
 import com.binance.client.model.Network;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
+import com.binance.client.model.SubAccountStatus;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
@@ -683,6 +684,31 @@ class RestApiRequestImpl {
                 element.setInsertTime(item.getInteger("insertTime"));
                 element.setStatus(item.getInteger("status"));
                 element.setTxId(item.getString("txId"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<SubAccountStatus>> getSubAccountStatus(String email) {
+        RestApiRequest<List<SubAccountStatus>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email);
+        request.request = createRequestByGetWithSignature("/sapi/v1/sub-account/status", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<SubAccountStatus> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                SubAccountStatus element = new SubAccountStatus();
+                element.setEmail(item.getString("email"));
+                element.setIsSubUserEnabled(item.getString("isSubUserEnabled"));
+                element.setIsUserActive(item.getBoolean("isUserActive"));
+                element.setInsertTime(item.getInteger("insertTime"));
+                element.setIsMarginEnabled(item.getString("isMarginEnabled"));
+                element.setIsFutureEnabled(item.getString("isFutureEnabled"));
+                element.setMobile(item.getInteger("mobile"));
                 result.add(element);
             });
             return result;
