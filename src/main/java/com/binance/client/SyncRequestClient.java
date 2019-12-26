@@ -1,6 +1,7 @@
 package com.binance.client;
 
 import com.binance.client.impl.BinanceApiInternalFactory;
+import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
@@ -144,5 +145,12 @@ public interface SyncRequestClient {
      * @return Account status detail.
      */
     AccountStatus getAccountStatus();
+
+    /**
+     * Fetch account api trading status detail.
+     *
+     * @return Account api trading status detail.
+     */
+    AccountApiTradingStatus getAccountApiTradingStatus();
 
 }

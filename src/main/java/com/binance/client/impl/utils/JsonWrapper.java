@@ -152,6 +152,10 @@ public class JsonWrapper {
         return new JsonWrapper(json.getJSONObject(name));
     }
 
+    public JSONObject convert2JsonObject() {
+        return this.json;
+    }
+
     public void getJsonObject(String name, Handler<JsonWrapper> todo) {
         checkMandatoryField(name);
         todo.handle(new JsonWrapper(json.getJSONObject(name)));

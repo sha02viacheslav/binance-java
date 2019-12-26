@@ -1,28 +1,32 @@
 package com.binance.client.impl;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
-import com.alibaba.fastjson.JSONArray;
-
-import okhttp3.Request;
-
 import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
+import com.binance.client.impl.utils.JsonWrapper;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
+import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
+import com.binance.client.model.Indicator;
+import com.binance.client.model.IndicatorInfo;
 import com.binance.client.model.Network;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeStatistics;
+import com.binance.client.model.TriggerCondition;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
+
+import okhttp3.Request;
 
 class RestApiRequestImpl {
 
@@ -406,6 +410,49 @@ class RestApiRequestImpl {
                 }
                 result.setObjs(data);
             }
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<AccountApiTradingStatus> getAccountApiTradingStatus() {
+        RestApiRequest<AccountApiTradingStatus> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/wapi/v3/apiTradingStatus.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            AccountApiTradingStatus result = new AccountApiTradingStatus();
+            JsonWrapper jsondata = jsonWrapper.getJsonObject("status");
+            result.setIsLocked(jsondata.getBoolean("isLocked"));
+            result.setPlannedRecoverTime(jsondata.getInteger("plannedRecoverTime"));
+            result.setUpdateTime(jsondata.getInteger("updateTime"));
+            TriggerCondition triggerCondition = new TriggerCondition();
+            triggerCondition.setGCR(jsondata.getJsonObject("triggerCondition").getString("GCR"));
+            triggerCondition.setIFER(jsondata.getJsonObject("triggerCondition").getString("IFER"));
+            triggerCondition.setUFR(jsondata.getJsonObject("triggerCondition").getString("UFR"));
+            result.setTriggerCondition(triggerCondition);
+            List<Indicator> indicatorList =  new LinkedList<>();
+
+            Set<String> keys = jsondata.getJsonObject("indicators").convert2JsonObject().keySet();
+            keys.forEach((key) -> {
+                JsonWrapperArray jsonIndicator = jsondata.getJsonObject("indicators").getJsonArray(key);
+                Indicator indicator = new Indicator();
+                indicator.setSymbol(key);
+                List<IndicatorInfo> indicatorInfoList = new ArrayList<IndicatorInfo>();
+                jsonIndicator.forEach((item) -> {
+                    IndicatorInfo indicatorInfo = new IndicatorInfo();
+                    indicatorInfo.setI(item.getString("i"));
+                    indicatorInfo.setC(item.getInteger("c"));
+                    indicatorInfo.setV(item.getBigDecimal("v"));
+                    indicatorInfo.setT(item.getBigDecimal("t"));
+                    indicatorInfoList.add(indicatorInfo);
+                });
+                indicator.setInformations(indicatorInfoList);
+
+                indicatorList.add(indicator);
+            });
+            
+            result.setIndicators(indicatorList);
             return result;
         });
         return request;

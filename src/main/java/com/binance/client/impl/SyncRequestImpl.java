@@ -1,6 +1,7 @@
 package com.binance.client.impl;
 
 import com.binance.client.SyncRequestClient;
+import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
@@ -82,5 +83,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public AccountStatus getAccountStatus() {
         return RestApiInvoker.callSync(requestImpl.getAccountStatus());
+    }
+
+    @Override
+    public AccountApiTradingStatus getAccountApiTradingStatus() {
+        return RestApiInvoker.callSync(requestImpl.getAccountApiTradingStatus());
     }
 }
