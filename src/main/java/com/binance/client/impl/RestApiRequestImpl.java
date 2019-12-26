@@ -60,6 +60,7 @@ import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.OrderBookEntry;
 import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.RateLimit;
+import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.enums.*;
 
@@ -1305,6 +1306,32 @@ class RestApiRequestImpl {
                 element.setFirstId(item.getInteger("firstId"));
                 element.setLastId(item.getInteger("lastId"));
                 element.setCount(item.getInteger("count"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<SymbolPrice>> getSymbolPriceTicker(String symbol) {
+        RestApiRequest<List<SymbolPrice>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGet("/api/v3/ticker/price", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<SymbolPrice> result = new LinkedList<>();
+            JsonWrapperArray dataArray = new JsonWrapperArray(new JSONArray());
+            if(jsonWrapper.containKey("data")) {
+                dataArray = jsonWrapper.getJsonArray("data");
+            } else {
+                dataArray.add(jsonWrapper.convert2JsonObject());
+            }
+            dataArray.forEach((item) -> {
+                SymbolPrice element = new SymbolPrice();
+                element.setSymbol(item.getString("symbol"));
+                element.setPrice(item.getBigDecimal("price"));
                 result.add(element);
             });
             

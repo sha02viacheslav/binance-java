@@ -33,6 +33,7 @@ import com.binance.client.model.market.Candlestick;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.PriceChangeTicker;
+import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.enums.*;
 
@@ -366,5 +367,12 @@ public interface SyncRequestClient {
      * @return 24 hour rolling window price change statistics.
      */
     List<PriceChangeTicker> get24hrTickerPriceChange(String symbol);
+
+    /**
+     * Get latest price for a symbol or symbols.
+     *
+     * @return Latest price for a symbol or symbols.
+     */
+    List<SymbolPrice> getSymbolPriceTicker(String symbol);
 
 }

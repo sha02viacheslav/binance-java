@@ -33,6 +33,7 @@ import com.binance.client.model.market.Candlestick;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.PriceChangeTicker;
+import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.enums.*;
 
@@ -251,6 +252,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<PriceChangeTicker> get24hrTickerPriceChange(String symbol) {
         return RestApiInvoker.callSync(requestImpl.get24hrTickerPriceChange(symbol));
+    }
+    
+    @Override
+    public List<SymbolPrice> getSymbolPriceTicker(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.getSymbolPriceTicker(symbol));
     }
 
 }
