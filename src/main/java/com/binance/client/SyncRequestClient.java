@@ -14,6 +14,7 @@ import com.binance.client.model.DustLog;
 import com.binance.client.model.MarginSummary;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
+import com.binance.client.model.SubAccountFuturesDetail;
 import com.binance.client.model.SubAccountStatus;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SubAccountMarginDetail;
@@ -262,5 +263,12 @@ public interface SyncRequestClient {
      * @return Sub-account futures status.
      */
     Boolean postEnableFutures(String email);
+
+    /**
+     * Get Detail on Sub-account's Futures Account.
+     *
+     * @return Detail on Sub-account's Futures Account.
+     */
+    SubAccountFuturesDetail getSubAccountFuturesDetail(String email);
 
 }

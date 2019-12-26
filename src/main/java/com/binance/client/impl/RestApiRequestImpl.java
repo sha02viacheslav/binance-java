@@ -30,9 +30,11 @@ import com.binance.client.model.MarginUserAssetVo;
 import com.binance.client.model.Network;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
+import com.binance.client.model.SubAccountFuturesDetail;
 import com.binance.client.model.SubAccountStatus;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SubAccountMarginDetail;
+import com.binance.client.model.SubAccountFuturesDetailAsset;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
@@ -809,6 +811,52 @@ class RestApiRequestImpl {
 
         request.jsonParser = (jsonWrapper -> {
             Boolean result = jsonWrapper.getBoolean("isFuturesEnabled");
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<SubAccountFuturesDetail> getSubAccountFuturesDetail(String email) {
+        RestApiRequest<SubAccountFuturesDetail> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email);
+        request.request = createRequestByGetWithSignature("/sapi/v1/sub-account/futures/account", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            SubAccountFuturesDetail result = new SubAccountFuturesDetail();
+            result.setEmail(jsonWrapper.getString("email"));
+            result.setCanDeposit(jsonWrapper.getBoolean("canDeposit"));
+            result.setCanTrade(jsonWrapper.getBoolean("canTrade"));
+            result.setCanWithdraw(jsonWrapper.getBoolean("canWithdraw"));
+            result.setFeeTier(jsonWrapper.getBigDecimal("feeTier"));
+            result.setMaxWithdrawAmount(jsonWrapper.getBigDecimal("maxWithdrawAmount"));
+            result.setTotalInitialMargin(jsonWrapper.getBigDecimal("totalInitialMargin"));
+            result.setTotalMaintMargin(jsonWrapper.getBigDecimal("totalMaintMargin"));
+            result.setTotalMarginBalance(jsonWrapper.getBigDecimal("totalMarginBalance"));
+            result.setTotalOpenOrderInitialMargin(jsonWrapper.getBigDecimal("totalOpenOrderInitialMargin"));
+            result.setTotalPositionInitialMargin(jsonWrapper.getBigDecimal("totalPositionInitialMargin"));
+            result.setTotalUnrealizedProfit(jsonWrapper.getBigDecimal("totalUnrealizedProfit"));
+            result.setTotalWalletBalance(jsonWrapper.getBigDecimal("totalWalletBalance"));
+            result.setAsset(jsonWrapper.getString("asset"));
+            result.setUpdateTime(jsonWrapper.getInteger("updateTime"));
+
+            List<SubAccountFuturesDetailAsset> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("assets");
+            dataArray.forEach((item) -> {
+                SubAccountFuturesDetailAsset element = new SubAccountFuturesDetailAsset();
+                element.setAsset(item.getString("asset"));
+                element.setInitialMargin(item.getBigDecimal("initialMargin"));
+                element.setMaintMargin(item.getBigDecimal("maintMargin"));
+                element.setMarginBalance(item.getBigDecimal("marginBalance"));
+                element.setMaxWithdrawAmount(item.getBigDecimal("maxWithdrawAmount"));
+                element.setOpenOrderInitialMargin(item.getBigDecimal("openOrderInitialMargin"));
+                element.setPositionInitialMargin(item.getBigDecimal("positionInitialMargin"));
+                element.setUnrealizedProfit(item.getBigDecimal("unrealizedProfit"));
+                element.setWalletBalance(item.getBigDecimal("walletBalance"));
+                elementList.add(element);
+            });
+            result.setAssets(elementList);
+            
             return result;
         });
         return request;
