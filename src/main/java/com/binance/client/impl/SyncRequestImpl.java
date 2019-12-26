@@ -12,6 +12,7 @@ import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
 import com.binance.client.model.SubAccount;
+import com.binance.client.model.SubAccountDepositHistory;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
@@ -135,6 +136,13 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public DepositAddressSapi getSubAccountDepositAddress(String email, String coin, String network) {
         return RestApiInvoker.callSync(requestImpl.getSubAccountDepositAddress(email, coin, network));
+    }
+
+    @Override
+    public List<SubAccountDepositHistory> getSubAccountDepositHistory(String email, String coin, Integer status,
+            Long startTime, Long endTime, Integer limit, Integer offset) {
+        return RestApiInvoker.callSync(requestImpl.getSubAccountDepositHistory(email, coin, status, 
+                startTime, endTime, limit, offset));
     }
 
 }

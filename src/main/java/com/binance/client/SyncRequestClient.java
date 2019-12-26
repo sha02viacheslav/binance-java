@@ -12,6 +12,7 @@ import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
 import com.binance.client.model.SubAccount;
+import com.binance.client.model.SubAccountDepositHistory;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
@@ -215,5 +216,13 @@ public interface SyncRequestClient {
      * @return Sub-account deposit address.
      */
     DepositAddressSapi getSubAccountDepositAddress(String email, String coin, String network);
+
+    /**
+     * Fetch sub-account deposit history.
+     *
+     * @return Sub-account deposit history.
+     */
+    List<SubAccountDepositHistory> getSubAccountDepositHistory(String email, String coin, Integer status,
+            Long startTime, Long endTime, Integer limit, Integer offset);
 
 }

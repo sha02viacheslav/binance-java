@@ -25,6 +25,7 @@ import com.binance.client.model.Indicator;
 import com.binance.client.model.IndicatorInfo;
 import com.binance.client.model.Network;
 import com.binance.client.model.SubAccount;
+import com.binance.client.model.SubAccountDepositHistory;
 import com.binance.client.model.SubAccountTransferHistory;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
@@ -657,4 +658,35 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<List<SubAccountDepositHistory>> getSubAccountDepositHistory(String email, String coin, Integer status,
+            Long startTime, Long endTime, Integer limit, Integer offset) {
+        RestApiRequest<List<SubAccountDepositHistory>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email)
+                .putToUrl("coin", coin)
+                .putToUrl("status", status)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("limit", limit)
+                .putToUrl("offset", offset);
+        request.request = createRequestByGetWithSignature("/sapi/v1/capital/deposit/subHisrec", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<SubAccountDepositHistory> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                SubAccountDepositHistory element = new SubAccountDepositHistory();
+                element.setAddress(item.getString("address"));
+                element.setAddressTag(item.getString("addressTag"));
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setCoin(item.getString("coin"));
+                element.setInsertTime(item.getInteger("insertTime"));
+                element.setStatus(item.getInteger("status"));
+                element.setTxId(item.getString("txId"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
 }
