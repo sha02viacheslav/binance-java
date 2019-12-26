@@ -36,6 +36,7 @@ import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.enums.*;
 
 import java.util.List;
@@ -263,6 +264,15 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<SymbolOrderBook> getSymbolOrderBookTicker(String symbol) {
         return RestApiInvoker.callSync(requestImpl.getSymbolOrderBookTicker(symbol));
+    }
+    
+    @Override
+    public NewOrder postOrder(String symbol, OrderSide side, OrderType orderType,
+            TimeInForce timeInForce, String quantity, String price, String quoteOrderQty, 
+            String newClientOrderId, String stopPrice, String icebergQty, OrderRespType newOrderRespType) {
+        return RestApiInvoker.callSync(requestImpl.postOrder(symbol, side, orderType, 
+                timeInForce, quantity, price, quoteOrderQty, 
+                newClientOrderId, stopPrice, icebergQty, newOrderRespType));
     }
 
 }

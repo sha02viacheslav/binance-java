@@ -36,6 +36,7 @@ import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.enums.*;
 
 import java.util.List;
@@ -382,5 +383,14 @@ public interface SyncRequestClient {
      * @return Best price/qty on the order book for a symbol or symbols.
      */
     List<SymbolOrderBook> getSymbolOrderBookTicker(String symbol);
+
+    /**
+     * Send in a new order.
+     *
+     * @return New order.
+     */
+    NewOrder postOrder(String symbol, OrderSide side, OrderType orderType,
+            TimeInForce timeInForce, String quantity, String price, String quoteOrderQty,
+            String newClientOrderId, String stopPrice, String icebergQty, OrderRespType newOrderRespType);
 
 }

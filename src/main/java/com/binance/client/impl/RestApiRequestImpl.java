@@ -63,6 +63,8 @@ import com.binance.client.model.market.RateLimit;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.Fill;
+import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.enums.*;
 
 import okhttp3.Request;
@@ -1364,6 +1366,57 @@ class RestApiRequestImpl {
                 element.setAskQty(item.getBigDecimal("askQty"));
                 result.add(element);
             });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<NewOrder> postOrder(String symbol, OrderSide side, OrderType orderType,
+            TimeInForce timeInForce, String quantity, String price, String quoteOrderQty,
+            String newClientOrderId, String stopPrice, String icebergQty, OrderRespType newOrderRespType) {
+        RestApiRequest<NewOrder> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("side", side)
+                .putToUrl("type", orderType)
+                .putToUrl("timeInForce", timeInForce)
+                .putToUrl("quantity", quantity)
+                .putToUrl("quoteOrderQty", quoteOrderQty)
+                .putToUrl("price", price)
+                .putToUrl("newClientOrderId", newClientOrderId)
+                .putToUrl("stopPrice", stopPrice)
+                .putToUrl("icebergQty", icebergQty)
+                .putToUrl("newOrderRespType", newOrderRespType);
+        request.request = createRequestByPostWithSignature("/api/v3/order", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            NewOrder result = new NewOrder();
+            result.setSymbol(jsonWrapper.getString("symbol"));
+            result.setOrderId(jsonWrapper.getInteger("orderId"));
+            result.setOrderListId(jsonWrapper.getInteger("orderListId"));
+            result.setClientOrderId(jsonWrapper.getString("clientOrderId"));
+            result.setTransactTime(jsonWrapper.getInteger("transactTime"));
+            result.setPrice(jsonWrapper.getBigDecimalOrDefault("price", null));
+            result.setOrigQty(jsonWrapper.getBigDecimalOrDefault("origQty", null));
+            result.setExecutedQty(jsonWrapper.getBigDecimalOrDefault("executedQty", null));
+            result.setCummulativeQuoteQty(jsonWrapper.getBigDecimalOrDefault("cummulativeQuoteQty", null));
+            result.setStatus(jsonWrapper.getStringOrDefault("status", null));
+            result.setTimeInForce(jsonWrapper.getStringOrDefault("timeInForce", null));
+            result.setType(jsonWrapper.getStringOrDefault("type", null));
+            result.setSide(jsonWrapper.getStringOrDefault("side", null));
+
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("fills");
+            List<Fill> elementList = new LinkedList<>();
+            dataArray.forEach((item) -> {
+                Fill element = new Fill();
+                element.setPrice(item.getBigDecimal("price"));
+                element.setQty(item.getBigDecimal("qty"));
+                element.setCommission(item.getBigDecimal("commission"));
+                element.setCommissionAsset(item.getString("commissionAsset"));
+                elementList.add(element);
+            });
+            result.setFills(elementList);
             
             return result;
         });
