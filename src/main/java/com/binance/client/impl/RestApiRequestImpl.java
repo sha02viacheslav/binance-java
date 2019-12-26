@@ -54,6 +54,7 @@ import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.OrderBookEntry;
 import com.binance.client.model.market.RateLimit;
+import com.binance.client.model.market.Trade;
 
 import okhttp3.Request;
 
@@ -132,6 +133,35 @@ class RestApiRequestImpl {
 
     private Request createRequestByGetWithSignature(String address, UrlParamsBuilder builder) {
         return createRequestWithSignature(serverUrl, address, tradingHost, builder);
+    }
+
+    private Request createRequestWithApikey(String url, String address, String host, UrlParamsBuilder builder) {
+        if (builder == null) {
+            throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
+                    "[Invoking] Builder is null when create request with Signature");
+        }
+        String requestUrl = url + address;
+        if (builder.hasPostParam()) {
+            requestUrl += builder.buildUrl();
+            return new Request.Builder().url(requestUrl).post(builder.buildPostBody())
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("X-MBX-APIKEY", apiKey)
+                    .build();
+        } else {
+            requestUrl += builder.buildUrl();
+            return new Request.Builder().url(requestUrl)
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("X-MBX-APIKEY", apiKey)
+                    .build();
+        }
+    }
+
+    private Request createRequestByPostWithApikey(String address, UrlParamsBuilder builder) {
+        return createRequestWithApikey(serverUrl, address, tradingHost, builder.setPostMode(true));
+    }
+
+    private Request createRequestByGetWithApikey(String address, UrlParamsBuilder builder) {
+        return createRequestWithApikey(serverUrl, address, tradingHost, builder);
     }
 
     RestApiRequest<TradeStatistics> get24HTradeStatistics(String symbol) {
@@ -1089,6 +1119,61 @@ class RestApiRequestImpl {
                 askList.add(element);
             });
             result.setAsks(askList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<Trade>> getRecentTrades(String symbol, Integer limit) {
+        RestApiRequest<List<Trade>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGet("/api/v3/trades", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<Trade> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                Trade element = new Trade();
+                element.setId(item.getInteger("id"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setQty(item.getBigDecimal("qty"));
+                element.setQuoteQty(item.getBigDecimal("quoteQty"));
+                element.setTime(item.getInteger("time"));
+                element.setIsBuyerMaker(item.getBoolean("isBuyerMaker"));
+                element.setIsBestMatch(item.getBoolean("isBestMatch"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<Trade>> getOldTrades(String symbol, Integer limit, Long fromId) {
+        RestApiRequest<List<Trade>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("limit", limit)
+                .putToUrl("fromId", fromId);
+        request.request = createRequestByGetWithApikey("/api/v3/historicalTrades", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<Trade> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                Trade element = new Trade();
+                element.setId(item.getInteger("id"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setQty(item.getBigDecimal("qty"));
+                element.setQuoteQty(item.getBigDecimal("quoteQty"));
+                element.setTime(item.getInteger("time"));
+                element.setIsBuyerMaker(item.getBoolean("isBuyerMaker"));
+                element.setIsBestMatch(item.getBoolean("isBestMatch"));
+                result.add(element);
+            });
             
             return result;
         });

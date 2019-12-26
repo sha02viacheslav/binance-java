@@ -29,6 +29,7 @@ import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
+import com.binance.client.model.market.Trade;
 
 import java.util.List;
 
@@ -318,5 +319,19 @@ public interface SyncRequestClient {
      * @return Order book.
      */
     OrderBook getOrderBook(String symbol, Integer limit);
+
+    /**
+     * Get recent trades.
+     *
+     * @return Recent trades.
+     */
+    List<Trade> getRecentTrades(String symbol, Integer limit);
+
+    /**
+     * Get old Trade.
+     *
+     * @return Old trades.
+     */
+    List<Trade> getOldTrades(String symbol, Integer limit, Long fromId);
 
 }

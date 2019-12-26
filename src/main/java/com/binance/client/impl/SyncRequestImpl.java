@@ -29,6 +29,7 @@ import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
+import com.binance.client.model.market.Trade;
 
 import java.util.List;
 
@@ -213,6 +214,16 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public OrderBook getOrderBook(String symbol, Integer limit) {
         return RestApiInvoker.callSync(requestImpl.getOrderBook(symbol, limit));
+    }
+    
+    @Override
+    public List<Trade> getRecentTrades(String symbol, Integer limit) {
+        return RestApiInvoker.callSync(requestImpl.getRecentTrades(symbol, limit));
+    }
+    
+    @Override
+    public List<Trade> getOldTrades(String symbol, Integer limit, Long fromId) {
+        return RestApiInvoker.callSync(requestImpl.getOldTrades(symbol, limit, fromId));
     }
 
 }
