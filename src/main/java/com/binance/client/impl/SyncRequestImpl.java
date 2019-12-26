@@ -4,6 +4,7 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.AssetDetail;
+import com.binance.client.model.Balance;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
@@ -124,6 +125,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public Long postSubAccountTransfer(String fromEmail, String toEmail, String asset, String amount) {
         return RestApiInvoker.callSync(requestImpl.postSubAccountTransfer(fromEmail, toEmail, asset, amount));
+    }
+
+    @Override
+    public List<Balance> getSubAccountAssets(String email, String symbol) {
+        return RestApiInvoker.callSync(requestImpl.getSubAccountAssets(email, symbol));
     }
 
 }

@@ -4,6 +4,7 @@ import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.AssetDetail;
+import com.binance.client.model.Balance;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
@@ -200,5 +201,12 @@ public interface SyncRequestClient {
      * @return Transaction ID.
      */
     Long postSubAccountTransfer(String fromEmail, String toEmail, String asset, String amount);
+
+    /**
+     * Fetch sub-account assets.
+     *
+     * @return Sub-account assets.
+     */
+    List<Balance> getSubAccountAssets(String email, String symbol);
 
 }

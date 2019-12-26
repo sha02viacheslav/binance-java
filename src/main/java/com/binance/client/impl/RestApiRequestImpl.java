@@ -13,6 +13,7 @@ import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.AssetDetail;
+import com.binance.client.model.Balance;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
@@ -610,6 +611,28 @@ class RestApiRequestImpl {
 
         request.jsonParser = (jsonWrapper -> {
             Long result = jsonWrapper.getLong("txnId");
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<Balance>> getSubAccountAssets(String email, String symbol) {
+        RestApiRequest<List<Balance>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email)
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithSignature("/wapi/v3/sub-account/assets.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<Balance> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("balances");
+            dataArray.forEach((item) -> {
+                Balance element = new Balance();
+                element.setAsset(item.getString("asset"));
+                element.setFree(item.getString("free"));
+                element.setLocked(item.getBoolean("locked"));
+                result.add(element);
+            });
             return result;
         });
         return request;
