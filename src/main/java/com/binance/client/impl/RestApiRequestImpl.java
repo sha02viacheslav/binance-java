@@ -12,6 +12,7 @@ import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
+import com.binance.client.model.AssetDetail;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
@@ -510,6 +511,30 @@ class RestApiRequestImpl {
                 element.setSymbol(item.getString("symbol"));
                 element.setMaker(item.getBigDecimal("maker"));
                 element.setTaker(item.getBigDecimal("taker"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<AssetDetail>> getAssetDetail() {
+        RestApiRequest<List<AssetDetail>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/wapi/v3/assetDetail.html", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<AssetDetail> result = new LinkedList<>();
+            Set<String> keys = jsonWrapper.getJsonObject("assetDetail").convert2JsonObject().keySet();
+            keys.forEach((key) -> {
+                AssetDetail element = new AssetDetail();
+                element.setAsset(key);
+                JsonWrapper item = jsonWrapper.getJsonObject("assetDetail").getJsonObject(key);
+                element.setMinWithdrawAmount(item.getBigDecimal("minWithdrawAmount"));
+                element.setDepositStatus(item.getBoolean("depositStatus"));
+                element.setWithdrawFee(item.getBigDecimal("withdrawFee"));
+                element.setWithdrawStatus(item.getBoolean("withdrawStatus"));
+                element.setDepositTip(item.getStringOrDefault("depositTip", null));
                 result.add(element);
             });
             return result;

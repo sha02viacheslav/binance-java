@@ -3,6 +3,7 @@ package com.binance.client.impl;
 import com.binance.client.SyncRequestClient;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
+import com.binance.client.model.AssetDetail;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
@@ -101,4 +102,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<TradeFee> getTradeFee(String symbol) {
         return RestApiInvoker.callSync(requestImpl.getTradeFee(symbol));
     }
+
+    @Override
+    public List<AssetDetail> getAssetDetail() {
+        return RestApiInvoker.callSync(requestImpl.getAssetDetail());
+    }
+
 }

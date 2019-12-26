@@ -3,6 +3,7 @@ package com.binance.client;
 import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
+import com.binance.client.model.AssetDetail;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
 import com.binance.client.model.DepositAddressSapi;
@@ -168,5 +169,12 @@ public interface SyncRequestClient {
      * @return Trade fee.
      */
     List<TradeFee> getTradeFee(String symbol);
+
+    /**
+     * Fetch asset detail.
+     *
+     * @return Asset detail.
+     */
+    List<AssetDetail> getAssetDetail();
 
 }
