@@ -23,6 +23,8 @@ import com.binance.client.model.DustLog;
 import com.binance.client.model.DustLogEntry;
 import com.binance.client.model.Indicator;
 import com.binance.client.model.IndicatorInfo;
+import com.binance.client.model.MarginSummary;
+import com.binance.client.model.MarginSummaryEntry;
 import com.binance.client.model.MarginTradeCoeffVo;
 import com.binance.client.model.MarginUserAssetVo;
 import com.binance.client.model.Network;
@@ -765,6 +767,34 @@ class RestApiRequestImpl {
                 marginUserAssetVoList.add(element);
             });
             result.setMarginUserAssetVoList(marginUserAssetVoList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<MarginSummary> getSubAccountMarginSummary() {
+        RestApiRequest<MarginSummary> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/sapi/v1/sub-account/margin/accountSummary", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            MarginSummary result = new MarginSummary();
+            result.setTotalAssetOfBtc(jsonWrapper.getBigDecimal("totalAssetOfBtc"));
+            result.setTotalLiabilityOfBtc(jsonWrapper.getBigDecimal("totalLiabilityOfBtc"));
+            result.setTotalNetAssetOfBtc(jsonWrapper.getBigDecimal("totalNetAssetOfBtc"));
+
+            List<MarginSummaryEntry> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("subAccountList");
+            dataArray.forEach((item) -> {
+                MarginSummaryEntry element = new MarginSummaryEntry();
+                element.setEmail(item.getString("email"));
+                element.setTotalAssetOfBtc(item.getBigDecimal("totalAssetOfBtc"));
+                element.setTotalLiabilityOfBtc(item.getBigDecimal("totalLiabilityOfBtc"));
+                element.setTotalNetAssetOfBtc(item.getBigDecimal("totalNetAssetOfBtc"));
+                elementList.add(element);
+            });
+            result.setSubAccountList(elementList);
             
             return result;
         });

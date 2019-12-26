@@ -11,6 +11,7 @@ import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
+import com.binance.client.model.MarginSummary;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
 import com.binance.client.model.SubAccountStatus;
@@ -247,5 +248,12 @@ public interface SyncRequestClient {
      * @return Detail on Sub-account's Margin Account.
      */
     SubAccountMarginDetail getSubAccountMarginDetail(String email);
+
+    /**
+     * Get Summary of Sub-account's Margin Account.
+     *
+     * @return Summary of Sub-account's Margin Account.
+     */
+    MarginSummary getSubAccountMarginSummary();
 
 }
