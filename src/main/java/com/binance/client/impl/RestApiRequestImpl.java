@@ -60,6 +60,7 @@ import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.OrderBookEntry;
 import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.RateLimit;
+import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.enums.*;
@@ -1332,6 +1333,35 @@ class RestApiRequestImpl {
                 SymbolPrice element = new SymbolPrice();
                 element.setSymbol(item.getString("symbol"));
                 element.setPrice(item.getBigDecimal("price"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<SymbolOrderBook>> getSymbolOrderBookTicker(String symbol) {
+        RestApiRequest<List<SymbolOrderBook>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGet("/api/v3/ticker/bookTicker", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<SymbolOrderBook> result = new LinkedList<>();
+            JsonWrapperArray dataArray = new JsonWrapperArray(new JSONArray());
+            if(jsonWrapper.containKey("data")) {
+                dataArray = jsonWrapper.getJsonArray("data");
+            } else {
+                dataArray.add(jsonWrapper.convert2JsonObject());
+            }
+            dataArray.forEach((item) -> {
+                SymbolOrderBook element = new SymbolOrderBook();
+                element.setSymbol(item.getString("symbol"));
+                element.setBidPrice(item.getBigDecimal("bidPrice"));
+                element.setBidQty(item.getBigDecimal("bidQty"));
+                element.setAskPrice(item.getBigDecimal("askPrice"));
+                element.setAskQty(item.getBigDecimal("askQty"));
                 result.add(element);
             });
             
