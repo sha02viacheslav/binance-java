@@ -23,11 +23,14 @@ import com.binance.client.model.DustLog;
 import com.binance.client.model.DustLogEntry;
 import com.binance.client.model.Indicator;
 import com.binance.client.model.IndicatorInfo;
+import com.binance.client.model.MarginTradeCoeffVo;
+import com.binance.client.model.MarginUserAssetVo;
 import com.binance.client.model.Network;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
 import com.binance.client.model.SubAccountStatus;
 import com.binance.client.model.SubAccountTransferHistory;
+import com.binance.client.model.SubAccountMarginDetail;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
@@ -724,6 +727,45 @@ class RestApiRequestImpl {
 
         request.jsonParser = (jsonWrapper -> {
             Boolean result = jsonWrapper.getBoolean("isMarginEnabled");
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<SubAccountMarginDetail> getSubAccountMarginDetail(String email) {
+        RestApiRequest<SubAccountMarginDetail> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email);
+        request.request = createRequestByGetWithSignature("/sapi/v1/sub-account/margin/account", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            SubAccountMarginDetail result = new SubAccountMarginDetail();
+            result.setEmail(jsonWrapper.getString("email"));
+            result.setMarginLevel(jsonWrapper.getBigDecimal("marginLevel"));
+            result.setTotalAssetOfBtc(jsonWrapper.getBigDecimal("totalAssetOfBtc"));
+            result.setTotalLiabilityOfBtc(jsonWrapper.getBigDecimal("totalLiabilityOfBtc"));
+            result.setTotalNetAssetOfBtc(jsonWrapper.getBigDecimal("totalNetAssetOfBtc"));
+
+            MarginTradeCoeffVo marginTradeCoeffVo = new MarginTradeCoeffVo();
+            marginTradeCoeffVo.setForceLiquidationBar(jsonWrapper.getBigDecimal("forceLiquidationBar"));
+            marginTradeCoeffVo.setMarginCallBar(jsonWrapper.getBigDecimal("marginCallBar"));
+            marginTradeCoeffVo.setNormalBar(jsonWrapper.getBigDecimal("normalBar"));
+            result.setMarginTradeCoeffVo(marginTradeCoeffVo);
+
+            List<MarginUserAssetVo> marginUserAssetVoList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("marginUserAssetVoList");
+            dataArray.forEach((item) -> {
+                MarginUserAssetVo element = new MarginUserAssetVo();
+                element.setAsset(item.getString("asset"));
+                element.setBorrowed(item.getBigDecimal("borrowed"));
+                element.setFree(item.getBigDecimal("free"));
+                element.setInterest(item.getBigDecimal("interest"));
+                element.setLocked(item.getBigDecimal("locked"));
+                element.setNetAsset(item.getBigDecimal("netAsset"));
+                marginUserAssetVoList.add(element);
+            });
+            result.setMarginUserAssetVoList(marginUserAssetVoList);
+            
             return result;
         });
         return request;

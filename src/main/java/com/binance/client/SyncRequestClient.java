@@ -15,6 +15,7 @@ import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
 import com.binance.client.model.SubAccountStatus;
 import com.binance.client.model.SubAccountTransferHistory;
+import com.binance.client.model.SubAccountMarginDetail;
 import com.binance.client.model.SystemStatus;
 import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
@@ -239,5 +240,12 @@ public interface SyncRequestClient {
      * @return Sub-account margin status.
      */
     Boolean postEnableMargin(String email);
+
+    /**
+     * Get Detail on Sub-account's Margin Account.
+     *
+     * @return Detail on Sub-account's Margin Account.
+     */
+    SubAccountMarginDetail getSubAccountMarginDetail(String email);
 
 }
