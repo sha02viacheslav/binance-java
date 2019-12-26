@@ -4,6 +4,7 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.AssetDetail;
+import com.binance.client.model.AssetDividendRecord;
 import com.binance.client.model.Balance;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
@@ -11,6 +12,7 @@ import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
+import com.binance.client.model.DustTransfer;
 import com.binance.client.model.FuturesSummary;
 import com.binance.client.model.MarginSummary;
 import com.binance.client.model.SubAccount;
@@ -189,6 +191,16 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<SubAccountFuturesPositionRisk> getSubAccountFuturesPositionRisk(String email) {
         return RestApiInvoker.callSync(requestImpl.getSubAccountFuturesPositionRisk(email));
+    }
+    
+    @Override
+    public DustTransfer postDustTransfer(String asset) {
+        return RestApiInvoker.callSync(requestImpl.postDustTransfer(asset));
+    }
+    
+    @Override
+    public List<AssetDividendRecord> getAssetDividendRecord(String asset, Long startTime, Long endTime) {
+        return RestApiInvoker.callSync(requestImpl.getAssetDividendRecord(asset, startTime, endTime));
     }
 
 }

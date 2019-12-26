@@ -13,6 +13,7 @@ import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.AssetDetail;
+import com.binance.client.model.AssetDividendRecord;
 import com.binance.client.model.Balance;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
@@ -21,6 +22,8 @@ import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
 import com.binance.client.model.DustLogEntry;
+import com.binance.client.model.DustTransfer;
+import com.binance.client.model.DustTransferEntry;
 import com.binance.client.model.FuturesSummary;
 import com.binance.client.model.FuturesSummaryEntry;
 import com.binance.client.model.Indicator;
@@ -922,6 +925,62 @@ class RestApiRequestImpl {
                 element.setPositionAmt(item.getBigDecimal("positionAmt"));
                 element.setSymbol(item.getString("symbol"));
                 element.setUnRealizedProfit(item.getBigDecimal("unRealizedProfit"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<DustTransfer> postDustTransfer(String asset) {
+        RestApiRequest<DustTransfer> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset);
+        request.request = createRequestByPostWithSignature("/sapi/v1/asset/dust", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            DustTransfer result = new DustTransfer();
+            result.setTotalServiceCharge(jsonWrapper.getBigDecimal("totalServiceCharge"));
+            result.setTotalTransfered(jsonWrapper.getBigDecimal("totalTransfered"));
+
+            List<DustTransferEntry> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("assets");
+            dataArray.forEach((item) -> {
+                DustTransferEntry element = new DustTransferEntry();
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setFromAsset(item.getString("fromAsset"));
+                element.setOperateTime(item.getInteger("operateTime"));
+                element.setServiceChargeAmount(item.getBigDecimal("serviceChargeAmount"));
+                element.setTranId(item.getInteger("tranId"));
+                element.setTransferedAmount(item.getBigDecimal("transferedAmount"));
+                elementList.add(element);
+            });
+            result.setTransferResult(elementList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<AssetDividendRecord>> getAssetDividendRecord(String asset, Long startTime, Long endTime) {
+        RestApiRequest<List<AssetDividendRecord>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime);
+        request.request = createRequestByGetWithSignature("/sapi/v1/asset/assetDividend", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<AssetDividendRecord> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("rows");
+            dataArray.forEach((item) -> {
+                AssetDividendRecord element = new AssetDividendRecord();
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setAsset(item.getString("asset"));
+                element.setDivTime(item.getInteger("divTime"));
+                element.setEnInfo(item.getString("enInfo"));
+                element.setTranId(item.getInteger("tranId"));
                 result.add(element);
             });
             

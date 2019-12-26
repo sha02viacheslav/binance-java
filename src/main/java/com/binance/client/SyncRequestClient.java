@@ -4,6 +4,7 @@ import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.AccountApiTradingStatus;
 import com.binance.client.model.AccountStatus;
 import com.binance.client.model.AssetDetail;
+import com.binance.client.model.AssetDividendRecord;
 import com.binance.client.model.Balance;
 import com.binance.client.model.CoinInformation;
 import com.binance.client.model.DepositAddress;
@@ -11,6 +12,7 @@ import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
+import com.binance.client.model.DustTransfer;
 import com.binance.client.model.FuturesSummary;
 import com.binance.client.model.MarginSummary;
 import com.binance.client.model.SubAccount;
@@ -286,5 +288,19 @@ public interface SyncRequestClient {
      * @return Futures Postion-Risk of Sub-account.
      */
     List<SubAccountFuturesPositionRisk> getSubAccountFuturesPositionRisk(String email);
+
+    /**
+     * Convert dust assets to BNB.
+     *
+     * @return Transfer result.
+     */
+    DustTransfer postDustTransfer(String asset);
+
+    /**
+     * Query asset dividend record.
+     *
+     * @return Asset dividend record.
+     */
+    List<AssetDividendRecord> getAssetDividendRecord(String asset, Long startTime, Long endTime);
 
 }
