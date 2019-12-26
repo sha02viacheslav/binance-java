@@ -27,6 +27,7 @@ import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
+import com.binance.client.model.market.ExchangeInformation;
 
 import java.util.List;
 
@@ -302,5 +303,12 @@ public interface SyncRequestClient {
      * @return Asset dividend record.
      */
     List<AssetDividendRecord> getAssetDividendRecord(String asset, Long startTime, Long endTime);
+
+    /**
+     * Fetch current exchange trading rules and symbol information.
+     *
+     * @return Current exchange trading rules and symbol information.
+     */
+    ExchangeInformation getExchangeInformation();
 
 }

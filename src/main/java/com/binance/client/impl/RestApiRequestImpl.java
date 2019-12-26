@@ -2,9 +2,10 @@ package com.binance.client.impl;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.Map;
 import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapper;
@@ -47,6 +48,10 @@ import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.TriggerCondition;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
+import com.binance.client.model.market.ExchangeFilter;
+import com.binance.client.model.market.ExchangeInfoEntry;
+import com.binance.client.model.market.ExchangeInformation;
+import com.binance.client.model.market.RateLimit;
 
 import okhttp3.Request;
 
@@ -983,6 +988,69 @@ class RestApiRequestImpl {
                 element.setTranId(item.getInteger("tranId"));
                 result.add(element);
             });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<ExchangeInformation> getExchangeInformation() {
+        RestApiRequest<ExchangeInformation> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGet("/api/v3/exchangeInfo", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            ExchangeInformation result = new ExchangeInformation();
+            result.setTimezone(jsonWrapper.getString("timezone"));
+            result.setServerTime(jsonWrapper.getInteger("serverTime"));
+
+            List<RateLimit> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("rateLimits");
+            dataArray.forEach((item) -> {
+                RateLimit element = new RateLimit();
+                element.setRateLimitType(item.getString("rateLimitType"));
+                element.setInterval(item.getString("interval"));
+                element.setIntervalNum(item.getInteger("intervalNum"));
+                element.setLimit(item.getInteger("limit"));
+                elementList.add(element);
+            });
+            result.setRateLimits(elementList);
+
+            List<ExchangeFilter> filterList = new LinkedList<>();
+            JsonWrapperArray filterArray = jsonWrapper.getJsonArray("exchangeFilters");
+            filterArray.forEach((item) -> {
+                ExchangeFilter filter = new ExchangeFilter();
+                filter.setFilterType(item.getString("filterType"));
+                filter.setMaxNumOrders(item.getInteger("maxNumOrders"));
+                filter.setMaxNumAlgoOrders(item.getInteger("maxNumAlgoOrders"));
+                filterList.add(filter);
+            });
+            result.setExchangeFilters(filterList);
+
+            List<ExchangeInfoEntry> symbolList = new LinkedList<>();
+            JsonWrapperArray symbolArray = jsonWrapper.getJsonArray("symbols");
+            symbolArray.forEach((item) -> {
+                ExchangeInfoEntry symbol = new ExchangeInfoEntry();
+                symbol.setSymbol(item.getString("symbol"));
+                symbol.setStatus(item.getString("status"));
+                symbol.setBaseAsset(item.getString("baseAsset"));
+                symbol.setBaseAssetPrecision(item.getInteger("baseAssetPrecision"));
+                symbol.setQuoteAsset(item.getString("quoteAsset"));
+                symbol.setQuotePrecision(item.getInteger("quotePrecision"));
+                symbol.setOrderTypes(item.getJsonArray("orderTypes").convert2StringList());
+                symbol.setIcebergAllowed(item.getBoolean("icebergAllowed"));
+                symbol.setOcoAllowed(item.getBoolean("ocoAllowed"));
+                symbol.setIsSpotTradingAllowed(item.getBoolean("isSpotTradingAllowed"));
+                symbol.setIsMarginTradingAllowed(item.getBoolean("isMarginTradingAllowed"));
+                List<List<Map<String, String>>> valList = new LinkedList<>();
+                JsonWrapperArray valArray = item.getJsonArray("filters");
+                valArray.forEach((val) -> {
+                    valList.add(val.convert2DictList());
+                });
+                symbol.setFilters(valList);
+                symbolList.add(symbol);
+            });
+            result.setSymbols(symbolList);
             
             return result;
         });

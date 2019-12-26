@@ -27,6 +27,7 @@ import com.binance.client.model.TradeFee;
 import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
+import com.binance.client.model.market.ExchangeInformation;
 
 import java.util.List;
 
@@ -201,6 +202,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<AssetDividendRecord> getAssetDividendRecord(String asset, Long startTime, Long endTime) {
         return RestApiInvoker.callSync(requestImpl.getAssetDividendRecord(asset, startTime, endTime));
+    }
+    
+    @Override
+    public ExchangeInformation getExchangeInformation() {
+        return RestApiInvoker.callSync(requestImpl.getExchangeInformation());
     }
 
 }
