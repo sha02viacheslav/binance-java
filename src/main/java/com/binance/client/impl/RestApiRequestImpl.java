@@ -51,6 +51,8 @@ import com.binance.client.model.WithdrawHistorySapi;
 import com.binance.client.model.market.ExchangeFilter;
 import com.binance.client.model.market.ExchangeInfoEntry;
 import com.binance.client.model.market.ExchangeInformation;
+import com.binance.client.model.market.OrderBook;
+import com.binance.client.model.market.OrderBookEntry;
 import com.binance.client.model.market.RateLimit;
 
 import okhttp3.Request;
@@ -1051,6 +1053,42 @@ class RestApiRequestImpl {
                 symbolList.add(symbol);
             });
             result.setSymbols(symbolList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<OrderBook> getOrderBook(String symbol, Integer limit) {
+        RestApiRequest<OrderBook> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGet("/api/v3/depth", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            OrderBook result = new OrderBook();
+            result.setLastUpdateId(jsonWrapper.getInteger("lastUpdateId"));
+
+            List<OrderBookEntry> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("bids");
+            dataArray.forEachAsArray((item) -> {
+                OrderBookEntry element = new OrderBookEntry();
+                element.setPrice(item.getBigDecimalAt(0));
+                element.setQty(item.getBigDecimalAt(1));
+                elementList.add(element);
+            });
+            result.setBids(elementList);
+
+            List<OrderBookEntry> askList = new LinkedList<>();
+            JsonWrapperArray askArray = jsonWrapper.getJsonArray("asks");
+            askArray.forEachAsArray((item) -> {
+                OrderBookEntry element = new OrderBookEntry();
+                element.setPrice(item.getBigDecimalAt(0));
+                element.setQty(item.getBigDecimalAt(1));
+                askList.add(element);
+            });
+            result.setAsks(askList);
             
             return result;
         });

@@ -28,6 +28,7 @@ import com.binance.client.model.TradeStatistics;
 import com.binance.client.model.WithdrawHistory;
 import com.binance.client.model.WithdrawHistorySapi;
 import com.binance.client.model.market.ExchangeInformation;
+import com.binance.client.model.market.OrderBook;
 
 import java.util.List;
 
@@ -310,5 +311,12 @@ public interface SyncRequestClient {
      * @return Current exchange trading rules and symbol information.
      */
     ExchangeInformation getExchangeInformation();
+
+    /**
+     * Fetch order book.
+     *
+     * @return Order book.
+     */
+    OrderBook getOrderBook(String symbol, Integer limit);
 
 }

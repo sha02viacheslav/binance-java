@@ -65,7 +65,7 @@ public class JsonWrapperArray {
     public BigDecimal getBigDecimalAt(int index) {
 
         try {
-            return new BigDecimal(((BigDecimal) getObjectAt(index)).stripTrailingZeros().toPlainString());
+            return new BigDecimal(new BigDecimal(getStringAt(index)).stripTrailingZeros().toPlainString());
         } catch (RuntimeException e) {
             throw new BinanceApiException(null, e.getMessage());
         }
