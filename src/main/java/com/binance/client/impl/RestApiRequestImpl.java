@@ -48,6 +48,7 @@ import com.binance.client.model.wallet.TradeStatistics;
 import com.binance.client.model.wallet.TriggerCondition;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
+import com.binance.client.model.market.AggregateTrade;
 import com.binance.client.model.market.ExchangeFilter;
 import com.binance.client.model.market.ExchangeInfoEntry;
 import com.binance.client.model.market.ExchangeInformation;
@@ -1172,6 +1173,38 @@ class RestApiRequestImpl {
                 element.setTime(item.getInteger("time"));
                 element.setIsBuyerMaker(item.getBoolean("isBuyerMaker"));
                 element.setIsBestMatch(item.getBoolean("isBestMatch"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<AggregateTrade>> getAggregateTrades(String symbol, Long fromId, 
+            Long startTime, Long endTime, Integer limit) {
+        RestApiRequest<List<AggregateTrade>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("fromId", fromId)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGet("/api/v3/aggTrades", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<AggregateTrade> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                AggregateTrade element = new AggregateTrade();
+                element.setId(item.getInteger("a"));
+                element.setPrice(item.getBigDecimal("p"));
+                element.setQty(item.getBigDecimal("q"));
+                element.setFirstId(item.getInteger("f"));
+                element.setLastId(item.getInteger("l"));
+                element.setTime(item.getInteger("T"));
+                element.setIsBuyerMaker(item.getBoolean("m"));
+                element.setIsBestMatch(item.getBoolean("M"));
                 result.add(element);
             });
             

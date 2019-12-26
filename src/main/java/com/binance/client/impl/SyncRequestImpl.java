@@ -27,6 +27,7 @@ import com.binance.client.model.wallet.TradeFee;
 import com.binance.client.model.wallet.TradeStatistics;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
+import com.binance.client.model.market.AggregateTrade;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.Trade;
@@ -224,6 +225,12 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<Trade> getOldTrades(String symbol, Integer limit, Long fromId) {
         return RestApiInvoker.callSync(requestImpl.getOldTrades(symbol, limit, fromId));
+    }
+    
+    @Override
+    public List<AggregateTrade> getAggregateTrades(String symbol, Long fromId, Long startTime, 
+            Long endTime, Integer limit) {
+        return RestApiInvoker.callSync(requestImpl.getAggregateTrades(symbol, fromId, startTime, endTime, limit));
     }
 
 }

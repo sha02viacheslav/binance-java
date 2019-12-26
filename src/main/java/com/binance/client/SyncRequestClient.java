@@ -27,6 +27,7 @@ import com.binance.client.model.wallet.TradeFee;
 import com.binance.client.model.wallet.TradeStatistics;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
+import com.binance.client.model.market.AggregateTrade;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.Trade;
@@ -333,5 +334,12 @@ public interface SyncRequestClient {
      * @return Old trades.
      */
     List<Trade> getOldTrades(String symbol, Integer limit, Long fromId);
+
+    /**
+     * Get compressed, aggregate trades.
+     *
+     * @return Aggregate trades.
+     */
+    List<AggregateTrade> getAggregateTrades(String symbol, Long fromId, Long startTime, Long endTime, Integer limit);
 
 }
