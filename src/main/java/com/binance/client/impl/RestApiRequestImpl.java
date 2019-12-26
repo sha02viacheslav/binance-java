@@ -49,6 +49,7 @@ import com.binance.client.model.wallet.TriggerCondition;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
 import com.binance.client.model.market.AggregateTrade;
+import com.binance.client.model.market.Candlestick;
 import com.binance.client.model.market.ExchangeFilter;
 import com.binance.client.model.market.ExchangeInfoEntry;
 import com.binance.client.model.market.ExchangeInformation;
@@ -56,6 +57,7 @@ import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.OrderBookEntry;
 import com.binance.client.model.market.RateLimit;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.enums.*;
 
 import okhttp3.Request;
 
@@ -1205,6 +1207,42 @@ class RestApiRequestImpl {
                 element.setTime(item.getInteger("T"));
                 element.setIsBuyerMaker(item.getBoolean("m"));
                 element.setIsBestMatch(item.getBoolean("M"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<Candlestick>> getCandlestick(String symbol, CandlestickInterval interval, Long startTime, 
+            Long endTime, Integer limit) {
+        RestApiRequest<List<Candlestick>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("interval", interval)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGet("/api/v3/klines", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<Candlestick> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEachAsArray((item) -> {
+                Candlestick element = new Candlestick();
+                element.setOpenTime(item.getLongAt(0));
+                element.setOpen(item.getBigDecimalAt(1));
+                element.setHigh(item.getBigDecimalAt(2));
+                element.setLow(item.getBigDecimalAt(3));
+                element.setClose(item.getBigDecimalAt(4));
+                element.setVolume(item.getBigDecimalAt(5));
+                element.setCloseTime(item.getLongAt(6));
+                element.setQuoteAssetVolume(item.getBigDecimalAt(7));
+                element.setNumTrades(item.getIntegerAt(8));
+                element.setTakerBuyBaseAssetVolume(item.getBigDecimalAt(9));
+                element.setTakerBuyQuoteAssetVolume(item.getBigDecimalAt(10));
+                element.setIgnore(item.getBigDecimalAt(11));
                 result.add(element);
             });
             

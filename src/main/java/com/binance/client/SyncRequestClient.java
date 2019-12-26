@@ -28,9 +28,11 @@ import com.binance.client.model.wallet.TradeStatistics;
 import com.binance.client.model.wallet.WithdrawHistory;
 import com.binance.client.model.wallet.WithdrawHistorySapi;
 import com.binance.client.model.market.AggregateTrade;
+import com.binance.client.model.market.Candlestick;
 import com.binance.client.model.market.ExchangeInformation;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.enums.*;
 
 import java.util.List;
 
@@ -341,5 +343,12 @@ public interface SyncRequestClient {
      * @return Aggregate trades.
      */
     List<AggregateTrade> getAggregateTrades(String symbol, Long fromId, Long startTime, Long endTime, Integer limit);
+
+    /**
+     * Get kline/candlestick bars for a symbol.
+     *
+     * @return Kline/candlestick bars for a symbol.
+     */
+    List<Candlestick> getCandlestick(String symbol, CandlestickInterval interval, Long startTime, Long endTime, Integer limit);
 
 }

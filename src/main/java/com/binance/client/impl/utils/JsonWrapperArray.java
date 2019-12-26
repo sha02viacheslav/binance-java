@@ -62,6 +62,16 @@ public class JsonWrapperArray {
 
     }
 
+    public Integer getIntegerAt(int index) {
+        try {
+            return (Integer) getObjectAt(index);
+        } catch (Exception e) {
+            throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
+                    "[Json] Cannot get integer at index " + index + " in array: " + e.getMessage());
+        }
+
+    }
+
     public BigDecimal getBigDecimalAt(int index) {
 
         try {
