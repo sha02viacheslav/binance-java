@@ -11,6 +11,7 @@ import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
+import com.binance.client.model.FuturesSummary;
 import com.binance.client.model.MarginSummary;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
@@ -270,5 +271,12 @@ public interface SyncRequestClient {
      * @return Detail on Sub-account's Futures Account.
      */
     SubAccountFuturesDetail getSubAccountFuturesDetail(String email);
+
+    /**
+     * Get Summary of Sub-account's Futures Account.
+     *
+     * @return Summary of Sub-account's Futures Account.
+     */
+    FuturesSummary getSubAccountFuturesSummary();
 
 }

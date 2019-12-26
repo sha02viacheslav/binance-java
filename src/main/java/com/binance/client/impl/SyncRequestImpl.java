@@ -11,6 +11,7 @@ import com.binance.client.model.DepositAddressSapi;
 import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
+import com.binance.client.model.FuturesSummary;
 import com.binance.client.model.MarginSummary;
 import com.binance.client.model.SubAccount;
 import com.binance.client.model.SubAccountDepositHistory;
@@ -177,6 +178,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public SubAccountFuturesDetail getSubAccountFuturesDetail(String email) {
         return RestApiInvoker.callSync(requestImpl.getSubAccountFuturesDetail(email));
+    }
+    
+    @Override
+    public FuturesSummary getSubAccountFuturesSummary() {
+        return RestApiInvoker.callSync(requestImpl.getSubAccountFuturesSummary());
     }
 
 }

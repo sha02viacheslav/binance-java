@@ -21,6 +21,8 @@ import com.binance.client.model.DepositHistory;
 import com.binance.client.model.DepositHistorySapi;
 import com.binance.client.model.DustLog;
 import com.binance.client.model.DustLogEntry;
+import com.binance.client.model.FuturesSummary;
+import com.binance.client.model.FuturesSummaryEntry;
 import com.binance.client.model.Indicator;
 import com.binance.client.model.IndicatorInfo;
 import com.binance.client.model.MarginSummary;
@@ -856,6 +858,44 @@ class RestApiRequestImpl {
                 elementList.add(element);
             });
             result.setAssets(elementList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<FuturesSummary> getSubAccountFuturesSummary() {
+        RestApiRequest<FuturesSummary> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/sapi/v1/sub-account/futures/accountSummary", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            FuturesSummary result = new FuturesSummary();
+            result.setTotalInitialMargin(jsonWrapper.getBigDecimal("totalInitialMargin"));
+            result.setTotalMaintMargin(jsonWrapper.getBigDecimal("totalMaintMargin"));
+            result.setTotalMarginBalance(jsonWrapper.getBigDecimal("totalMarginBalance"));
+            result.setTotalOpenOrderInitialMargin(jsonWrapper.getBigDecimal("totalOpenOrderInitialMargin"));
+            result.setTotalPositionInitialMargin(jsonWrapper.getBigDecimal("totalPositionInitialMargin"));
+            result.setTotalUnrealizedProfit(jsonWrapper.getBigDecimal("totalUnrealizedProfit"));
+            result.setTotalWalletBalance(jsonWrapper.getBigDecimal("totalWalletBalance"));
+            result.setAsset(jsonWrapper.getString("asset"));
+
+            List<FuturesSummaryEntry> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("subAccountList");
+            dataArray.forEach((item) -> {
+                FuturesSummaryEntry element = new FuturesSummaryEntry();
+                element.setEmail(item.getString("email"));
+                element.setTotalInitialMargin(item.getBigDecimal("totalInitialMargin"));
+                element.setTotalMaintMargin(item.getBigDecimal("totalMaintMargin"));
+                element.setTotalMarginBalance(item.getBigDecimal("totalMarginBalance"));
+                element.setTotalOpenOrderInitialMargin(item.getBigDecimal("totalOpenOrderInitialMargin"));
+                element.setTotalPositionInitialMargin(item.getBigDecimal("totalPositionInitialMargin"));
+                element.setTotalUnrealizedProfit(item.getBigDecimal("totalUnrealizedProfit"));
+                element.setTotalWalletBalance(item.getBigDecimal("totalWalletBalance"));
+                element.setAsset(item.getString("asset"));
+                elementList.add(element);
+            });
+            result.setSubAccount(elementList);
             
             return result;
         });
