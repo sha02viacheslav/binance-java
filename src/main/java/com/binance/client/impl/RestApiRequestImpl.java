@@ -715,4 +715,17 @@ class RestApiRequestImpl {
         });
         return request;
     }
+
+    RestApiRequest<Boolean> postEnableMargin(String email) {
+        RestApiRequest<Boolean> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("email", email);
+        request.request = createRequestByPostWithSignature("/sapi/v1/sub-account/margin/enable", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Boolean result = jsonWrapper.getBoolean("isMarginEnabled");
+            return result;
+        });
+        return request;
+    }
 }

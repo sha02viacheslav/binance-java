@@ -233,4 +233,11 @@ public interface SyncRequestClient {
      */
     List<SubAccountStatus> getSubAccountStatus(String email);
 
+    /**
+     * Enable Margin for Sub-account.
+     *
+     * @return Sub-account margin status.
+     */
+    Boolean postEnableMargin(String email);
+
 }
