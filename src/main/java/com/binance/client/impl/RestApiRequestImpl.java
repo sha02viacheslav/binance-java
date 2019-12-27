@@ -1927,4 +1927,18 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<Long> postMarginRepay(String asset, String amount) {
+        RestApiRequest<Long> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("amount", amount);
+        request.request = createRequestByPostWithSignature("/sapi/v1/margin/repay", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Long result = jsonWrapper.getLong("tranId");
+            return result;
+        });
+        return request;
+    }
+
 }

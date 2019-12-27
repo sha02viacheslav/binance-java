@@ -502,4 +502,11 @@ public interface SyncRequestClient {
      */
     Long postMarginBorrow(String asset, String amount);
 
+    /**
+     * Repay loan for margin account.
+     *
+     * @return Transaction Id.
+     */
+    Long postMarginRepay(String asset, String amount);
+
 }
