@@ -39,6 +39,7 @@ import com.binance.client.model.market.Trade;
 import com.binance.client.model.spot.AccountInformation;
 import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOrder;
+import com.binance.client.model.spot.MyTrade;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.spot.Oco;
@@ -471,5 +472,12 @@ public interface SyncRequestClient {
      * @return Current account information.
      */
     AccountInformation getAccountInformation();
+
+    /**
+     * Get trades for a specific account and symbol.
+     *
+     * @return Trades.
+     */
+    List<MyTrade> getAccountTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit);
 
 }

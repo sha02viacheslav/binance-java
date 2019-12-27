@@ -68,6 +68,7 @@ import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOcoReport;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.Fill;
+import com.binance.client.model.spot.MyTrade;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.spot.Oco;
@@ -1836,6 +1837,42 @@ class RestApiRequestImpl {
                 elementList.add(element);
             });
             result.setBalances(elementList);
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<MyTrade>> getAccountTrades(String symbol, Long startTime, Long endTime, 
+            Long fromId, Integer limit) {
+        RestApiRequest<List<MyTrade>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("fromId", fromId)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGetWithSignature("/api/v3/myTrades", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MyTrade> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                MyTrade element = new MyTrade();
+                element.setSymbol(item.getString("symbol"));
+                element.setId(item.getInteger("id"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setOrderListId(item.getInteger("orderListId"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setQty(item.getBigDecimal("qty"));
+                element.setQuoteQty(item.getBigDecimal("quoteQty"));
+                element.setCommission(item.getBigDecimal("commission"));
+                element.setCommissionAsset(item.getString("commissionAsset"));
+                element.setTime(item.getInteger("time"));
+                element.setIsBuyer(item.getBoolean("isBuyer"));
+                element.setIsMaker(item.getBoolean("isMaker"));
+                element.setIsBestMatch(item.getBoolean("isBestMatch"));
+                result.add(element);
+            });
             return result;
         });
         return request;
