@@ -63,6 +63,7 @@ import com.binance.client.model.market.RateLimit;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.Fill;
 import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.enums.*;
@@ -115,21 +116,27 @@ class RestApiRequestImpl {
         }
     }
 
-    private Request createRequestWithSignature(String url, String address, String host, UrlParamsBuilder builder) {
+    private Request createRequestWithSignature(String url, String address, UrlParamsBuilder builder) {
         if (builder == null) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
                     "[Invoking] Builder is null when create request with Signature");
         }
         String requestUrl = url + address;
+        new ApiSignature().createSignature(apiKey, secretKey, builder);
         if (builder.hasPostParam()) {
-            new ApiSignature().createSignature(apiKey, secretKey, "POST", host, address, builder);
             requestUrl += builder.buildUrl();
             return new Request.Builder().url(requestUrl).post(builder.buildPostBody())
                     .addHeader("Content-Type", "application/json")
                     .addHeader("X-MBX-APIKEY", apiKey)
                     .build();
+        } else if(builder.checkMethod("DELETE")) {
+            requestUrl += builder.buildUrl();
+            return new Request.Builder().url(requestUrl)
+                    .delete()
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("X-MBX-APIKEY", apiKey)
+                    .build();
         } else {
-            new ApiSignature().createSignature(apiKey, secretKey, "GET", host, address, builder);
             requestUrl += builder.buildUrl();
             return new Request.Builder().url(requestUrl)
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
@@ -139,11 +146,15 @@ class RestApiRequestImpl {
     }
 
     private Request createRequestByPostWithSignature(String address, UrlParamsBuilder builder) {
-        return createRequestWithSignature(serverUrl, address, tradingHost, builder.setPostMode(true));
+        return createRequestWithSignature(serverUrl, address, builder.setMethod("POST"));
     }
 
     private Request createRequestByGetWithSignature(String address, UrlParamsBuilder builder) {
-        return createRequestWithSignature(serverUrl, address, tradingHost, builder);
+        return createRequestWithSignature(serverUrl, address, builder);
+    }
+
+    private Request createRequestByDeleteWithSignature(String address, UrlParamsBuilder builder) {
+        return createRequestWithSignature(serverUrl, address, builder.setMethod("DELETE"));
     }
 
     private Request createRequestWithApikey(String url, String address, String host, UrlParamsBuilder builder) {
@@ -165,10 +176,6 @@ class RestApiRequestImpl {
                     .addHeader("X-MBX-APIKEY", apiKey)
                     .build();
         }
-    }
-
-    private Request createRequestByPostWithApikey(String address, UrlParamsBuilder builder) {
-        return createRequestWithApikey(serverUrl, address, tradingHost, builder.setPostMode(true));
     }
 
     private Request createRequestByGetWithApikey(String address, UrlParamsBuilder builder) {
@@ -1418,6 +1425,35 @@ class RestApiRequestImpl {
             });
             result.setFills(elementList);
             
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<CancelOrder> cancelOrder(String symbol, Long orderId, String origClientOrderId, String newClientOrderId) {
+        RestApiRequest<CancelOrder> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("orderId", orderId)
+                .putToUrl("origClientOrderId", origClientOrderId)
+                .putToUrl("newClientOrderId", newClientOrderId);
+        request.request = createRequestByDeleteWithSignature("/api/v3/order", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            CancelOrder result = new CancelOrder();
+            result.setSymbol(jsonWrapper.getString("symbol"));
+            result.setOrigClientOrderId(jsonWrapper.getString("origClientOrderId"));
+            result.setOrderId(jsonWrapper.getInteger("orderId"));
+            result.setOrderListId(jsonWrapper.getInteger("orderListId"));
+            result.setClientOrderId(jsonWrapper.getString("clientOrderId"));
+            result.setPrice(jsonWrapper.getBigDecimal("price"));
+            result.setOrigQty(jsonWrapper.getBigDecimal("origQty"));
+            result.setExecutedQty(jsonWrapper.getBigDecimal("executedQty"));
+            result.setCummulativeQuoteQty(jsonWrapper.getBigDecimal("cummulativeQuoteQty"));
+            result.setStatus(jsonWrapper.getString("status"));
+            result.setTimeInForce(jsonWrapper.getString("timeInForce"));
+            result.setType(jsonWrapper.getString("type"));
+            result.setSide(jsonWrapper.getString("side"));
             return result;
         });
         return request;

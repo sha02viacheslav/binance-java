@@ -16,8 +16,7 @@ class ApiSignature {
     private static final String signatureMethodValue = "HmacSHA256";
     public static final String signatureVersionValue = "2";
 
-    void createSignature(String accessKey, String secretKey, String method, String host, String uri,
-            UrlParamsBuilder builder) {
+    void createSignature(String accessKey, String secretKey, UrlParamsBuilder builder) {
 
         if (accessKey == null || "".equals(accessKey) || secretKey == null || "".equals(secretKey)) {
             throw new BinanceApiException(BinanceApiException.KEY_MISSING, "API key and secret key are required");

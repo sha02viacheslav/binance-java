@@ -36,6 +36,7 @@ import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.enums.*;
 
@@ -392,5 +393,12 @@ public interface SyncRequestClient {
     NewOrder postOrder(String symbol, OrderSide side, OrderType orderType,
             TimeInForce timeInForce, String quantity, String price, String quoteOrderQty,
             String newClientOrderId, String stopPrice, String icebergQty, OrderRespType newOrderRespType);
+
+    /**
+     * Cancel an active order.
+     *
+     * @return Cancel order.
+     */
+    CancelOrder cancelOrder(String symbol, Long orderId, String origClientOrderId, String newClientOrderId);
 
 }
