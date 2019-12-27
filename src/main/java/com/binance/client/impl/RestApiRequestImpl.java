@@ -1962,4 +1962,29 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<List<MarginAsset>> getMarginAssets() {
+        RestApiRequest<List<MarginAsset>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/allAssets", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginAsset> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+
+            dataArray.forEach((item) -> {
+                MarginAsset element = new MarginAsset();
+                element.setAssetFullName(item.getString("assetFullName"));
+                element.setAssetName(item.getString("assetName"));
+                element.setIsBorrowable(item.getBoolean("isBorrowable"));
+                element.setIsMortgageable(item.getBoolean("isMortgageable"));
+                element.setUserMinBorrow(item.getBigDecimal("userMinBorrow"));
+                element.setUserMinRepay(item.getBigDecimal("userMinRepay"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
 }
