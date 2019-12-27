@@ -320,5 +320,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public Oco getOco(Long orderListId, String origClientOrderId) {
         return RestApiInvoker.callSync(requestImpl.getOco(orderListId, origClientOrderId));
     }
+    
+    @Override
+    public List<Oco> getAllOco(Long fromId, Long startTime, Long endTime, Integer limit) {
+        return RestApiInvoker.callSync(requestImpl.getAllOco(fromId, startTime, endTime, limit));
+    }
 
 }

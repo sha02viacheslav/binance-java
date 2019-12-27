@@ -450,4 +450,11 @@ public interface SyncRequestClient {
      */
     Oco getOco(Long orderListId, String origClientOrderId);
 
+    /**
+     * Retrieves all OCO based on provided optional parameters.
+     *
+     * @return All ocos.
+     */
+    List<Oco> getAllOco(Long fromId, Long startTime, Long endTime, Integer limit);
+
 }
