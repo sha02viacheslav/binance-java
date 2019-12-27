@@ -1493,4 +1493,40 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<List<Order>> getOpenOrders(String symbol) {
+        RestApiRequest<List<Order>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithSignature("/api/v3/openOrders", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<Order> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                Order element = new Order();
+                element.setSymbol(item.getString("symbol"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setOrderListId(item.getInteger("orderListId"));
+                element.setClientOrderId(item.getString("clientOrderId"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setOrigQty(item.getBigDecimal("origQty"));
+                element.setExecutedQty(item.getBigDecimal("executedQty"));
+                element.setCummulativeQuoteQty(item.getBigDecimal("cummulativeQuoteQty"));
+                element.setStatus(item.getString("status"));
+                element.setTimeInForce(item.getString("timeInForce"));
+                element.setType(item.getString("type"));
+                element.setSide(item.getString("side"));
+                element.setStopPrice(item.getBigDecimal("stopPrice"));
+                element.setIcebergQty(item.getBigDecimal("icebergQty"));
+                element.setTime(item.getInteger("time"));
+                element.setUpdateTime(item.getInteger("updateTime"));
+                element.setIsWorking(item.getBoolean("isWorking"));
+                element.setOrigQuoteOrderQty(item.getBigDecimal("origQuoteOrderQty"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
 }

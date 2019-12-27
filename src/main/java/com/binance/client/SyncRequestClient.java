@@ -409,4 +409,11 @@ public interface SyncRequestClient {
      */
     Order getOrder(String symbol, Long orderId, String origClientOrderId);
 
+    /**
+     * Get all open orders on a symbol. Careful when accessing this with no symbol.
+     *
+     * @return Open orders.
+     */
+    List<Order> getOpenOrders(String symbol);
+
 }
