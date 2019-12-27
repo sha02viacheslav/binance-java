@@ -348,5 +348,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public MarginAsset getMarginAsset(String asset) {
         return RestApiInvoker.callSync(requestImpl.getMarginAsset(asset));
     }
+    
+    @Override
+    public Long postMarginTransfer(String asset, String amount, MarginTransferType type) {
+        return RestApiInvoker.callSync(requestImpl.postMarginTransfer(asset, amount, type));
+    }
 
 }

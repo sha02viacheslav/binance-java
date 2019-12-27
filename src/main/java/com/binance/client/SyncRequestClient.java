@@ -488,4 +488,11 @@ public interface SyncRequestClient {
      */
     MarginAsset getMarginAsset(String asset);
 
+    /**
+     * Execute transfer between spot account and margin account.
+     *
+     * @return Transaction Id.
+     */
+    Long postMarginTransfer(String asset, String amount, MarginTransferType type);
+
 }
