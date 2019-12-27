@@ -45,6 +45,7 @@ import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
+import com.binance.client.model.margin.MarginAsset;
 
 import java.util.List;
 
@@ -341,6 +342,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<MyTrade> getAccountTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit) {
         return RestApiInvoker.callSync(requestImpl.getAccountTrades(symbol, startTime, endTime, fromId, limit));
+    }
+    
+    @Override
+    public MarginAsset getMarginAsset(String asset) {
+        return RestApiInvoker.callSync(requestImpl.getMarginAsset(asset));
     }
 
 }

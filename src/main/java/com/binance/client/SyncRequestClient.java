@@ -45,6 +45,7 @@ import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
+import com.binance.client.model.margin.MarginAsset;
 
 import java.util.List;
 
@@ -479,5 +480,12 @@ public interface SyncRequestClient {
      * @return Trades.
      */
     List<MyTrade> getAccountTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit);
+
+    /**
+     * Get margin asset.
+     *
+     * @return Margin asset.
+     */
+    MarginAsset getMarginAsset(String asset);
 
 }

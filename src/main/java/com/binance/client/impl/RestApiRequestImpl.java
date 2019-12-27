@@ -76,6 +76,7 @@ import com.binance.client.model.spot.OcoOrder;
 import com.binance.client.model.spot.NewOcoReport;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
+import com.binance.client.model.margin.MarginAsset;
 
 import okhttp3.Request;
 
@@ -1873,6 +1874,25 @@ class RestApiRequestImpl {
                 element.setIsBestMatch(item.getBoolean("isBestMatch"));
                 result.add(element);
             });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<MarginAsset> getMarginAsset(String asset) {
+        RestApiRequest<MarginAsset> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/asset", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            MarginAsset result = new MarginAsset();
+            result.setAssetFullName(jsonWrapper.getString("assetFullName"));
+            result.setAssetName(jsonWrapper.getString("assetName"));
+            result.setIsBorrowable(jsonWrapper.getBoolean("isBorrowable"));
+            result.setIsMortgageable(jsonWrapper.getBoolean("isMortgageable"));
+            result.setUserMinBorrow(jsonWrapper.getBigDecimal("userMinBorrow"));
+            result.setUserMinRepay(jsonWrapper.getBigDecimal("userMinRepay"));
             return result;
         });
         return request;
