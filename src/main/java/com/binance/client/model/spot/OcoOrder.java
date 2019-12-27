@@ -3,7 +3,7 @@ package com.binance.client.model.spot;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class NewOcoOrder {
+public class OcoOrder {
 
     private String symbol;
 

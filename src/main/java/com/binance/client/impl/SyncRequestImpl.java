@@ -36,6 +36,7 @@ import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
@@ -307,6 +308,11 @@ public class SyncRequestImpl implements SyncRequestClient {
                 listClientOrderId, limitClientOrderId, limitIcebergQty,
                 stopClientOrderId, stopLimitPrice, stopIcebergQty, 
                 stopLimitTimeInForce, newOrderRespType));
+    }
+    
+    @Override
+    public CancelOco cancelOco(String symbol, Long orderListId, String listClientOrderId, String newClientOrderId) {
+        return RestApiInvoker.callSync(requestImpl.cancelOco(symbol, orderListId, listClientOrderId, newClientOrderId));
     }
 
 }

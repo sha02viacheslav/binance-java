@@ -63,11 +63,13 @@ import com.binance.client.model.market.RateLimit;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.CancelOco;
+import com.binance.client.model.spot.CancelOcoReport;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.Fill;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
-import com.binance.client.model.spot.NewOcoOrder;
+import com.binance.client.model.spot.OcoOrder;
 import com.binance.client.model.spot.NewOcoReport;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
@@ -1604,9 +1606,9 @@ class RestApiRequestImpl {
             result.setSymbol(jsonWrapper.getString("symbol"));
 
             JsonWrapperArray dataArray = jsonWrapper.getJsonArray("orders");
-            List<NewOcoOrder> elementList = new LinkedList<>();
+            List<OcoOrder> elementList = new LinkedList<>();
             dataArray.forEach((item) -> {
-                NewOcoOrder element = new NewOcoOrder();
+                OcoOrder element = new OcoOrder();
                 element.setSymbol(item.getString("symbol"));
                 element.setOrderId(item.getInteger("orderId"));
                 element.setClientOrderId(item.getString("clientOrderId"));
@@ -1623,6 +1625,63 @@ class RestApiRequestImpl {
                 element.setOrderListId(item.getInteger("orderListId"));
                 element.setClientOrderId(item.getString("clientOrderId"));
                 element.setTransactTime(item.getInteger("transactTime"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setOrigQty(item.getBigDecimal("origQty"));
+                element.setExecutedQty(item.getBigDecimal("executedQty"));
+                element.setCummulativeQuoteQty(item.getBigDecimal("cummulativeQuoteQty"));
+                element.setStatus(item.getString("status"));
+                element.setTimeInForce(item.getString("timeInForce"));
+                element.setType(item.getString("type"));
+                element.setSide(item.getString("side"));
+                element.setStopPrice(item.getBigDecimal("stopPrice"));
+                reportList.add(element);
+            });
+            result.setOrderReports(reportList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<CancelOco> cancelOco(String symbol, Long orderListId, String listClientOrderId, String newClientOrderId) {
+        RestApiRequest<CancelOco> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("orderListId", orderListId)
+                .putToUrl("listClientOrderId", listClientOrderId)
+                .putToUrl("newClientOrderId", newClientOrderId);
+        request.request = createRequestByDeleteWithSignature("/api/v3/orderList", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            CancelOco result = new CancelOco();
+            result.setOrderListId(jsonWrapper.getInteger("orderListId"));
+            result.setContingencyType(jsonWrapper.getString("contingencyType"));
+            result.setListStatusType(jsonWrapper.getString("listStatusType"));
+            result.setListOrderStatus(jsonWrapper.getString("listOrderStatus"));
+            result.setListClientOrderId(jsonWrapper.getString("listClientOrderId"));
+            result.setTransactionTime(jsonWrapper.getInteger("transactionTime"));
+            result.setSymbol(jsonWrapper.getString("symbol"));
+
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("orders");
+            List<OcoOrder> elementList = new LinkedList<>();
+            dataArray.forEach((item) -> {
+                OcoOrder element = new OcoOrder();
+                element.setSymbol(item.getString("symbol"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setClientOrderId(item.getString("clientOrderId"));
+                elementList.add(element);
+            });
+            result.setOrders(elementList);
+
+            JsonWrapperArray reportArray = jsonWrapper.getJsonArray("orderReports");
+            List<CancelOcoReport> reportList = new LinkedList<>();
+            reportArray.forEach((item) -> {
+                CancelOcoReport element = new CancelOcoReport();
+                element.setSymbol(item.getString("symbol"));
+                element.setOrigClientOrderId(item.getString("origClientOrderId"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setOrderListId(item.getInteger("orderListId"));
+                element.setClientOrderId(item.getString("clientOrderId"));
                 element.setPrice(item.getBigDecimal("price"));
                 element.setOrigQty(item.getBigDecimal("origQty"));
                 element.setExecutedQty(item.getBigDecimal("executedQty"));

@@ -36,6 +36,7 @@ import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
@@ -399,7 +400,7 @@ public interface SyncRequestClient {
     /**
      * Cancel an active order.
      *
-     * @return Cancel order.
+     * @return Canceled order.
      */
     CancelOrder cancelOrder(String symbol, Long orderId, String origClientOrderId, String newClientOrderId);
 
@@ -433,5 +434,12 @@ public interface SyncRequestClient {
             String listClientOrderId, String limitClientOrderId, String limitIcebergQty,
             String stopClientOrderId, String stopLimitPrice, String stopIcebergQty, 
             TimeInForce stopLimitTimeInForce, OrderRespType newOrderRespType);
+
+    /**
+     * Cancel an entire Order List.
+     *
+     * @return Canceled order list.
+     */
+    CancelOco cancelOco(String symbol, Long orderListId, String listClientOrderId, String newClientOrderId);
 
 }

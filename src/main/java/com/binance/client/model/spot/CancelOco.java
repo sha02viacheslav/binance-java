@@ -3,9 +3,10 @@ package com.binance.client.model.spot;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-public class NewOco {
+public class CancelOco {
 
     private Integer orderListId;
 
@@ -23,7 +24,7 @@ public class NewOco {
 
     private List<OcoOrder> orders;
 
-    private List<NewOcoReport> orderReports;
+    private List<CancelOcoReport> orderReports;
 
     public Integer getOrderListId() {
         return orderListId;
@@ -89,11 +90,11 @@ public class NewOco {
         this.orders = orders;
     }
 
-    public List<NewOcoReport> getOrderReports() {
+    public List<CancelOcoReport> getOrderReports() {
         return orderReports;
     }
 
-    public void setOrderReports(List<NewOcoReport> orderReports) {
+    public void setOrderReports(List<CancelOcoReport> orderReports) {
         this.orderReports = orderReports;
     }
 
