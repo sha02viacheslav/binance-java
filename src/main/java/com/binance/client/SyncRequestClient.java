@@ -46,6 +46,7 @@ import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
+import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
 
@@ -538,5 +539,15 @@ public interface SyncRequestClient {
      * @return Margin priceIndex.
      */
     MarginPriceIndex getMarginPriceIndex(String symbol);
+
+    /**
+     * Send in a margin account new order.
+     *
+     * @return Mrgin account new order.
+     */
+    MarginNewOrder postMarginOrder(String symbol, OrderSide side, OrderType orderType,
+            String quantity, String price, String quoteOrderQty, String stopPrice,
+            String newClientOrderId, String icebergQty, OrderRespType newOrderRespType, 
+            SideEffectType sideEffectType,  TimeInForce timeInForce);
 
 }

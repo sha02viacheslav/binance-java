@@ -77,6 +77,7 @@ import com.binance.client.model.spot.NewOcoReport;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
+import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
 
@@ -2025,6 +2026,61 @@ class RestApiRequestImpl {
             result.setCalcTime(jsonWrapper.getInteger("calcTime"));
             result.setPrice(jsonWrapper.getBigDecimal("price"));
             result.setSymbol(jsonWrapper.getString("symbol"));
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<MarginNewOrder> postMarginOrder(String symbol, OrderSide side, OrderType orderType,
+            String quantity, String price, String quoteOrderQty, String stopPrice,
+            String newClientOrderId, String icebergQty, OrderRespType newOrderRespType, 
+            SideEffectType sideEffectType,  TimeInForce timeInForce) {
+        RestApiRequest<MarginNewOrder> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("side", side)
+                .putToUrl("type", orderType)
+                .putToUrl("quantity", quantity)
+                .putToUrl("price", price)
+                .putToUrl("quoteOrderQty", quoteOrderQty)
+                .putToUrl("stopPrice", stopPrice)
+                .putToUrl("newClientOrderId", newClientOrderId)
+                .putToUrl("icebergQty", icebergQty)
+                .putToUrl("newOrderRespType", newOrderRespType)
+                .putToUrl("sideEffectType", sideEffectType)
+                .putToUrl("timeInForce", timeInForce);
+        request.request = createRequestByPostWithSignature("/sapi/v1/margin/order", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            MarginNewOrder result = new MarginNewOrder();
+            result.setSymbol(jsonWrapper.getString("symbol"));
+            result.setOrderId(jsonWrapper.getInteger("orderId"));
+            result.setOrderListId(jsonWrapper.getInteger("orderListId"));
+            result.setClientOrderId(jsonWrapper.getString("clientOrderId"));
+            result.setTransactTime(jsonWrapper.getInteger("transactTime"));
+            result.setPrice(jsonWrapper.getBigDecimal("price"));
+            result.setOrigQty(jsonWrapper.getBigDecimal("origQty"));
+            result.setExecutedQty(jsonWrapper.getBigDecimal("executedQty"));
+            result.setCummulativeQuoteQty(jsonWrapper.getBigDecimal("cummulativeQuoteQty"));
+            result.setStatus(jsonWrapper.getString("status"));
+            result.setTimeInForce(jsonWrapper.getString("timeInForce"));
+            result.setType(jsonWrapper.getString("type"));
+            result.setSide(jsonWrapper.getString("side"));
+            result.setMarginBuyBorrowAmount(jsonWrapper.getString("marginBuyBorrowAmount"));
+            result.setMarginBuyBorrowAsset(jsonWrapper.getString("marginBuyBorrowAsset"));
+
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("fills");
+            List<Fill> elementList = new LinkedList<>();
+            dataArray.forEach((item) -> {
+                Fill element = new Fill();
+                element.setPrice(item.getBigDecimal("price"));
+                element.setQty(item.getBigDecimal("qty"));
+                element.setCommission(item.getBigDecimal("commission"));
+                element.setCommissionAsset(item.getString("commissionAsset"));
+                elementList.add(element);
+            });
+            result.setFills(elementList);
+            
             return result;
         });
         return request;

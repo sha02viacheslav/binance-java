@@ -5,8 +5,8 @@ package com.binance.client.model.enums;
  */
 
 public enum OrderSide {
-  BUY("buy"),
-  SELL("sell");
+  BUY("BUY"),
+  SELL("SELL");
 
   private final String code;
 

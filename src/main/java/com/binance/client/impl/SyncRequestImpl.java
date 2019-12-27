@@ -46,6 +46,7 @@ import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
+import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
 
@@ -384,6 +385,15 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public MarginPriceIndex getMarginPriceIndex(String symbol) {
         return RestApiInvoker.callSync(requestImpl.getMarginPriceIndex(symbol));
+    }
+    
+    @Override
+    public MarginNewOrder postMarginOrder(String symbol, OrderSide side, OrderType orderType,
+            String quantity, String price, String quoteOrderQty, String stopPrice,
+            String newClientOrderId, String icebergQty, OrderRespType newOrderRespType, 
+            SideEffectType sideEffectType,  TimeInForce timeInForce) {
+        return RestApiInvoker.callSync(requestImpl.postMarginOrder(symbol, side, orderType, quantity, price, 
+                quoteOrderQty, stopPrice, newClientOrderId, icebergQty, newOrderRespType, sideEffectType,  timeInForce));
     }
 
 }
