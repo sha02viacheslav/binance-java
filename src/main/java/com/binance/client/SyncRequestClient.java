@@ -47,6 +47,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
+import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
@@ -582,6 +583,12 @@ public interface SyncRequestClient {
      *
      * @return Repay record.
      */
-    List<MarginRepay> getMarginRepay(String asset, Long txId, Long startTime, Long endTime, 
-            Long current, Long size);
+    List<MarginRepay> getMarginRepay(String asset, Long txId, Long startTime, Long endTime, Long current, Long size);
+
+    /**
+     * Get interest history.
+     *
+     * @return Interest history.
+     */
+    List<MarginInterest> getMarginInterest(String asset, Long startTime, Long endTime, Long current, Long size);
 }

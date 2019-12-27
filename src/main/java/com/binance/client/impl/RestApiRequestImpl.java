@@ -78,6 +78,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
+import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
@@ -2122,7 +2123,13 @@ class RestApiRequestImpl {
     RestApiRequest<List<MarginTransfer>> getMarginTransfer(String asset, TransferType type, 
             Long startTime, Long endTime, Long current, Long size) {
         RestApiRequest<List<MarginTransfer>> request = new RestApiRequest<>();
-        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("type", type)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("current", current)
+                .putToUrl("size", size);
         request.request = createRequestByGetWithApikey("/sapi/v1/margin/transfer", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -2148,7 +2155,13 @@ class RestApiRequestImpl {
     RestApiRequest<List<MarginLoan>> getMarginLoan(String asset, Long txId, Long startTime, Long endTime, 
             Long current, Long size) {
         RestApiRequest<List<MarginLoan>> request = new RestApiRequest<>();
-        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("txId", txId)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("current", current)
+                .putToUrl("size", size);
         request.request = createRequestByGetWithApikey("/sapi/v1/margin/loan", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -2172,7 +2185,13 @@ class RestApiRequestImpl {
     RestApiRequest<List<MarginRepay>> getMarginRepay(String asset, Long txId, Long startTime, Long endTime, 
             Long current, Long size) {
         RestApiRequest<List<MarginRepay>> request = new RestApiRequest<>();
-        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("txId", txId)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("current", current)
+                .putToUrl("size", size);
         request.request = createRequestByGetWithApikey("/sapi/v1/margin/repay", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -2188,6 +2207,37 @@ class RestApiRequestImpl {
                 element.setStatus(item.getString("status"));
                 element.setTimestamp(item.getInteger("timestamp"));
                 element.setTxId(item.getInteger("txId"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<MarginInterest>> getMarginInterest(String asset, Long startTime, Long endTime, 
+            Long current, Long size) {
+        RestApiRequest<List<MarginInterest>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("current", current)
+                .putToUrl("size", size);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/interestHistory", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginInterest> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("rows");
+
+            dataArray.forEach((item) -> {
+                MarginInterest element = new MarginInterest();
+                element.setAsset(item.getString("asset"));
+                element.setInterest(item.getBigDecimal("interest"));
+                element.setInterestAccuredTime(item.getInteger("interestAccuredTime"));
+                element.setInterestRate(item.getBigDecimal("interestRate"));
+                element.setPrincipal(item.getBigDecimal("principal"));
+                element.setType(item.getString("type"));
                 result.add(element);
             });
             
