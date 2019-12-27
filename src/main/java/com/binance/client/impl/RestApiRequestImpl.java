@@ -78,6 +78,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
+import com.binance.client.model.margin.MarginForceLiquidation;
 import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
@@ -2238,6 +2239,39 @@ class RestApiRequestImpl {
                 element.setInterestRate(item.getBigDecimal("interestRate"));
                 element.setPrincipal(item.getBigDecimal("principal"));
                 element.setType(item.getString("type"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<MarginForceLiquidation>> getMarginForceLiquidation(Long startTime, Long endTime, 
+            Long current, Long size) {
+        RestApiRequest<List<MarginForceLiquidation>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("current", current)
+                .putToUrl("size", size);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/forceLiquidationRec", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginForceLiquidation> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("rows");
+
+            dataArray.forEach((item) -> {
+                MarginForceLiquidation element = new MarginForceLiquidation();
+                element.setAvgPrice(item.getBigDecimal("avgPrice"));
+                element.setExecutedQty(item.getBigDecimal("executedQty"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setQty(item.getBigDecimal("qty"));
+                element.setSide(item.getString("side"));
+                element.setSymbol(item.getString("symbol"));
+                element.setTimeInForce(item.getString("timeInForce"));
+                element.setUpdatedTime(item.getInteger("updatedTime"));
                 result.add(element);
             });
             

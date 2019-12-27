@@ -47,6 +47,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
+import com.binance.client.model.margin.MarginForceLiquidation;
 import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
@@ -591,4 +592,11 @@ public interface SyncRequestClient {
      * @return Interest history.
      */
     List<MarginInterest> getMarginInterest(String asset, Long startTime, Long endTime, Long current, Long size);
+
+    /**
+     * Get force liquidation record.
+     *
+     * @return Force liquidation record.
+     */
+    List<MarginForceLiquidation> getMarginForceLiquidation(Long startTime, Long endTime, Long current, Long size);
 }
