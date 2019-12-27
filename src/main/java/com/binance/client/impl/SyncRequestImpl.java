@@ -291,5 +291,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<Order> getOpenOrders(String symbol) {
         return RestApiInvoker.callSync(requestImpl.getOpenOrders(symbol));
     }
+    
+    @Override
+    public List<Order> getAllOrders(String symbol, Long orderId, Long startTime, Long endTime, Integer limit) {
+        return RestApiInvoker.callSync(requestImpl.getAllOrders(symbol, orderId, startTime, endTime, limit));
+    }
 
 }

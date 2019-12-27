@@ -416,4 +416,11 @@ public interface SyncRequestClient {
      */
     List<Order> getOpenOrders(String symbol);
 
+    /**
+     * Get all account orders; active, canceled, or filled.
+     *
+     * @return All orders.
+     */
+    List<Order> getAllOrders(String symbol, Long orderId, Long startTime, Long endTime, Integer limit);
+
 }
