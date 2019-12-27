@@ -46,6 +46,7 @@ import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
+import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
@@ -549,5 +550,12 @@ public interface SyncRequestClient {
             String quantity, String price, String quoteOrderQty, String stopPrice,
             String newClientOrderId, String icebergQty, OrderRespType newOrderRespType, 
             SideEffectType sideEffectType,  TimeInForce timeInForce);
+
+    /**
+     * Cancel an active margin order.
+     *
+     * @return Canceled margin order.
+     */
+    MarginCancelOrder cancelMarginOrder(String symbol, Long orderId, String origClientOrderId, String newClientOrderId);
 
 }

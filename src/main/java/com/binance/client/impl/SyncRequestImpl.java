@@ -46,6 +46,7 @@ import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
+import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
@@ -394,6 +395,12 @@ public class SyncRequestImpl implements SyncRequestClient {
             SideEffectType sideEffectType,  TimeInForce timeInForce) {
         return RestApiInvoker.callSync(requestImpl.postMarginOrder(symbol, side, orderType, quantity, price, 
                 quoteOrderQty, stopPrice, newClientOrderId, icebergQty, newOrderRespType, sideEffectType,  timeInForce));
+    }
+    
+    @Override
+    public MarginCancelOrder cancelMarginOrder(String symbol, Long orderId, 
+            String origClientOrderId, String newClientOrderId) {
+        return RestApiInvoker.callSync(requestImpl.cancelMarginOrder(symbol, orderId, origClientOrderId, newClientOrderId));
     }
 
 }
