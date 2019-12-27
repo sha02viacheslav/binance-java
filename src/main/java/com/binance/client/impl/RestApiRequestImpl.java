@@ -65,7 +65,10 @@ import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.Fill;
+import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
+import com.binance.client.model.spot.NewOcoOrder;
+import com.binance.client.model.spot.NewOcoReport;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 
@@ -1564,6 +1567,75 @@ class RestApiRequestImpl {
                 element.setOrigQuoteOrderQty(item.getBigDecimal("origQuoteOrderQty"));
                 result.add(element);
             });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<NewOco> postOco(String symbol, OrderSide side, String quantity, String price, String stopPrice, 
+            String listClientOrderId, String limitClientOrderId, String limitIcebergQty,
+            String stopClientOrderId, String stopLimitPrice, String stopIcebergQty, 
+            TimeInForce stopLimitTimeInForce, OrderRespType newOrderRespType) {
+        RestApiRequest<NewOco> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("side", side)
+                .putToUrl("quantity", quantity)
+                .putToUrl("price", price)
+                .putToUrl("stopPrice", stopPrice)
+                .putToUrl("listClientOrderId", listClientOrderId)
+                .putToUrl("limitClientOrderId", limitClientOrderId)
+                .putToUrl("limitIcebergQty", limitIcebergQty)
+                .putToUrl("stopClientOrderId", stopClientOrderId)
+                .putToUrl("stopLimitPrice", stopLimitPrice)
+                .putToUrl("stopIcebergQty", stopIcebergQty)
+                .putToUrl("stopLimitTimeInForce", stopLimitTimeInForce)
+                .putToUrl("newOrderRespType", newOrderRespType);
+        request.request = createRequestByPostWithSignature("/api/v3/order/oco", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            NewOco result = new NewOco();
+            result.setOrderListId(jsonWrapper.getInteger("orderListId"));
+            result.setContingencyType(jsonWrapper.getString("contingencyType"));
+            result.setListStatusType(jsonWrapper.getString("listStatusType"));
+            result.setListOrderStatus(jsonWrapper.getString("listOrderStatus"));
+            result.setListClientOrderId(jsonWrapper.getString("listClientOrderId"));
+            result.setTransactionTime(jsonWrapper.getInteger("transactionTime"));
+            result.setSymbol(jsonWrapper.getString("symbol"));
+
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("orders");
+            List<NewOcoOrder> elementList = new LinkedList<>();
+            dataArray.forEach((item) -> {
+                NewOcoOrder element = new NewOcoOrder();
+                element.setSymbol(item.getString("symbol"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setClientOrderId(item.getString("clientOrderId"));
+                elementList.add(element);
+            });
+            result.setOrders(elementList);
+
+            JsonWrapperArray reportArray = jsonWrapper.getJsonArray("orderReports");
+            List<NewOcoReport> reportList = new LinkedList<>();
+            reportArray.forEach((item) -> {
+                NewOcoReport element = new NewOcoReport();
+                element.setSymbol(item.getString("symbol"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setOrderListId(item.getInteger("orderListId"));
+                element.setClientOrderId(item.getString("clientOrderId"));
+                element.setTransactTime(item.getInteger("transactTime"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setOrigQty(item.getBigDecimal("origQty"));
+                element.setExecutedQty(item.getBigDecimal("executedQty"));
+                element.setCummulativeQuoteQty(item.getBigDecimal("cummulativeQuoteQty"));
+                element.setStatus(item.getString("status"));
+                element.setTimeInForce(item.getString("timeInForce"));
+                element.setType(item.getString("type"));
+                element.setSide(item.getString("side"));
+                element.setStopPrice(item.getBigDecimal("stopPrice"));
+                reportList.add(element);
+            });
+            result.setOrderReports(reportList);
+            
             return result;
         });
         return request;

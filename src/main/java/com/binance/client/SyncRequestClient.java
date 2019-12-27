@@ -37,6 +37,7 @@ import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.spot.CancelOrder;
+import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
@@ -422,5 +423,15 @@ public interface SyncRequestClient {
      * @return All orders.
      */
     List<Order> getAllOrders(String symbol, Long orderId, Long startTime, Long endTime, Integer limit);
+    
+    /**
+     * Send in a new OCO.
+     *
+     * @return New oco.
+     */
+    NewOco postOco(String symbol, OrderSide side, String quantity, String price, String stopPrice, 
+            String listClientOrderId, String limitClientOrderId, String limitIcebergQty,
+            String stopClientOrderId, String stopLimitPrice, String stopIcebergQty, 
+            TimeInForce stopLimitTimeInForce, OrderRespType newOrderRespType);
 
 }
