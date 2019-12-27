@@ -51,6 +51,7 @@ import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
+import com.binance.client.model.margin.MarginRepay;
 import com.binance.client.model.margin.MarginTransfer;
 
 import java.util.List;
@@ -415,6 +416,12 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<MarginLoan> getMarginLoan(String asset, Long txId, Long startTime, Long endTime, 
     Long current, Long size) {
         return RestApiInvoker.callSync(requestImpl.getMarginLoan(asset, txId, startTime, endTime, current, size));
+    }
+    
+    @Override
+    public List<MarginRepay> getMarginRepay(String asset, Long txId, Long startTime, Long endTime, 
+    Long current, Long size) {
+        return RestApiInvoker.callSync(requestImpl.getMarginRepay(asset, txId, startTime, endTime, current, size));
     }
 
 }

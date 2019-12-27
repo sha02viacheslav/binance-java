@@ -51,6 +51,7 @@ import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
+import com.binance.client.model.margin.MarginRepay;
 import com.binance.client.model.margin.MarginTransfer;
 
 import java.util.List;
@@ -574,5 +575,13 @@ public interface SyncRequestClient {
      * @return Loan record.
      */
     List<MarginLoan> getMarginLoan(String asset, Long txId, Long startTime, Long endTime, 
+            Long current, Long size);
+
+    /**
+     * Get repay record.
+     *
+     * @return Repay record.
+     */
+    List<MarginRepay> getMarginRepay(String asset, Long txId, Long startTime, Long endTime, 
             Long current, Long size);
 }
