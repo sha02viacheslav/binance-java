@@ -69,6 +69,7 @@ import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.Fill;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
+import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.OcoOrder;
 import com.binance.client.model.spot.NewOcoReport;
 import com.binance.client.model.spot.Order;
@@ -1694,6 +1695,39 @@ class RestApiRequestImpl {
                 reportList.add(element);
             });
             result.setOrderReports(reportList);
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<Oco> getOco(Long orderListId, String origClientOrderId) {
+        RestApiRequest<Oco> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("orderListId", orderListId)
+                .putToUrl("origClientOrderId", origClientOrderId);
+        request.request = createRequestByGetWithSignature("/api/v3/orderList", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Oco result = new Oco();
+            result.setOrderListId(jsonWrapper.getInteger("orderListId"));
+            result.setContingencyType(jsonWrapper.getString("contingencyType"));
+            result.setListStatusType(jsonWrapper.getString("listStatusType"));
+            result.setListOrderStatus(jsonWrapper.getString("listOrderStatus"));
+            result.setListClientOrderId(jsonWrapper.getString("listClientOrderId"));
+            result.setTransactionTime(jsonWrapper.getInteger("transactionTime"));
+            result.setSymbol(jsonWrapper.getString("symbol"));
+
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("orders");
+            List<OcoOrder> elementList = new LinkedList<>();
+            dataArray.forEach((item) -> {
+                OcoOrder element = new OcoOrder();
+                element.setSymbol(item.getString("symbol"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setClientOrderId(item.getString("clientOrderId"));
+                elementList.add(element);
+            });
+            result.setOrders(elementList);
             
             return result;
         });

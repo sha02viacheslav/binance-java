@@ -40,6 +40,7 @@ import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
+import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 
@@ -441,5 +442,12 @@ public interface SyncRequestClient {
      * @return Canceled order list.
      */
     CancelOco cancelOco(String symbol, Long orderListId, String listClientOrderId, String newClientOrderId);
+
+    /**
+     * Retrieves a specific OCO based on provided optional parameters.
+     *
+     * @return Order list.
+     */
+    Oco getOco(Long orderListId, String origClientOrderId);
 
 }

@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
-public class CancelOco {
+public class Oco {
 
     private Integer orderListId;
 
@@ -22,8 +22,6 @@ public class CancelOco {
     private String symbol;
 
     private List<OcoOrder> orders;
-
-    private List<CancelOcoReport> orderReports;
 
     public Integer getOrderListId() {
         return orderListId;
@@ -89,20 +87,12 @@ public class CancelOco {
         this.orders = orders;
     }
 
-    public List<CancelOcoReport> getOrderReports() {
-        return orderReports;
-    }
-
-    public void setOrderReports(List<CancelOcoReport> orderReports) {
-        this.orderReports = orderReports;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("orderListId", orderListId)
                 .append("contingencyType", contingencyType).append("listStatusType", listStatusType)
                 .append("listOrderStatus", listOrderStatus).append("listClientOrderId", listClientOrderId)
                 .append("transactionTime", transactionTime).append("symbol", symbol).append("orders", orders)
-                .append("orderReports", orderReports).toString();
+                .toString();
     }
 }

@@ -40,6 +40,7 @@ import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOco;
 import com.binance.client.model.spot.NewOrder;
+import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 
@@ -313,6 +314,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public CancelOco cancelOco(String symbol, Long orderListId, String listClientOrderId, String newClientOrderId) {
         return RestApiInvoker.callSync(requestImpl.cancelOco(symbol, orderListId, listClientOrderId, newClientOrderId));
+    }
+    
+    @Override
+    public Oco getOco(Long orderListId, String origClientOrderId) {
+        return RestApiInvoker.callSync(requestImpl.getOco(orderListId, origClientOrderId));
     }
 
 }
