@@ -1,5 +1,7 @@
 package com.binance.client.model.wallet;
 
+import java.math.BigDecimal;
+
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -7,9 +9,9 @@ public class Balance {
 
     private String asset;
 
-    private String free;
+    private BigDecimal free;
 
-    private Boolean locked;
+    private BigDecimal locked;
 
     public String getAsset() {
         return asset;
@@ -19,19 +21,19 @@ public class Balance {
         this.asset = asset;
     }
 
-    public String getFree() {
+    public BigDecimal getFree() {
         return free;
     }
 
-    public void setFree(String free) {
+    public void setFree(BigDecimal free) {
         this.free = free;
     }
 
-    public Boolean getLocked() {
+    public BigDecimal getLocked() {
         return locked;
     }
 
-    public void setLocked(Boolean locked) {
+    public void setLocked(BigDecimal locked) {
         this.locked = locked;
     }
 

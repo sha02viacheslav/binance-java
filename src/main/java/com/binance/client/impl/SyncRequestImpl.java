@@ -36,6 +36,7 @@ import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.AccountInformation;
 import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOco;
@@ -329,6 +330,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<Oco> getOpenOco() {
         return RestApiInvoker.callSync(requestImpl.getOpenOco());
+    }
+    
+    @Override
+    public AccountInformation getAccountInformation() {
+        return RestApiInvoker.callSync(requestImpl.getAccountInformation());
     }
 
 }

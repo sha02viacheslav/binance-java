@@ -36,6 +36,7 @@ import com.binance.client.model.market.PriceChangeTicker;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.AccountInformation;
 import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOco;
@@ -463,5 +464,12 @@ public interface SyncRequestClient {
      * @return Open ocos.
      */
     List<Oco> getOpenOco();
+
+    /**
+     * Get current account information.
+     *
+     * @return Current account information.
+     */
+    AccountInformation getAccountInformation();
 
 }

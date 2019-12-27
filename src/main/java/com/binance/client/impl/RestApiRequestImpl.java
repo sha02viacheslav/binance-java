@@ -63,6 +63,7 @@ import com.binance.client.model.market.RateLimit;
 import com.binance.client.model.market.SymbolOrderBook;
 import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
+import com.binance.client.model.spot.AccountInformation;
 import com.binance.client.model.spot.CancelOco;
 import com.binance.client.model.spot.CancelOcoReport;
 import com.binance.client.model.spot.CancelOrder;
@@ -706,8 +707,8 @@ class RestApiRequestImpl {
             dataArray.forEach((item) -> {
                 Balance element = new Balance();
                 element.setAsset(item.getString("asset"));
-                element.setFree(item.getString("free"));
-                element.setLocked(item.getBoolean("locked"));
+                element.setFree(item.getBigDecimal("free"));
+                element.setLocked(item.getBigDecimal("locked"));
                 result.add(element);
             });
             return result;
@@ -1803,6 +1804,38 @@ class RestApiRequestImpl {
                 element.setOrders(orderList);
                 result.add(element);
             });
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<AccountInformation> getAccountInformation() {
+        RestApiRequest<AccountInformation> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/api/v3/account", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            AccountInformation result = new AccountInformation();
+            result.setMakerCommission(jsonWrapper.getInteger("makerCommission"));
+            result.setTakerCommission(jsonWrapper.getInteger("takerCommission"));
+            result.setBuyerCommission(jsonWrapper.getInteger("buyerCommission"));
+            result.setSellerCommission(jsonWrapper.getInteger("sellerCommission"));
+            result.setCanTrade(jsonWrapper.getBoolean("canTrade"));
+            result.setCanWithdraw(jsonWrapper.getBoolean("canWithdraw"));
+            result.setCanDeposit(jsonWrapper.getBoolean("canDeposit"));
+            result.setUpdateTime(jsonWrapper.getInteger("updateTime"));
+            result.setAccountType(jsonWrapper.getString("accountType"));
+
+            List<Balance> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("balances");
+            dataArray.forEach((item) -> {
+                Balance element = new Balance();
+                element.setAsset(item.getString("asset"));
+                element.setFree(item.getBigDecimal("free"));
+                element.setLocked(item.getBigDecimal("locked"));
+                elementList.add(element);
+            });
+            result.setBalances(elementList);
             return result;
         });
         return request;
