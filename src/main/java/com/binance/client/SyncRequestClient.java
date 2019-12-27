@@ -46,6 +46,7 @@ import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
+import com.binance.client.model.margin.MarginPair;
 
 import java.util.List;
 
@@ -508,5 +509,12 @@ public interface SyncRequestClient {
      * @return Transaction Id.
      */
     Long postMarginRepay(String asset, String amount);
+
+    /**
+     * Get margin pair.
+     *
+     * @return Margin pair.
+     */
+    MarginPair getMarginPair(String symbol);
 
 }

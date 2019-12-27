@@ -77,6 +77,7 @@ import com.binance.client.model.spot.NewOcoReport;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
+import com.binance.client.model.margin.MarginPair;
 
 import okhttp3.Request;
 
@@ -1936,6 +1937,26 @@ class RestApiRequestImpl {
 
         request.jsonParser = (jsonWrapper -> {
             Long result = jsonWrapper.getLong("tranId");
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<MarginPair> getMarginPair(String symbol) {
+        RestApiRequest<MarginPair> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/pair", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            MarginPair result = new MarginPair();
+            result.setId(jsonWrapper.getInteger("id"));
+            result.setSymbol(jsonWrapper.getString("symbol"));
+            result.setBase(jsonWrapper.getString("base"));
+            result.setQuote(jsonWrapper.getString("quote"));
+            result.setIsMarginTrade(jsonWrapper.getBoolean("isMarginTrade"));
+            result.setIsBuyAllowed(jsonWrapper.getBoolean("isBuyAllowed"));
+            result.setIsSellAllowed(jsonWrapper.getBoolean("isSellAllowed"));
             return result;
         });
         return request;
