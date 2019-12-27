@@ -45,6 +45,7 @@ import com.binance.client.model.spot.NewOrder;
 import com.binance.client.model.spot.Oco;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
+import com.binance.client.model.margin.MarginAccount;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginForceLiquidation;
@@ -599,4 +600,11 @@ public interface SyncRequestClient {
      * @return Force liquidation record.
      */
     List<MarginForceLiquidation> getMarginForceLiquidation(Long startTime, Long endTime, Long current, Long size);
+
+    /**
+     * Get margin account details.
+     *
+     * @return Margin account details.
+     */
+    MarginAccount getMarginAccount();
 }

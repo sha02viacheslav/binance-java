@@ -76,6 +76,8 @@ import com.binance.client.model.spot.OcoOrder;
 import com.binance.client.model.spot.NewOcoReport;
 import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
+import com.binance.client.model.margin.MarginAccount;
+import com.binance.client.model.margin.MarginAccountAsset;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginForceLiquidation;
@@ -2274,6 +2276,41 @@ class RestApiRequestImpl {
                 element.setUpdatedTime(item.getInteger("updatedTime"));
                 result.add(element);
             });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<MarginAccount> getMarginAccount() {
+        RestApiRequest<MarginAccount> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/forceLiquidationRec", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            MarginAccount result = new MarginAccount();
+            result.setBorrowEnabled(jsonWrapper.getBoolean("borrowEnabled"));
+            result.setMarginLevel(jsonWrapper.getBigDecimal("marginLevel"));
+            result.setTotalAssetOfBtc(jsonWrapper.getBigDecimal("totalAssetOfBtc"));
+            result.setTotalLiabilityOfBtc(jsonWrapper.getBigDecimal("totalLiabilityOfBtc"));
+            result.setTotalNetAssetOfBtc(jsonWrapper.getBigDecimal("totalNetAssetOfBtc"));
+            result.setTradeEnabled(jsonWrapper.getBoolean("tradeEnabled"));
+            result.setTransferEnabled(jsonWrapper.getBoolean("transferEnabled"));
+
+            List<MarginAccountAsset> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("userAssets");
+
+            dataArray.forEach((item) -> {
+                MarginAccountAsset element = new MarginAccountAsset();
+                element.setAsset(item.getString("asset"));
+                element.setBorrowed(item.getBigDecimal("borrowed"));
+                element.setFree(item.getBigDecimal("free"));
+                element.setInterest(item.getBigDecimal("interest"));
+                element.setLocked(item.getBigDecimal("locked"));
+                element.setNetAsset(item.getBigDecimal("netAsset"));
+                elementList.add(element);
+            });
+            result.setUserAssets(elementList);
             
             return result;
         });
