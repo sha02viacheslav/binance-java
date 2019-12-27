@@ -78,6 +78,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
+import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
@@ -2135,6 +2136,30 @@ class RestApiRequestImpl {
                 element.setTimestamp(item.getInteger("timestamp"));
                 element.setTxId(item.getInteger("txId"));
                 element.setType(item.getString("type"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<MarginLoan>> getMarginLoan(String asset, Long txId, Long startTime, Long endTime, 
+            Long current, Long size) {
+        RestApiRequest<List<MarginLoan>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/loan", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginLoan> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("rows");
+
+            dataArray.forEach((item) -> {
+                MarginLoan element = new MarginLoan();
+                element.setAsset(item.getString("asset"));
+                element.setPrincipal(item.getBigDecimal("principal"));
+                element.setTimestamp(item.getInteger("timestamp"));
+                element.setStatus(item.getString("status"));
                 result.add(element);
             });
             

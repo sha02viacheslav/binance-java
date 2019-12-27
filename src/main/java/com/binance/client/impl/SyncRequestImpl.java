@@ -47,6 +47,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginCancelOrder;
+import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
@@ -408,6 +409,12 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<MarginTransfer> getMarginTransfer(String asset, TransferType type, Long startTime, Long endTime, 
     Long current, Long size) {
         return RestApiInvoker.callSync(requestImpl.getMarginTransfer(asset, type, startTime, endTime, current, size));
+    }
+    
+    @Override
+    public List<MarginLoan> getMarginLoan(String asset, Long txId, Long startTime, Long endTime, 
+    Long current, Long size) {
+        return RestApiInvoker.callSync(requestImpl.getMarginLoan(asset, txId, startTime, endTime, current, size));
     }
 
 }
