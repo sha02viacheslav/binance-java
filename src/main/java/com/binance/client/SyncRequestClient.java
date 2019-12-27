@@ -52,6 +52,7 @@ import com.binance.client.model.margin.MarginForceLiquidation;
 import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewOrder;
+import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
 import com.binance.client.model.margin.MarginRepay;
@@ -607,4 +608,11 @@ public interface SyncRequestClient {
      * @return Margin account details.
      */
     MarginAccount getMarginAccount();
+
+    /**
+     * Get margin account order.
+     *
+     * @return Margin account order.
+     */
+    MarginOrder getMarginOrder(String symbol, String orderId, String origClientOrderId);
 }
