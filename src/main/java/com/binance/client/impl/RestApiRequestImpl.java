@@ -78,6 +78,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginPair;
+import com.binance.client.model.margin.MarginPriceIndex;
 
 import okhttp3.Request;
 
@@ -2008,6 +2009,22 @@ class RestApiRequestImpl {
                 result.add(element);
             });
             
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<MarginPriceIndex> getMarginPriceIndex(String symbol) {
+        RestApiRequest<MarginPriceIndex> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/priceIndex", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            MarginPriceIndex result = new MarginPriceIndex();
+            result.setCalcTime(jsonWrapper.getInteger("calcTime"));
+            result.setPrice(jsonWrapper.getBigDecimal("price"));
+            result.setSymbol(jsonWrapper.getString("symbol"));
             return result;
         });
         return request;

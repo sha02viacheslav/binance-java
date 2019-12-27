@@ -47,6 +47,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginPair;
+import com.binance.client.model.margin.MarginPriceIndex;
 
 import java.util.List;
 
@@ -378,6 +379,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<MarginPair> getMarginPairs() {
         return RestApiInvoker.callSync(requestImpl.getMarginPairs());
+    }
+    
+    @Override
+    public MarginPriceIndex getMarginPriceIndex(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.getMarginPriceIndex(symbol));
     }
 
 }

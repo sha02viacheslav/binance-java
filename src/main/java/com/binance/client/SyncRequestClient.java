@@ -47,6 +47,7 @@ import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 import com.binance.client.model.margin.MarginAsset;
 import com.binance.client.model.margin.MarginPair;
+import com.binance.client.model.margin.MarginPriceIndex;
 
 import java.util.List;
 
@@ -525,10 +526,17 @@ public interface SyncRequestClient {
     List<MarginAsset> getMarginAssets();
 
     /**
-     * Get all margin pairs .
+     * Get all margin pairs.
      *
      * @return All margin pairs.
      */
     List<MarginPair> getMarginPairs();
+
+    /**
+     * Get margin priceIndex.
+     *
+     * @return Margin priceIndex.
+     */
+    MarginPriceIndex getMarginPriceIndex(String symbol);
 
 }
