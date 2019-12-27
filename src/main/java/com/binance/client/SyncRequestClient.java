@@ -50,6 +50,7 @@ import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
+import com.binance.client.model.margin.MarginTransfer;
 
 import java.util.List;
 
@@ -558,4 +559,11 @@ public interface SyncRequestClient {
      */
     MarginCancelOrder cancelMarginOrder(String symbol, Long orderId, String origClientOrderId, String newClientOrderId);
 
+    /**
+     * Get transfer history.
+     *
+     * @return Transfer history.
+     */
+    List<MarginTransfer> getMarginTransfer(String asset, TransferType type, Long startTime, Long endTime, 
+            Long current, Long size);
 }

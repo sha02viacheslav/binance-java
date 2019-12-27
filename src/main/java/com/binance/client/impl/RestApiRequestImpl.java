@@ -81,6 +81,7 @@ import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
+import com.binance.client.model.margin.MarginTransfer;
 
 import okhttp3.Request;
 
@@ -2111,6 +2112,32 @@ class RestApiRequestImpl {
             result.setTimeInForce(jsonWrapper.getString("timeInForce"));
             result.setType(jsonWrapper.getString("type"));
             result.setSide(jsonWrapper.getString("side"));
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<MarginTransfer>> getMarginTransfer(String asset, TransferType type, 
+            Long startTime, Long endTime, Long current, Long size) {
+        RestApiRequest<List<MarginTransfer>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/transfer", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginTransfer> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("rows");
+
+            dataArray.forEach((item) -> {
+                MarginTransfer element = new MarginTransfer();
+                element.setAmount(item.getBigDecimal("amount"));
+                element.setAsset(item.getString("asset"));
+                element.setStatus(item.getString("status"));
+                element.setTimestamp(item.getInteger("timestamp"));
+                element.setTxId(item.getInteger("txId"));
+                element.setType(item.getString("type"));
+                result.add(element);
+            });
+            
             return result;
         });
         return request;
