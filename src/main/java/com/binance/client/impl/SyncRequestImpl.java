@@ -374,5 +374,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<MarginAsset> getMarginAssets() {
         return RestApiInvoker.callSync(requestImpl.getMarginAssets());
     }
+    
+    @Override
+    public List<MarginPair> getMarginPairs() {
+        return RestApiInvoker.callSync(requestImpl.getMarginPairs());
+    }
 
 }

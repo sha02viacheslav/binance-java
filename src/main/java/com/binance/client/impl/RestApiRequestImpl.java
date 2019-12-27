@@ -1987,4 +1987,30 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<List<MarginPair>> getMarginPairs() {
+        RestApiRequest<List<MarginPair>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/allPairs", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginPair> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+
+            dataArray.forEach((item) -> {
+                MarginPair element = new MarginPair();
+                element.setId(item.getInteger("id"));
+                element.setSymbol(item.getString("symbol"));
+                element.setBase(item.getString("base"));
+                element.setQuote(item.getString("quote"));
+                element.setIsMarginTrade(item.getBoolean("isMarginTrade"));
+                element.setIsBuyAllowed(item.getBoolean("isBuyAllowed"));
+                element.setIsSellAllowed(item.getBoolean("isSellAllowed"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
 }

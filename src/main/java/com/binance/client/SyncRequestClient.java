@@ -524,4 +524,11 @@ public interface SyncRequestClient {
      */
     List<MarginAsset> getMarginAssets();
 
+    /**
+     * Get all margin pairs .
+     *
+     * @return All margin pairs.
+     */
+    List<MarginPair> getMarginPairs();
+
 }
