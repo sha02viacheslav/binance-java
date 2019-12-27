@@ -66,6 +66,7 @@ import com.binance.client.model.market.Trade;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.Fill;
 import com.binance.client.model.spot.NewOrder;
+import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 
 import okhttp3.Request;
@@ -1454,6 +1455,39 @@ class RestApiRequestImpl {
             result.setTimeInForce(jsonWrapper.getString("timeInForce"));
             result.setType(jsonWrapper.getString("type"));
             result.setSide(jsonWrapper.getString("side"));
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<Order> getOrder(String symbol, Long orderId, String origClientOrderId) {
+        RestApiRequest<Order> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("orderId", orderId)
+                .putToUrl("origClientOrderId", origClientOrderId);
+        request.request = createRequestByGetWithSignature("/api/v3/order", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Order result = new Order();
+            result.setSymbol(jsonWrapper.getString("symbol"));
+            result.setOrderId(jsonWrapper.getInteger("orderId"));
+            result.setOrderListId(jsonWrapper.getInteger("orderListId"));
+            result.setClientOrderId(jsonWrapper.getString("clientOrderId"));
+            result.setPrice(jsonWrapper.getBigDecimal("price"));
+            result.setOrigQty(jsonWrapper.getBigDecimal("origQty"));
+            result.setExecutedQty(jsonWrapper.getBigDecimal("executedQty"));
+            result.setCummulativeQuoteQty(jsonWrapper.getBigDecimal("cummulativeQuoteQty"));
+            result.setStatus(jsonWrapper.getString("status"));
+            result.setTimeInForce(jsonWrapper.getString("timeInForce"));
+            result.setType(jsonWrapper.getString("type"));
+            result.setSide(jsonWrapper.getString("side"));
+            result.setStopPrice(jsonWrapper.getBigDecimal("stopPrice"));
+            result.setIcebergQty(jsonWrapper.getBigDecimal("icebergQty"));
+            result.setTime(jsonWrapper.getInteger("time"));
+            result.setUpdateTime(jsonWrapper.getInteger("updateTime"));
+            result.setIsWorking(jsonWrapper.getBoolean("isWorking"));
+            result.setOrigQuoteOrderQty(jsonWrapper.getBigDecimal("origQuoteOrderQty"));
             return result;
         });
         return request;

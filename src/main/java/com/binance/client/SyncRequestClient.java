@@ -38,6 +38,7 @@ import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOrder;
+import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 
 import java.util.List;
@@ -400,5 +401,12 @@ public interface SyncRequestClient {
      * @return Cancel order.
      */
     CancelOrder cancelOrder(String symbol, Long orderId, String origClientOrderId, String newClientOrderId);
+
+    /**
+     * Check an order's status.
+     *
+     * @return Order status.
+     */
+    Order getOrder(String symbol, Long orderId, String origClientOrderId);
 
 }

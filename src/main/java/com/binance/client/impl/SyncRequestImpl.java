@@ -38,6 +38,7 @@ import com.binance.client.model.market.SymbolPrice;
 import com.binance.client.model.market.Trade;
 import com.binance.client.model.spot.CancelOrder;
 import com.binance.client.model.spot.NewOrder;
+import com.binance.client.model.spot.Order;
 import com.binance.client.model.enums.*;
 
 import java.util.List;
@@ -279,6 +280,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public CancelOrder cancelOrder(String symbol, Long orderId, String origClientOrderId, String newClientOrderId) {
         return RestApiInvoker.callSync(requestImpl.cancelOrder(symbol, orderId, origClientOrderId, newClientOrderId));
+    }
+    
+    @Override
+    public Order getOrder(String symbol, Long orderId, String origClientOrderId) {
+        return RestApiInvoker.callSync(requestImpl.getOrder(symbol, orderId, origClientOrderId));
     }
 
 }
