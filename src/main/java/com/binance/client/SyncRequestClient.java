@@ -457,4 +457,11 @@ public interface SyncRequestClient {
      */
     List<Oco> getAllOco(Long fromId, Long startTime, Long endTime, Integer limit);
 
+    /**
+     * Retrieves open OCO based on provided optional parameters.
+     *
+     * @return Open ocos.
+     */
+    List<Oco> getOpenOco();
+
 }

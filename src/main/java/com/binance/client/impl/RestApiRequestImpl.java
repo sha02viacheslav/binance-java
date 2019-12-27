@@ -1773,4 +1773,39 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<List<Oco>> getOpenOco() {
+        RestApiRequest<List<Oco>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGetWithSignature("/api/v3/openOrderList", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<Oco> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                Oco element = new Oco();
+                element.setOrderListId(item.getInteger("orderListId"));
+                element.setContingencyType(item.getString("contingencyType"));
+                element.setListStatusType(item.getString("listStatusType"));
+                element.setListOrderStatus(item.getString("listOrderStatus"));
+                element.setListClientOrderId(item.getString("listClientOrderId"));
+                element.setTransactionTime(item.getInteger("transactionTime"));
+                element.setSymbol(item.getString("symbol"));
+                
+                List<OcoOrder> orderList = new LinkedList<>();
+                JsonWrapperArray orderArray = item.getJsonArray("orders");
+                orderArray.forEach((val) -> {
+                    OcoOrder order = new OcoOrder();
+                    order.setSymbol(item.getString("symbol"));
+                    order.setOrderId(item.getInteger("orderId"));
+                    order.setClientOrderId(item.getString("clientOrderId"));
+                    orderList.add(order);
+                });
+                element.setOrders(orderList);
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
 }
