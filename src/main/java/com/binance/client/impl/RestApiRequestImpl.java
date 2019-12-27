@@ -1904,7 +1904,21 @@ class RestApiRequestImpl {
                 .putToUrl("asset", asset)
                 .putToUrl("amount", amount)
                 .putToUrl("type", type);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/transfer", builder);
+        request.request = createRequestByPostWithSignature("/sapi/v1/margin/transfer", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            Long result = jsonWrapper.getLong("tranId");
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<Long> postMarginBorrow(String asset, String amount) {
+        RestApiRequest<Long> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset)
+                .putToUrl("amount", amount);
+        request.request = createRequestByPostWithSignature("/sapi/v1/margin/loan", builder);
 
         request.jsonParser = (jsonWrapper -> {
             Long result = jsonWrapper.getLong("tranId");

@@ -495,4 +495,11 @@ public interface SyncRequestClient {
      */
     Long postMarginTransfer(String asset, String amount, MarginTransferType type);
 
+    /**
+     * Apply for a loan.
+     *
+     * @return Transaction Id.
+     */
+    Long postMarginBorrow(String asset, String amount);
+
 }
