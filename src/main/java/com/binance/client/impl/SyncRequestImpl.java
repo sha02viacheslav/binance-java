@@ -448,5 +448,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public MarginOrder getMarginOrder(String symbol, String orderId, String origClientOrderId) {
         return RestApiInvoker.callSync(requestImpl.getMarginOrder(symbol, orderId, origClientOrderId));
     }
+    
+    @Override
+    public List<MarginOrder> getMarginOpenOrders(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.getMarginOpenOrders(symbol));
+    }
 
 }

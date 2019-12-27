@@ -2350,4 +2350,40 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<List<MarginOrder>> getMarginOpenOrders(String symbol) {
+        RestApiRequest<List<MarginOrder>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/openOrders", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginOrder> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+
+            dataArray.forEach((item) -> {
+                MarginOrder element = new MarginOrder();
+                element.setClientOrderId(item.getString("clientOrderId"));
+                element.setCummulativeQuoteQty(item.getBigDecimal("cummulativeQuoteQty"));
+                element.setExecutedQty(item.getBigDecimal("executedQty"));
+                element.setIcebergQty(item.getBigDecimal("icebergQty"));
+                element.setIsWorking(item.getBoolean("isWorking"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setOrigQty(item.getBigDecimal("origQty"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setSide(item.getString("side"));
+                element.setStatus(item.getString("status"));
+                element.setStopPrice(item.getBigDecimal("stopPrice"));
+                element.setSymbol(item.getString("symbol"));
+                element.setTime(item.getInteger("time"));
+                element.setTimeInForce(item.getString("timeInForce"));
+                element.setType(item.getString("type"));
+                element.setUpdateTime(item.getInteger("updateTime"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
 }

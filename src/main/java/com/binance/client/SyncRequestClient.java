@@ -615,4 +615,11 @@ public interface SyncRequestClient {
      * @return Margin account order.
      */
     MarginOrder getMarginOrder(String symbol, String orderId, String origClientOrderId);
+
+    /**
+     * Get margin account open orders.
+     *
+     * @return Margin account open orders.
+     */
+    List<MarginOrder> getMarginOpenOrders(String symbol);
 }
