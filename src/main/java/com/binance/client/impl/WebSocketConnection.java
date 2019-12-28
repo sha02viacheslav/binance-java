@@ -54,11 +54,6 @@ public class WebSocketConnection extends WebSocketListener {
         this.secretKey = secretKey;
         this.request = request;
         this.autoClose = autoClose;
-        try {
-            this.subscriptionUrl = "wss://stream.binance.com:9443/ws";
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
         this.okhttpRequest = request.authHandler == null ? new Request.Builder().url(subscriptionUrl).build()
                 : new Request.Builder().url(subscriptionUrl).build();
@@ -122,13 +117,7 @@ public class WebSocketConnection extends WebSocketListener {
         try {
             JsonWrapper jsonWrapper = JsonWrapper.parseFromString(text);
 
-            if (jsonWrapper.containKey("status") && !"ok".equals(jsonWrapper.getString("status"))) {
-                String errorCode = jsonWrapper.getStringOrDefault("err-code", "");
-                String errorMsg = jsonWrapper.getStringOrDefault("err-msg", "");
-                onError(errorCode + ": " + errorMsg, null);
-                log.error("[Sub][" + this.connectionId + "] Got error from server: " + errorCode + "; " + errorMsg);
-                close();
-            } else if (jsonWrapper.containKey("result") || jsonWrapper.containKey("id")) {
+            if (jsonWrapper.containKey("result") || jsonWrapper.containKey("id")) {
                 // onReceiveAndClose(jsonWrapper);
             } else {
                 onReceiveAndClose(jsonWrapper);
@@ -201,32 +190,6 @@ public class WebSocketConnection extends WebSocketListener {
         }
         state = ConnectionState.CONNECTED;
         lastReceivedTime = System.currentTimeMillis();
-        if (request.authHandler != null) {
-
-            if (ApiSignature.signatureVersionValue.equals(request.signatureVersion)) {
-                sendAuthV2();
-            } else {
-                onError("Unsupport signature version: " + request.signatureVersion, null);
-                close();
-                return;
-            }
-
-            InternalUtils.await(100);
-        }
-    }
-
-    private void sendAuthV2() {
-        ApiSignature as = new ApiSignature();
-        UrlParamsBuilder builder = UrlParamsBuilder.build();
-        try {
-            as.createSignature(apiKey, secretKey, builder);
-        } catch (Exception e) {
-            onError("Unexpected error when create the signature: " + e.getMessage(), e);
-            close();
-            return;
-        }
-        builder.putToUrl(ApiSignature.op, ApiSignature.opValue).putToUrl("cid", System.currentTimeMillis());
-        send(builder.buildUrlToJsonString());
     }
 
     @Override
