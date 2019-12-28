@@ -8,6 +8,7 @@ import com.binance.client.impl.utils.Channels;
 import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.TradeEvent;
 
 class WebsocketRequestImpl {
@@ -104,6 +105,32 @@ class WebsocketRequestImpl {
             result.setTakerBuyBaseAssetVolume(jsondata.getBigDecimal("V"));
             result.setTakerBuyQuoteAssetVolume(jsondata.getBigDecimal("Q"));
             result.setIgnore(jsondata.getInteger("B"));
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<SymbolMiniTickerEvent> subscribeSymbolMiniTickerEvent(String symbol,
+            SubscriptionListener<SymbolMiniTickerEvent> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(symbol, "symbol")
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<SymbolMiniTickerEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***Individual Symbol Mini Ticker for " + symbol + "***"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.miniTickerChannel(symbol));
+
+        request.jsonParser = (jsonWrapper) -> {
+            SymbolMiniTickerEvent result = new SymbolMiniTickerEvent();
+            result.setEventType(jsonWrapper.getString("e"));
+            result.setEventTime(jsonWrapper.getInteger("E"));
+            result.setSymbol(jsonWrapper.getString("s"));
+            result.setOpen(jsonWrapper.getBigDecimal("o"));
+            result.setClose(jsonWrapper.getBigDecimal("c"));
+            result.setHigh(jsonWrapper.getBigDecimal("h"));
+            result.setLow(jsonWrapper.getBigDecimal("l"));
+            result.setTotalTradedBaseAssetVolume(jsonWrapper.getBigDecimal("v"));
+            result.setTotalTradedQuoteAssetVolume(jsonWrapper.getBigDecimal("q"));
             return result;
         };
         return request;
