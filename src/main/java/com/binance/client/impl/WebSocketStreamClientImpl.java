@@ -5,6 +5,7 @@ import com.binance.client.SubscriptionErrorHandler;
 import com.binance.client.SubscriptionListener;
 import com.binance.client.SubscriptionOptions;
 import com.binance.client.model.event.AggregateTradeEvent;
+import com.binance.client.model.event.TradeEvent;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -63,6 +64,14 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
             SubscriptionErrorHandler errorHandler) {
         createConnection(
                 requestImpl.subscribeAggregateTradeEvent(symbol, subscriptionListener, errorHandler));
+    }
+
+    @Override
+    public void subscribeTradeEvent(String symbol,
+            SubscriptionListener<TradeEvent> subscriptionListener, 
+            SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeTradeEvent(symbol, subscriptionListener, errorHandler));
     }
 
 }
