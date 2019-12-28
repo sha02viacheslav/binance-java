@@ -1,8 +1,10 @@
 package com.binance.client.impl;
 
-
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +35,8 @@ abstract class RestApiInvoker {
                 int code = json.getInteger("code");
                 if (code != 200) {
                     String message = json.getStringOrDefault("msg", "");
-                    throw new BinanceApiException(BinanceApiException.EXEC_ERROR, "[Executing] " + code + ": " + message);
+                    throw new BinanceApiException(BinanceApiException.EXEC_ERROR,
+                            "[Executing] " + code + ": " + message);
                 }
             }
         } catch (BinanceApiException e) {
@@ -64,8 +67,13 @@ abstract class RestApiInvoker {
         } catch (BinanceApiException e) {
             throw e;
         } catch (Exception e) {
-            throw new BinanceApiException(BinanceApiException.ENV_ERROR, "[Invoking] Unexpected error: " + e.getMessage());
+            throw new BinanceApiException(BinanceApiException.ENV_ERROR,
+                    "[Invoking] Unexpected error: " + e.getMessage());
         }
+    }
+
+    static WebSocket createWebSocket(Request request, WebSocketListener listener) {
+        return client.newWebSocket(request, listener);
     }
 
 }
