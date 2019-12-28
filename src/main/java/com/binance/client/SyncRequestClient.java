@@ -59,6 +59,7 @@ import com.binance.client.model.margin.MarginRepay;
 import com.binance.client.model.margin.MarginTrade;
 import com.binance.client.model.margin.MarginTransfer;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -637,5 +638,12 @@ public interface SyncRequestClient {
      * @return Margin account trades.
      */
     List<MarginTrade> getMarginTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit);
-    
+
+    /**
+     * Get Max borrow.
+     *
+     * @return Max borrow.
+     */
+    BigDecimal getMarginMaxBorrow(String asset);
+
 }

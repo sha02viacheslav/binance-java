@@ -59,6 +59,7 @@ import com.binance.client.model.margin.MarginRepay;
 import com.binance.client.model.margin.MarginTrade;
 import com.binance.client.model.margin.MarginTransfer;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SyncRequestImpl implements SyncRequestClient {
@@ -463,6 +464,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<MarginTrade> getMarginTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit) {
         return RestApiInvoker.callSync(requestImpl.getMarginTrades(symbol, startTime, endTime, fromId, limit));
+    }
+    
+    @Override
+    public BigDecimal getMarginMaxBorrow(String asset) {
+        return RestApiInvoker.callSync(requestImpl.getMarginMaxBorrow(asset));
     }
 
 }

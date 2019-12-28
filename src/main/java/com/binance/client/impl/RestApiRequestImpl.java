@@ -1,5 +1,6 @@
 package com.binance.client.impl;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -2459,6 +2460,20 @@ class RestApiRequestImpl {
                 result.add(element);
             });
             
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<BigDecimal> getMarginMaxBorrow(String asset) {
+        RestApiRequest<BigDecimal> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/maxTransferable", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            BigDecimal result = jsonWrapper.getBigDecimal("amount");
+
             return result;
         });
         return request;
