@@ -88,6 +88,7 @@ import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
 import com.binance.client.model.margin.MarginRepay;
+import com.binance.client.model.margin.MarginTrade;
 import com.binance.client.model.margin.MarginTransfer;
 
 import okhttp3.Request;
@@ -2419,6 +2420,42 @@ class RestApiRequestImpl {
                 element.setTimeInForce(item.getString("timeInForce"));
                 element.setType(item.getString("type"));
                 element.setUpdateTime(item.getInteger("updateTime"));
+                result.add(element);
+            });
+            
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<List<MarginTrade>> getMarginTrades(String symbol, Long startTime, 
+            Long endTime, Long fromId, Integer limit) {
+        RestApiRequest<List<MarginTrade>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol)
+                .putToUrl("startTime", startTime)
+                .putToUrl("endTime", endTime)
+                .putToUrl("fromId", fromId)
+                .putToUrl("limit", limit);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/myTrades", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<MarginTrade> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+
+            dataArray.forEach((item) -> {
+                MarginTrade element = new MarginTrade();
+                element.setCommission(item.getBigDecimal("commission"));
+                element.setCommissionAsset(item.getString("commissionAsset"));
+                element.setId(item.getInteger("id"));
+                element.setIsBestMatch(item.getBoolean("isBestMatch"));
+                element.setIsBuyer(item.getBoolean("isBuyer"));
+                element.setIsMaker(item.getBoolean("isMaker"));
+                element.setOrderId(item.getInteger("orderId"));
+                element.setPrice(item.getBigDecimal("price"));
+                element.setQty(item.getBigDecimal("qty"));
+                element.setSymbol(item.getString("symbol"));
+                element.setTime(item.getInteger("time"));
                 result.add(element);
             });
             

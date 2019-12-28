@@ -56,6 +56,7 @@ import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
 import com.binance.client.model.margin.MarginRepay;
+import com.binance.client.model.margin.MarginTrade;
 import com.binance.client.model.margin.MarginTransfer;
 
 import java.util.List;
@@ -630,4 +631,11 @@ public interface SyncRequestClient {
      */
     List<MarginOrder> getMarginAllOrders(String symbol, Long orderId, Long startTime, Long endTime, Integer limit);
 
+    /**
+     * Get margin account trades.
+     *
+     * @return Margin account trades.
+     */
+    List<MarginTrade> getMarginTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit);
+    
 }
