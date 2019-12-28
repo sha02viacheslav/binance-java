@@ -2469,6 +2469,20 @@ class RestApiRequestImpl {
         RestApiRequest<BigDecimal> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("asset", asset);
+        request.request = createRequestByGetWithApikey("/sapi/v1/margin/maxBorrowable", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            BigDecimal result = jsonWrapper.getBigDecimal("amount");
+
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<BigDecimal> getMarginMaxTransfer(String asset) {
+        RestApiRequest<BigDecimal> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("asset", asset);
         request.request = createRequestByGetWithApikey("/sapi/v1/margin/maxTransferable", builder);
 
         request.jsonParser = (jsonWrapper -> {

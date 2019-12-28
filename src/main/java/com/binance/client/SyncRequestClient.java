@@ -640,10 +640,17 @@ public interface SyncRequestClient {
     List<MarginTrade> getMarginTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit);
 
     /**
-     * Get Max borrow.
+     * Get max borrow.
      *
      * @return Max borrow.
      */
     BigDecimal getMarginMaxBorrow(String asset);
+
+    /**
+     * Get transfer-out amount .
+     *
+     * @return Max transfer-out amount .
+     */
+    BigDecimal getMarginMaxTransfer(String asset);
 
 }

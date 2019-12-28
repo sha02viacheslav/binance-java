@@ -470,5 +470,10 @@ public class SyncRequestImpl implements SyncRequestClient {
     public BigDecimal getMarginMaxBorrow(String asset) {
         return RestApiInvoker.callSync(requestImpl.getMarginMaxBorrow(asset));
     }
+    
+    @Override
+    public BigDecimal getMarginMaxTransfer(String asset) {
+        return RestApiInvoker.callSync(requestImpl.getMarginMaxTransfer(asset));
+    }
 
 }
