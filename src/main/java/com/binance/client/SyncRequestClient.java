@@ -63,7 +63,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Synchronous request interface, invoking Huobi RestAPI via synchronous
+ * Synchronous request interface, invoking Binance RestAPI via synchronous
  * method.<br>
  * All methods in this interface will be blocked until the RestAPI response.
  * <p>

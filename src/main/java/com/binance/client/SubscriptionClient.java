@@ -33,8 +33,8 @@ public interface SubscriptionClient {
     /**
      * Create the subscription client to subscribe the update from server.
      *
-     * @param apiKey    The public key applied from Huobi.
-     * @param secretKey The private key applied from Huobi.
+     * @param apiKey    The public key applied from Binance.
+     * @param secretKey The private key applied from Binance.
      * @return The instance of synchronous client.
      */
     static SubscriptionClient create(String apiKey, String secretKey) {
@@ -45,8 +45,8 @@ public interface SubscriptionClient {
     /**
      * Create the subscription client to subscribe the update from server.
      *
-     * @param apiKey              The public key applied from Huobi.
-     * @param secretKey           The private key applied from Huobi.
+     * @param apiKey              The public key applied from Binance.
+     * @param secretKey           The private key applied from Binance.
      * @param subscriptionOptions The option of subscription connection, see
      *                            {@link SubscriptionOptions}
      * @return The instance of synchronous client.
@@ -68,7 +68,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeAggregateTradeEvent(String symbol,
             SubscriptionListener<AggregateTradeEvent> callback, SubscriptionErrorHandler errorHandler);
@@ -81,7 +81,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeTradeEvent(String symbol,
             SubscriptionListener<TradeEvent> callback, SubscriptionErrorHandler errorHandler);
@@ -95,7 +95,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeCandlestickEvent(String symbol, CandlestickInterval interval,
             SubscriptionListener<CandlestickEvent> callback, SubscriptionErrorHandler errorHandler);
@@ -108,7 +108,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeSymbolMiniTickerEvent(String symbol,
             SubscriptionListener<SymbolMiniTickerEvent> callback, SubscriptionErrorHandler errorHandler);
@@ -120,7 +120,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeAllMiniTickerEvent(SubscriptionListener<SymbolMiniTickerEvent> callback, SubscriptionErrorHandler errorHandler);
 
@@ -132,7 +132,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeSymbolTickerEvent(String symbol,
             SubscriptionListener<SymbolTickerEvent> callback, SubscriptionErrorHandler errorHandler);
@@ -144,7 +144,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeAllTickerEvent(SubscriptionListener<List<SymbolTickerEvent>> callback, SubscriptionErrorHandler errorHandler);
 
@@ -156,7 +156,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeSymbolBookTickerEvent(String symbol,
             SubscriptionListener<SymbolBookTickerEvent> callback, SubscriptionErrorHandler errorHandler);
@@ -168,7 +168,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeAllBookTickerEvent(SubscriptionListener<SymbolBookTickerEvent> callback, SubscriptionErrorHandler errorHandler);
 
@@ -181,7 +181,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeBookDepthEvent(String symbol, Integer limit,
             SubscriptionListener<OrderBook> callback, SubscriptionErrorHandler errorHandler);
@@ -194,7 +194,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeDiffDepthEvent(String symbol,
             SubscriptionListener<DiffDepthEvent> callback, SubscriptionErrorHandler errorHandler);
@@ -207,7 +207,7 @@ public interface SubscriptionClient {
      * @param callback     The implementation is required. onReceive will be called
      *                     if receive server's update.
      * @param errorHandler The error handler will be called if subscription failed
-     *                     or error happen between client and Huobi server.
+     *                     or error happen between client and Binance server.
      */
     void subscribeUserDataEvent(String listenKey,
             SubscriptionListener<UserDataUpdateEvent> callback, SubscriptionErrorHandler errorHandler);

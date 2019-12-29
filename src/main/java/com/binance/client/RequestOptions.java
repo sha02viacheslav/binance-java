@@ -21,7 +21,7 @@ public class RequestOptions {
     /**
      * Set the URL for request.
      *
-     * @param url The URL name like "https://api.huobi.pro".
+     * @param url The URL name like "https://api.binance.com".
      */
     public void setUrl(String url) {
         try {
