@@ -12,6 +12,7 @@ import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
 import com.binance.client.model.market.OrderBook;
+import com.binance.client.model.user.UserDataUpdateEvent;
 
 /***
  * The subscription client interface, it is used for subscribing any market data
@@ -197,6 +198,19 @@ public interface SubscriptionClient {
      */
     void subscribeDiffDepthEvent(String symbol,
             SubscriptionListener<DiffDepthEvent> callback, SubscriptionErrorHandler errorHandler);
+
+    /**
+     * Subscribe user data event. If the user data is updated,
+     * server will send the data to client and onReceive in callback will be called.
+     *
+     * @param listenKey      The listenKey.
+     * @param callback     The implementation is required. onReceive will be called
+     *                     if receive server's update.
+     * @param errorHandler The error handler will be called if subscription failed
+     *                     or error happen between client and Huobi server.
+     */
+    void subscribeUserDataEvent(String listenKey,
+            SubscriptionListener<UserDataUpdateEvent> callback, SubscriptionErrorHandler errorHandler);
 
 
 }

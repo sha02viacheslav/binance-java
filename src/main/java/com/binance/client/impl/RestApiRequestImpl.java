@@ -1,7 +1,6 @@
 package com.binance.client.impl;
 
 import java.math.BigDecimal;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -99,19 +98,11 @@ class RestApiRequestImpl {
     private String apiKey;
     private String secretKey;
     private String serverUrl;
-    private RequestOptions options;
-    private String tradingHost;
 
     RestApiRequestImpl(String apiKey, String secretKey, RequestOptions options) {
         this.apiKey = apiKey;
         this.secretKey = secretKey;
         this.serverUrl = options.getUrl();
-        this.options = options;
-        try {
-            String host = new URL(this.options.getUrl()).getHost();
-            this.tradingHost = host;
-        } catch (Exception e) {
-        }
     }
 
     private Request createRequestByGet(String address, UrlParamsBuilder builder) {
@@ -181,20 +172,32 @@ class RestApiRequestImpl {
         return createRequestWithSignature(serverUrl, address, builder.setMethod("DELETE"));
     }
 
-    private Request createRequestWithApikey(String url, String address, String host, UrlParamsBuilder builder) {
+    private Request createRequestWithApikey(String url, String address, UrlParamsBuilder builder) {
         if (builder == null) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
                     "[Invoking] Builder is null when create request with Signature");
         }
         String requestUrl = url + address;
-        if (builder.hasPostParam()) {
             requestUrl += builder.buildUrl();
-            return new Request.Builder().url(requestUrl).post(builder.buildPostBody())
+        if (builder.hasPostParam()) {
+            return new Request.Builder().url(requestUrl)
+                    .post(builder.buildPostBody())
                     .addHeader("Content-Type", "application/json")
                     .addHeader("X-MBX-APIKEY", apiKey)
                     .build();
+        } else if(builder.checkMethod("DELETE")) {
+            return new Request.Builder().url(requestUrl)
+                    .delete()
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("X-MBX-APIKEY", apiKey)
+                    .build();
+        } else if(builder.checkMethod("PUT")) {
+            return new Request.Builder().url(requestUrl)
+                    .put(builder.buildPostBody())
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("X-MBX-APIKEY", apiKey)
+                    .build();
         } else {
-            requestUrl += builder.buildUrl();
             return new Request.Builder().url(requestUrl)
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .addHeader("X-MBX-APIKEY", apiKey)
@@ -203,7 +206,19 @@ class RestApiRequestImpl {
     }
 
     private Request createRequestByGetWithApikey(String address, UrlParamsBuilder builder) {
-        return createRequestWithApikey(serverUrl, address, tradingHost, builder);
+        return createRequestWithApikey(serverUrl, address, builder);
+    }
+
+    private Request createRequestByPostWithApikey(String address, UrlParamsBuilder builder) {
+        return createRequestWithApikey(serverUrl, address, builder.setMethod("POST"));
+    }
+
+    private Request createRequestByPutWithApikey(String address, UrlParamsBuilder builder) {
+        return createRequestWithApikey(serverUrl, address, builder.setMethod("PUT"));
+    }
+
+    private Request createRequestByDeleteWithApikey(String address, UrlParamsBuilder builder) {
+        return createRequestWithApikey(serverUrl, address, builder.setMethod("DELETE"));
     }
 
     RestApiRequest<TradeStatistics> get24HTradeStatistics(String symbol) {
@@ -2488,6 +2503,59 @@ class RestApiRequestImpl {
         request.jsonParser = (jsonWrapper -> {
             BigDecimal result = jsonWrapper.getBigDecimal("amount");
 
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<String> startUserDataStream(AccountType accountType) {
+        RestApiRequest<String> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+
+        if(accountType == AccountType.SPOT) {
+            request.request = createRequestByPostWithApikey("/api/v3/userDataStream", builder);
+        } else if(accountType == AccountType.MARGIN) {
+            request.request = createRequestByPostWithApikey("/sapi/v1/userDataStream", builder);
+        }
+
+        request.jsonParser = (jsonWrapper -> {
+            String result = jsonWrapper.getString("listenKey");
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<String> keepUserDataStream(AccountType accountType, String listenKey) {
+        RestApiRequest<String> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("listenKey", listenKey);
+
+        if(accountType == AccountType.SPOT) {
+            request.request = createRequestByPutWithApikey("/api/v3/userDataStream", builder);
+        } else if(accountType == AccountType.MARGIN) {
+            request.request = createRequestByPutWithApikey("/sapi/v1/userDataStream", builder);
+        }
+
+        request.jsonParser = (jsonWrapper -> {
+            String result = "Ok";
+            return result;
+        });
+        return request;
+    }
+
+    RestApiRequest<String> closeUserDataStream(AccountType accountType, String listenKey) {
+        RestApiRequest<String> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("listenKey", listenKey);
+
+        if(accountType == AccountType.SPOT) {
+            request.request = createRequestByDeleteWithApikey("/api/v3/userDataStream", builder);
+        } else if(accountType == AccountType.MARGIN) {
+            request.request = createRequestByDeleteWithApikey("/sapi/v1/userDataStream", builder);
+        }
+
+        request.jsonParser = (jsonWrapper -> {
+            String result = "Ok";
             return result;
         });
         return request;

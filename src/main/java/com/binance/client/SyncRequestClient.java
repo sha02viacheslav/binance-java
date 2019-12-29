@@ -647,10 +647,31 @@ public interface SyncRequestClient {
     BigDecimal getMarginMaxBorrow(String asset);
 
     /**
-     * Get transfer-out amount .
+     * Get transfer-out amount.
      *
-     * @return Max transfer-out amount .
+     * @return Max transfer-out amount.
      */
     BigDecimal getMarginMaxTransfer(String asset);
+
+    /**
+     * Start user data stream.
+     *
+     * @return listenKey.
+     */
+    String startUserDataStream(AccountType accountType);
+
+    /**
+     * Keep user data stream.
+     *
+     * @return null.
+     */
+    String keepUserDataStream(AccountType accountType, String listenKey);
+
+    /**
+     * Close user data stream.
+     *
+     * @return null.
+     */
+    String closeUserDataStream(AccountType accountType, String listenKey);
 
 }

@@ -475,5 +475,20 @@ public class SyncRequestImpl implements SyncRequestClient {
     public BigDecimal getMarginMaxTransfer(String asset) {
         return RestApiInvoker.callSync(requestImpl.getMarginMaxTransfer(asset));
     }
+    
+    @Override
+    public String startUserDataStream(AccountType accountType) {
+        return RestApiInvoker.callSync(requestImpl.startUserDataStream(accountType));
+    }
+    
+    @Override
+    public String keepUserDataStream(AccountType accountType, String listenKey) {
+        return RestApiInvoker.callSync(requestImpl.keepUserDataStream(accountType, listenKey));
+    }
+    
+    @Override
+    public String closeUserDataStream(AccountType accountType, String listenKey) {
+        return RestApiInvoker.callSync(requestImpl.closeUserDataStream(accountType, listenKey));
+    }
 
 }

@@ -19,6 +19,13 @@ import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
 import com.binance.client.model.market.OrderBook;
 import com.binance.client.model.market.OrderBookEntry;
+import com.binance.client.model.user.BalanceUpdate;
+import com.binance.client.model.user.ExecutionReport;
+import com.binance.client.model.user.ListStatus;
+import com.binance.client.model.user.OutboundAccountInfo;
+import com.binance.client.model.user.OutboundAccountPosition;
+import com.binance.client.model.user.UserDataUpdateEvent;
+import com.binance.client.model.wallet.Balance;
 
 class WebsocketRequestImpl {
 
@@ -377,6 +384,113 @@ class WebsocketRequestImpl {
                 askList.add(element);
             });
             result.setAsks(askList);
+            
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<UserDataUpdateEvent> subscribeUserDataEvent(String listenKey,
+            SubscriptionListener<UserDataUpdateEvent> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(listenKey, "listenKey")
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<UserDataUpdateEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***User Data***"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.userDataChannel(listenKey));
+
+        request.jsonParser = (jsonWrapper) -> {
+            UserDataUpdateEvent result = new UserDataUpdateEvent();
+            result.setEventType(jsonWrapper.getString("e"));
+            result.setEventTime(jsonWrapper.getInteger("E"));
+
+            if(jsonWrapper.getString("e").equals("outboundAccountInfo")) {
+                OutboundAccountInfo outboundAccountInfo = new OutboundAccountInfo();
+                outboundAccountInfo.setMakerCommission(jsonWrapper.getInteger("m"));
+                outboundAccountInfo.setTakerCommission(jsonWrapper.getInteger("t"));
+                outboundAccountInfo.setBuyerCommission(jsonWrapper.getInteger("b"));
+                outboundAccountInfo.setSellerCommission(jsonWrapper.getInteger("s"));
+                outboundAccountInfo.setCanTrade(jsonWrapper.getBoolean("T"));
+                outboundAccountInfo.setCanWithdraw(jsonWrapper.getBoolean("W"));
+                outboundAccountInfo.setCanDeposit(jsonWrapper.getBoolean("D"));
+                outboundAccountInfo.setUpdateTime(jsonWrapper.getInteger("u"));
+                List<Balance> elementList = new LinkedList<>();
+                JsonWrapperArray dataArray = jsonWrapper.getJsonArray("B");
+                dataArray.forEach(item -> {
+                    Balance balance = new Balance();
+                    balance.setAsset(item.getString("a"));
+                    balance.setFree(item.getBigDecimal("f"));
+                    balance.setLocked(item.getBigDecimal("l"));
+                    elementList.add(balance);
+                });
+                outboundAccountInfo.setBalances(elementList);
+                result.setOutboundAccountInfo(outboundAccountInfo); 
+            } else if(jsonWrapper.getString("e").equals("outboundAccountPosition")) {
+                OutboundAccountPosition outboundAccountPosition = new OutboundAccountPosition();
+                outboundAccountPosition.setUpdateTime(jsonWrapper.getInteger("u"));
+                List<Balance> elementList = new LinkedList<>();
+                JsonWrapperArray dataArray = jsonWrapper.getJsonArray("B");
+                dataArray.forEach(item -> {
+                    Balance balance = new Balance();
+                    balance.setAsset(item.getString("a"));
+                    balance.setFree(item.getBigDecimal("f"));
+                    balance.setLocked(item.getBigDecimal("l"));
+                    elementList.add(balance);
+                });
+                outboundAccountPosition.setBalances(elementList);
+                result.setOutboundAccountPosition(outboundAccountPosition); 
+            } else if(jsonWrapper.getString("e").equals("balanceUpdate")) {
+                BalanceUpdate balanceUpdate = new BalanceUpdate();
+                balanceUpdate.setAsset(jsonWrapper.getString("a"));
+                balanceUpdate.setDelta(jsonWrapper.getBigDecimal("d"));
+                balanceUpdate.setClearTime(jsonWrapper.getInteger("T"));
+                result.setBalanceUpdate(balanceUpdate); 
+            } else if(jsonWrapper.getString("e").equals("executionReport")) {
+                ExecutionReport executionReport = new ExecutionReport();
+                executionReport.setSymbol(jsonWrapper.getString("s"));
+                executionReport.setClientOrderId(jsonWrapper.getString("c"));
+                executionReport.setSide(jsonWrapper.getString("S"));
+                executionReport.setType(jsonWrapper.getString("o"));
+                executionReport.setTimeInForce(jsonWrapper.getString("f"));
+                executionReport.setOrderQty(jsonWrapper.getBigDecimal("q"));
+                executionReport.setOrderPrice(jsonWrapper.getBigDecimal("p"));
+                executionReport.setStopPrice(jsonWrapper.getBigDecimal("P"));
+                executionReport.setIcebergQty(jsonWrapper.getBigDecimal("F"));
+                executionReport.setOrderListId(jsonWrapper.getInteger("g"));
+                executionReport.setOrigClientOrderId(jsonWrapper.getString("C"));
+                executionReport.setExecutionType(jsonWrapper.getString("x"));
+                executionReport.setOrderStatus(jsonWrapper.getString("X"));
+                executionReport.setErrorCode(jsonWrapper.getString("r"));
+                executionReport.setOrderId(jsonWrapper.getInteger("i"));
+                executionReport.setLastExecutedQty(jsonWrapper.getBigDecimal("l"));
+                executionReport.setCumulativeFilledQty(jsonWrapper.getBigDecimal("z"));
+                executionReport.setLastExecutedPrice(jsonWrapper.getBigDecimal("L"));
+                executionReport.setCommissionAmount(jsonWrapper.getInteger("n"));
+                executionReport.setCommissionAsset(jsonWrapper.getString("N"));
+                executionReport.setTransactionTime(jsonWrapper.getInteger("T"));
+                executionReport.setTradeID(jsonWrapper.getInteger("t"));
+                executionReport.setIgnore(jsonWrapper.getInteger("I"));
+                executionReport.setIsOrderBook(jsonWrapper.getBoolean("w"));
+                executionReport.setIsMarkerSide(jsonWrapper.getBoolean("m"));
+                executionReport.setIsIgnore(jsonWrapper.getBoolean("M"));
+                executionReport.setOrderCreationTime(jsonWrapper.getInteger("O"));
+                executionReport.setCumulativeQuoteAssetQty(jsonWrapper.getBigDecimal("Z"));
+                executionReport.setLastQuoteAssetQty(jsonWrapper.getBigDecimal("Y"));
+                executionReport.setQuoteOrderQty(jsonWrapper.getBigDecimal("Q"));
+                result.setExecutionReport(executionReport); 
+            } else if(jsonWrapper.getString("e").equals("listStatus")) {
+                ListStatus listStatus = new ListStatus();
+                listStatus.setSymbol(jsonWrapper.getString("s"));
+                listStatus.setOrderListId(jsonWrapper.getInteger("g"));
+                listStatus.setContingencyType(jsonWrapper.getString("c"));
+                listStatus.setListStatusType(jsonWrapper.getString("l"));
+                listStatus.setListOrderStatus(jsonWrapper.getString("L"));
+                listStatus.setListRejectReason(jsonWrapper.getString("r"));
+                listStatus.setListClientOrderId(jsonWrapper.getString("C"));
+                listStatus.setTransactionTime(jsonWrapper.getInteger("T"));
+                result.setListStatus(listStatus); 
+            }
             
             return result;
         };
