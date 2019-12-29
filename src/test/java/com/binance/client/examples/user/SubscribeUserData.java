@@ -6,7 +6,7 @@ import com.binance.client.SubscriptionClient;
 import com.binance.client.examples.constants.PrivateConfig;
 import com.binance.client.model.enums.AccountType;
 
-public class SubscribeAggregateTrade {
+public class SubscribeUserData {
 
     public static void main(String[] args) {
 
