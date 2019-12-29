@@ -7,6 +7,7 @@ import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
+import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
 
 /***
@@ -119,5 +120,17 @@ public interface SubscriptionClient {
      */
     void subscribeAllMiniTickerEvent(SubscriptionListener<SymbolMiniTickerEvent> callback, SubscriptionErrorHandler errorHandler);
 
+    /**
+     * Subscribe individual symbol ticker event. If the symbol ticker is updated,
+     * server will send the data to client and onReceive in callback will be called.
+     *
+     * @param symbol      The symbol, like "btcusdt".
+     * @param callback     The implementation is required. onReceive will be called
+     *                     if receive server's update.
+     * @param errorHandler The error handler will be called if subscription failed
+     *                     or error happen between client and Huobi server.
+     */
+    void subscribeSymbolTickerEvent(String symbol,
+            SubscriptionListener<SymbolTickerEvent> callback, SubscriptionErrorHandler errorHandler);
 
 }

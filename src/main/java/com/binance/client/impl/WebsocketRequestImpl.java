@@ -13,6 +13,7 @@ import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
+import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
 
 class WebsocketRequestImpl {
@@ -160,6 +161,46 @@ class WebsocketRequestImpl {
             result.setLow(jsonWrapper.getBigDecimal("l"));
             result.setTotalTradedBaseAssetVolume(jsonWrapper.getBigDecimal("v"));
             result.setTotalTradedQuoteAssetVolume(jsonWrapper.getBigDecimal("q"));
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<SymbolTickerEvent> subscribeSymbolTickerEvent(String symbol,
+            SubscriptionListener<SymbolTickerEvent> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(symbol, "symbol")
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<SymbolTickerEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***Individual Symbol Ticker for " + symbol + "***"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.tickerChannel(symbol));
+
+        request.jsonParser = (jsonWrapper) -> {
+            SymbolTickerEvent result = new SymbolTickerEvent();
+            result.setEventType(jsonWrapper.getString("e"));
+            result.setEventTime(jsonWrapper.getInteger("E"));
+            result.setSymbol(jsonWrapper.getString("s"));
+            result.setPriceChange(jsonWrapper.getBigDecimal("p"));
+            result.setPriceChangePercent(jsonWrapper.getBigDecimal("P"));
+            result.setWeightedAvgPrice(jsonWrapper.getBigDecimal("w"));
+            result.setFirstPrice(jsonWrapper.getBigDecimal("x"));
+            result.setLastPrice(jsonWrapper.getBigDecimal("c"));
+            result.setLastQty(jsonWrapper.getBigDecimal("Q"));
+            result.setBestBidPrice(jsonWrapper.getBigDecimal("b"));
+            result.setBestBidQty(jsonWrapper.getBigDecimal("B"));
+            result.setBestAskPrice(jsonWrapper.getBigDecimal("a"));
+            result.setBestAskQty(jsonWrapper.getBigDecimal("A"));
+            result.setOpen(jsonWrapper.getBigDecimal("o"));
+            result.setHigh(jsonWrapper.getBigDecimal("h"));
+            result.setLow(jsonWrapper.getBigDecimal("l"));
+            result.setTotalTradedBaseAssetVolume(jsonWrapper.getBigDecimal("v"));
+            result.setTotalTradedQuoteAssetVolume(jsonWrapper.getBigDecimal("q"));
+            result.setOpenTime(jsonWrapper.getInteger("O"));
+            result.setCloseTime(jsonWrapper.getInteger("C"));
+            result.setFirstId(jsonWrapper.getInteger("F"));
+            result.setLastId(jsonWrapper.getInteger("L"));
+            result.setCount(jsonWrapper.getInteger("n"));
             return result;
         };
         return request;
