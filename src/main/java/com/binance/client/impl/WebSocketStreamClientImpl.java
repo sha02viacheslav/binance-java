@@ -109,4 +109,12 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
                 requestImpl.subscribeSymbolTickerEvent(symbol, subscriptionListener, errorHandler));
     }
 
+    @Override
+    public void subscribeAllTickerEvent(SubscriptionListener<List<SymbolTickerEvent>> subscriptionListener, 
+            SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeAllTickerEvent(subscriptionListener, errorHandler));
+    }
+
+
 }

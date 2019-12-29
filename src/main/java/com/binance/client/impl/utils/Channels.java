@@ -69,4 +69,14 @@ public abstract class Channels {
         return json.toJSONString();
     }
   
+    public static String tickerChannel() {
+        JSONObject json = new JSONObject();
+        JSONArray params = new JSONArray();
+        params.add("!ticker@arr");
+        json.put("params", params);
+        json.put("id", System.currentTimeMillis());
+        json.put("method", "SUBSCRIBE");
+        return json.toJSONString();
+    }
+  
 }

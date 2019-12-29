@@ -206,4 +206,49 @@ class WebsocketRequestImpl {
         return request;
     }
 
+    WebsocketRequest<List<SymbolTickerEvent>> subscribeAllTickerEvent(
+            SubscriptionListener<List<SymbolTickerEvent>> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<List<SymbolTickerEvent>> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***All Market Tickers"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.tickerChannel());
+
+        request.jsonParser = (jsonWrapper) -> {
+            List<SymbolTickerEvent> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach(item -> {
+                SymbolTickerEvent element = new SymbolTickerEvent();
+                element.setEventType(item.getString("e"));
+                element.setEventTime(item.getInteger("E"));
+                element.setSymbol(item.getString("s"));
+                element.setPriceChange(item.getBigDecimal("p"));
+                element.setPriceChangePercent(item.getBigDecimal("P"));
+                element.setWeightedAvgPrice(item.getBigDecimal("w"));
+                element.setFirstPrice(item.getBigDecimal("x"));
+                element.setLastPrice(item.getBigDecimal("c"));
+                element.setLastQty(item.getBigDecimal("Q"));
+                element.setBestBidPrice(item.getBigDecimal("b"));
+                element.setBestBidQty(item.getBigDecimal("B"));
+                element.setBestAskPrice(item.getBigDecimal("a"));
+                element.setBestAskQty(item.getBigDecimal("A"));
+                element.setOpen(item.getBigDecimal("o"));
+                element.setHigh(item.getBigDecimal("h"));
+                element.setLow(item.getBigDecimal("l"));
+                element.setTotalTradedBaseAssetVolume(item.getBigDecimal("v"));
+                element.setTotalTradedQuoteAssetVolume(item.getBigDecimal("q"));
+                element.setOpenTime(item.getInteger("O"));
+                element.setCloseTime(item.getInteger("C"));
+                element.setFirstId(item.getInteger("F"));
+                element.setLastId(item.getInteger("L"));
+                element.setCount(item.getInteger("n"));
+                result.add(element);
+            });
+           
+            return result;
+        };
+        return request;
+    }
+
 }

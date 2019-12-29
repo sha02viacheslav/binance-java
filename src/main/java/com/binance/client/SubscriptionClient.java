@@ -133,4 +133,16 @@ public interface SubscriptionClient {
     void subscribeSymbolTickerEvent(String symbol,
             SubscriptionListener<SymbolTickerEvent> callback, SubscriptionErrorHandler errorHandler);
 
+    /**
+     * Subscribe all market tickers event. If the tickers are updated,
+     * server will send the data to client and onReceive in callback will be called.
+     *
+     * @param callback     The implementation is required. onReceive will be called
+     *                     if receive server's update.
+     * @param errorHandler The error handler will be called if subscription failed
+     *                     or error happen between client and Huobi server.
+     */
+    void subscribeAllTickerEvent(SubscriptionListener<List<SymbolTickerEvent>> callback, SubscriptionErrorHandler errorHandler);
+
+
 }
