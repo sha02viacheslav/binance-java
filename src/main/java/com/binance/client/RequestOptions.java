@@ -1,5 +1,6 @@
 package com.binance.client;
 
+import com.binance.client.constant.BinanceApiConstants;
 import com.binance.client.exception.BinanceApiException;
 import java.net.URL;
 
@@ -8,7 +9,7 @@ import java.net.URL;
  */
 public class RequestOptions {
 
-    private String url = "https://api.binance.com";
+    private String url = BinanceApiConstants.API_BASE_URL;
 
     public RequestOptions() {
     }

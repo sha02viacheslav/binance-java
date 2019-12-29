@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.binance.client.SubscriptionOptions;
+import com.binance.client.constant.BinanceApiConstants;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapper;
 
@@ -34,7 +35,7 @@ public class WebSocketConnection extends WebSocketListener {
     private final int connectionId;
     private final boolean autoClose;
 
-    private String subscriptionUrl = "wss://stream.binance.com:9443/ws";
+    private String subscriptionUrl = BinanceApiConstants.WS_API_BASE_URL;
 
     WebSocketConnection(String apiKey, String secretKey, SubscriptionOptions options, WebsocketRequest request,
             WebSocketWatchDog watchDog) {
