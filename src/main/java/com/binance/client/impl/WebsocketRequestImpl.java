@@ -12,6 +12,7 @@ import com.binance.client.impl.utils.Channels;
 import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.DiffDepthEvent;
 import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
@@ -326,6 +327,49 @@ class WebsocketRequestImpl {
 
             List<OrderBookEntry> askList = new LinkedList<>();
             JsonWrapperArray askArray = jsonWrapper.getJsonArray("asks");
+            askArray.forEachAsArray((item) -> {
+                OrderBookEntry element = new OrderBookEntry();
+                element.setPrice(item.getBigDecimalAt(0));
+                element.setQty(item.getBigDecimalAt(1));
+                askList.add(element);
+            });
+            result.setAsks(askList);
+            
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<DiffDepthEvent> subscribeDiffDepthEvent(String symbol,
+            SubscriptionListener<DiffDepthEvent> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(symbol, "symbol")
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<DiffDepthEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***Partial Book Depth for " + symbol + "***"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.diffDepthChannel(symbol));
+
+        request.jsonParser = (jsonWrapper) -> {
+            DiffDepthEvent result = new DiffDepthEvent();
+            result.setEventType(jsonWrapper.getString("e"));
+            result.setEventTime(jsonWrapper.getInteger("E"));
+            result.setSymbol(jsonWrapper.getString("s"));
+            result.setFirstUpdateId(jsonWrapper.getInteger("U"));
+            result.setFinalUpdateId(jsonWrapper.getInteger("u"));
+
+            List<OrderBookEntry> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("b");
+            dataArray.forEachAsArray((item) -> {
+                OrderBookEntry element = new OrderBookEntry();
+                element.setPrice(item.getBigDecimalAt(0));
+                element.setQty(item.getBigDecimalAt(1));
+                elementList.add(element);
+            });
+            result.setBids(elementList);
+
+            List<OrderBookEntry> askList = new LinkedList<>();
+            JsonWrapperArray askArray = jsonWrapper.getJsonArray("a");
             askArray.forEachAsArray((item) -> {
                 OrderBookEntry element = new OrderBookEntry();
                 element.setPrice(item.getBigDecimalAt(0));

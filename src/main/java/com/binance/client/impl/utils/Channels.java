@@ -109,4 +109,14 @@ public abstract class Channels {
         return json.toJSONString();
     }
   
+    public static String diffDepthChannel(String symbol) {
+        JSONObject json = new JSONObject();
+        JSONArray params = new JSONArray();
+        params.add(symbol + "@depth");
+        json.put("params", params);
+        json.put("id", System.currentTimeMillis());
+        json.put("method", "SUBSCRIBE");
+        return json.toJSONString();
+    }
+  
 }

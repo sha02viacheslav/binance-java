@@ -6,6 +6,7 @@ import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.DiffDepthEvent;
 import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
@@ -183,6 +184,19 @@ public interface SubscriptionClient {
      */
     void subscribeBookDepthEvent(String symbol, Integer limit,
             SubscriptionListener<OrderBook> callback, SubscriptionErrorHandler errorHandler);
+
+    /**
+     * Subscribe diff depth event. If the book depth is updated,
+     * server will send the data to client and onReceive in callback will be called.
+     *
+     * @param symbol      The symbol, like "btcusdt".
+     * @param callback     The implementation is required. onReceive will be called
+     *                     if receive server's update.
+     * @param errorHandler The error handler will be called if subscription failed
+     *                     or error happen between client and Huobi server.
+     */
+    void subscribeDiffDepthEvent(String symbol,
+            SubscriptionListener<DiffDepthEvent> callback, SubscriptionErrorHandler errorHandler);
 
 
 }
