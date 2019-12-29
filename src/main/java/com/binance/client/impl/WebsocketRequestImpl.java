@@ -12,6 +12,7 @@ import com.binance.client.impl.utils.Channels;
 import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
@@ -246,6 +247,51 @@ class WebsocketRequestImpl {
                 result.add(element);
             });
            
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<SymbolBookTickerEvent> subscribeSymbolBookTickerEvent(String symbol,
+            SubscriptionListener<SymbolBookTickerEvent> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(symbol, "symbol")
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<SymbolBookTickerEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***Individual Symbol Book Ticker for " + symbol + "***"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.bookTickerChannel(symbol));
+
+        request.jsonParser = (jsonWrapper) -> {
+            SymbolBookTickerEvent result = new SymbolBookTickerEvent();
+            result.setOrderBookUpdateId(jsonWrapper.getInteger("u"));
+            result.setSymbol(jsonWrapper.getString("s"));
+            result.setBestBidPrice(jsonWrapper.getBigDecimal("b"));
+            result.setBestBidQty(jsonWrapper.getBigDecimal("B"));
+            result.setBestAskPrice(jsonWrapper.getBigDecimal("a"));
+            result.setBestAskQty(jsonWrapper.getBigDecimal("A"));
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<SymbolBookTickerEvent> subscribeAllBookTickerEvent(
+            SubscriptionListener<SymbolBookTickerEvent> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<SymbolBookTickerEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***All Market Book Tickers"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.bookTickerChannel());
+
+        request.jsonParser = (jsonWrapper) -> {
+            SymbolBookTickerEvent result = new SymbolBookTickerEvent();
+            result.setOrderBookUpdateId(jsonWrapper.getInteger("u"));
+            result.setSymbol(jsonWrapper.getString("s"));
+            result.setBestBidPrice(jsonWrapper.getBigDecimal("b"));
+            result.setBestBidQty(jsonWrapper.getBigDecimal("B"));
+            result.setBestAskPrice(jsonWrapper.getBigDecimal("a"));
+            result.setBestAskQty(jsonWrapper.getBigDecimal("A"));
             return result;
         };
         return request;

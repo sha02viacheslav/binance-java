@@ -7,6 +7,7 @@ import com.binance.client.SubscriptionOptions;
 import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
@@ -114,6 +115,21 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
             SubscriptionErrorHandler errorHandler) {
         createConnection(
                 requestImpl.subscribeAllTickerEvent(subscriptionListener, errorHandler));
+    }
+
+    @Override
+    public void subscribeSymbolBookTickerEvent(String symbol,
+            SubscriptionListener<SymbolBookTickerEvent> subscriptionListener, 
+            SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeSymbolBookTickerEvent(symbol, subscriptionListener, errorHandler));
+    }
+
+    @Override
+    public void subscribeAllBookTickerEvent(SubscriptionListener<SymbolBookTickerEvent> subscriptionListener, 
+            SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeAllBookTickerEvent(subscriptionListener, errorHandler));
     }
 
 
