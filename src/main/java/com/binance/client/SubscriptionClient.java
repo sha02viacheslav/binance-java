@@ -10,6 +10,7 @@ import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
+import com.binance.client.model.market.OrderBook;
 
 /***
  * The subscription client interface, it is used for subscribing any market data
@@ -168,6 +169,20 @@ public interface SubscriptionClient {
      *                     or error happen between client and Huobi server.
      */
     void subscribeAllBookTickerEvent(SubscriptionListener<SymbolBookTickerEvent> callback, SubscriptionErrorHandler errorHandler);
+
+    /**
+     * Subscribe partial book depth event. If the book depth is updated,
+     * server will send the data to client and onReceive in callback will be called.
+     *
+     * @param symbol      The symbol, like "btcusdt".
+     * @param limit         The limit.
+     * @param callback     The implementation is required. onReceive will be called
+     *                     if receive server's update.
+     * @param errorHandler The error handler will be called if subscription failed
+     *                     or error happen between client and Huobi server.
+     */
+    void subscribeBookDepthEvent(String symbol, Integer limit,
+            SubscriptionListener<OrderBook> callback, SubscriptionErrorHandler errorHandler);
 
 
 }

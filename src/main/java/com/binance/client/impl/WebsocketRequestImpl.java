@@ -16,6 +16,8 @@ import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
+import com.binance.client.model.market.OrderBook;
+import com.binance.client.model.market.OrderBookEntry;
 
 class WebsocketRequestImpl {
 
@@ -292,6 +294,46 @@ class WebsocketRequestImpl {
             result.setBestBidQty(jsonWrapper.getBigDecimal("B"));
             result.setBestAskPrice(jsonWrapper.getBigDecimal("a"));
             result.setBestAskQty(jsonWrapper.getBigDecimal("A"));
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<OrderBook> subscribeBookDepthEvent(String symbol, Integer limit,
+            SubscriptionListener<OrderBook> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(symbol, "symbol")
+                .shouldNotNull(limit, "limit")
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<OrderBook> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***Partial Book Depth for " + symbol + "***"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.bookDepthChannel(symbol, limit));
+
+        request.jsonParser = (jsonWrapper) -> {
+            OrderBook result = new OrderBook();
+            result.setLastUpdateId(jsonWrapper.getInteger("lastUpdateId"));
+
+            List<OrderBookEntry> elementList = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("bids");
+            dataArray.forEachAsArray((item) -> {
+                OrderBookEntry element = new OrderBookEntry();
+                element.setPrice(item.getBigDecimalAt(0));
+                element.setQty(item.getBigDecimalAt(1));
+                elementList.add(element);
+            });
+            result.setBids(elementList);
+
+            List<OrderBookEntry> askList = new LinkedList<>();
+            JsonWrapperArray askArray = jsonWrapper.getJsonArray("asks");
+            askArray.forEachAsArray((item) -> {
+                OrderBookEntry element = new OrderBookEntry();
+                element.setPrice(item.getBigDecimalAt(0));
+                element.setQty(item.getBigDecimalAt(1));
+                askList.add(element);
+            });
+            result.setAsks(askList);
+            
             return result;
         };
         return request;

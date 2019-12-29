@@ -99,4 +99,14 @@ public abstract class Channels {
         return json.toJSONString();
     }
   
+    public static String bookDepthChannel(String symbol, Integer limit) {
+        JSONObject json = new JSONObject();
+        JSONArray params = new JSONArray();
+        params.add(symbol + "@depth" + limit);
+        json.put("params", params);
+        json.put("id", System.currentTimeMillis());
+        json.put("method", "SUBSCRIBE");
+        return json.toJSONString();
+    }
+  
 }

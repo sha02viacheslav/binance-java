@@ -11,6 +11,7 @@ import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.event.TradeEvent;
+import com.binance.client.model.market.OrderBook;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -130,6 +131,14 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
             SubscriptionErrorHandler errorHandler) {
         createConnection(
                 requestImpl.subscribeAllBookTickerEvent(subscriptionListener, errorHandler));
+    }
+
+    @Override
+    public void subscribeBookDepthEvent(String symbol, Integer limit,
+            SubscriptionListener<OrderBook> subscriptionListener, 
+            SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeBookDepthEvent(symbol, limit, subscriptionListener, errorHandler));
     }
 
 
