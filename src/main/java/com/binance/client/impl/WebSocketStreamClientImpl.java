@@ -93,4 +93,11 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
                 requestImpl.subscribeSymbolMiniTickerEvent(symbol, subscriptionListener, errorHandler));
     }
 
+    @Override
+    public void subscribeAllMiniTickerEvent(SubscriptionListener<SymbolMiniTickerEvent> subscriptionListener, 
+            SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeAllMiniTickerEvent(subscriptionListener, errorHandler));
+    }
+
 }

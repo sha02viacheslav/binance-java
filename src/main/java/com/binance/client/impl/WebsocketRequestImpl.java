@@ -1,6 +1,10 @@
 package com.binance.client.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapperArray;
 
 import com.binance.client.SubscriptionErrorHandler;
 import com.binance.client.SubscriptionListener;
@@ -119,6 +123,31 @@ class WebsocketRequestImpl {
         WebsocketRequest<SymbolMiniTickerEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
         request.name = "***Individual Symbol Mini Ticker for " + symbol + "***"; 
         request.connectionHandler = (connection) -> connection.send(Channels.miniTickerChannel(symbol));
+
+        request.jsonParser = (jsonWrapper) -> {
+            SymbolMiniTickerEvent result = new SymbolMiniTickerEvent();
+            result.setEventType(jsonWrapper.getString("e"));
+            result.setEventTime(jsonWrapper.getInteger("E"));
+            result.setSymbol(jsonWrapper.getString("s"));
+            result.setOpen(jsonWrapper.getBigDecimal("o"));
+            result.setClose(jsonWrapper.getBigDecimal("c"));
+            result.setHigh(jsonWrapper.getBigDecimal("h"));
+            result.setLow(jsonWrapper.getBigDecimal("l"));
+            result.setTotalTradedBaseAssetVolume(jsonWrapper.getBigDecimal("v"));
+            result.setTotalTradedQuoteAssetVolume(jsonWrapper.getBigDecimal("q"));
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<SymbolMiniTickerEvent> subscribeAllMiniTickerEvent(
+            SubscriptionListener<SymbolMiniTickerEvent> subscriptionListener,
+            SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<SymbolMiniTickerEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***All Market Mini Tickers"; 
+        request.connectionHandler = (connection) -> connection.send(Channels.miniTickerChannel());
 
         request.jsonParser = (jsonWrapper) -> {
             SymbolMiniTickerEvent result = new SymbolMiniTickerEvent();
