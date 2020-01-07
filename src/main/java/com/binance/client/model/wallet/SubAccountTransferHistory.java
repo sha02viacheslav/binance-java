@@ -9,7 +9,7 @@ public class SubAccountTransferHistory {
 
     private String toEmail;
 
-    private Boolean asset;
+    private String asset;
 
     private String qty;
 
@@ -31,11 +31,11 @@ public class SubAccountTransferHistory {
         this.toEmail = toEmail;
     }
 
-    public Boolean getAsset() {
+    public String getAsset() {
         return asset;
     }
 
-    public void setAsset(Boolean asset) {
+    public void setAsset(String asset) {
         this.asset = asset;
     }
 

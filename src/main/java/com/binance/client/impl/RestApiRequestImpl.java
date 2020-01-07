@@ -699,7 +699,7 @@ class RestApiRequestImpl {
                 SubAccountTransferHistory element = new SubAccountTransferHistory();
                 element.setFromEmail(item.getString("from"));
                 element.setToEmail(item.getString("to"));
-                element.setAsset(item.getBoolean("asset"));
+                element.setAsset(item.getString("asset"));
                 element.setQty(item.getString("qty"));
                 element.setTime(item.getInteger("time"));
                 result.add(element);
