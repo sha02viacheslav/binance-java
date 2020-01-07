@@ -11,9 +11,9 @@ public class CancelOrder {
 
     private String origClientOrderId;
 
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private String clientOrderId;
 
@@ -49,19 +49,19 @@ public class CancelOrder {
         this.origClientOrderId = origClientOrderId;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 

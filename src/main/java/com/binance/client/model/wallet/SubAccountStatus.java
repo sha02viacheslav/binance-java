@@ -11,13 +11,13 @@ public class SubAccountStatus {
 
     private Boolean isUserActive;
 
-    private Integer insertTime;
+    private Long insertTime;
 
     private String isMarginEnabled;
 
     private String isFutureEnabled;
 
-    private Integer mobile;
+    private Long mobile;
 
     public String getEmail() {
         return email;
@@ -43,11 +43,11 @@ public class SubAccountStatus {
         this.isUserActive = isUserActive;
     }
 
-    public Integer getInsertTime() {
+    public Long getInsertTime() {
         return insertTime;
     }
 
-    public void setInsertTime(Integer insertTime) {
+    public void setInsertTime(Long insertTime) {
         this.insertTime = insertTime;
     }
 
@@ -67,11 +67,11 @@ public class SubAccountStatus {
         this.isFutureEnabled = isFutureEnabled;
     }
 
-    public Integer getMobile() {
+    public Long getMobile() {
         return mobile;
     }
 
-    public void setMobile(Integer mobile) {
+    public void setMobile(Long mobile) {
         this.mobile = mobile;
     }
 

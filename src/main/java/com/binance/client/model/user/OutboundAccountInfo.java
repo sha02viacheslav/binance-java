@@ -9,13 +9,13 @@ import com.binance.client.model.wallet.Balance;
 
 public class OutboundAccountInfo {
 
-    private Integer makerCommission;
+    private Long makerCommission;
 
-    private Integer takerCommission;
+    private Long takerCommission;
 
-    private Integer buyerCommission;
+    private Long buyerCommission;
 
-    private Integer sellerCommission;
+    private Long sellerCommission;
 
     private Boolean canTrade;
 
@@ -23,39 +23,39 @@ public class OutboundAccountInfo {
 
     private Boolean canDeposit;
 
-    private Integer updateTime;
+    private Long updateTime;
 
     private List<Balance> balances;
 
-    public Integer getMakerCommission() {
+    public Long getMakerCommission() {
         return makerCommission;
     }
 
-    public void setMakerCommission(Integer makerCommission) {
+    public void setMakerCommission(Long makerCommission) {
         this.makerCommission = makerCommission;
     }
 
-    public Integer getTakerCommission() {
+    public Long getTakerCommission() {
         return takerCommission;
     }
 
-    public void setTakerCommission(Integer takerCommission) {
+    public void setTakerCommission(Long takerCommission) {
         this.takerCommission = takerCommission;
     }
 
-    public Integer getBuyerCommission() {
+    public Long getBuyerCommission() {
         return buyerCommission;
     }
 
-    public void setBuyerCommission(Integer buyerCommission) {
+    public void setBuyerCommission(Long buyerCommission) {
         this.buyerCommission = buyerCommission;
     }
 
-    public Integer getSellerCommission() {
+    public Long getSellerCommission() {
         return sellerCommission;
     }
 
-    public void setSellerCommission(Integer sellerCommission) {
+    public void setSellerCommission(Long sellerCommission) {
         this.sellerCommission = sellerCommission;
     }
 
@@ -83,11 +83,11 @@ public class OutboundAccountInfo {
         this.canDeposit = canDeposit;
     }
 
-    public Integer getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

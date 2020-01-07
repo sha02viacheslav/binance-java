@@ -23,7 +23,7 @@ public class Candlestick {
 
     private BigDecimal quoteAssetVolume;
 
-    private Integer numTrades;
+    private Long numTrades;
 
     private BigDecimal takerBuyBaseAssetVolume;
 
@@ -95,11 +95,11 @@ public class Candlestick {
         this.quoteAssetVolume = quoteAssetVolume;
     }
 
-    public Integer getNumTrades() {
+    public Long getNumTrades() {
         return numTrades;
     }
 
-    public void setNumTrades(Integer numTrades) {
+    public void setNumTrades(Long numTrades) {
         this.numTrades = numTrades;
     }
 

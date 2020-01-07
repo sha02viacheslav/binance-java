@@ -17,7 +17,7 @@ public class MarginOrder {
 
     private Boolean isWorking;
 
-    private Integer orderId;
+    private Long orderId;
 
     private BigDecimal origQty;
 
@@ -31,13 +31,13 @@ public class MarginOrder {
 
     private String symbol;
 
-    private Integer time;
+    private Long time;
 
     private String timeInForce;
 
     private String type;
 
-    private Integer updateTime;
+    private Long updateTime;
 
     public String getClientOrderId() {
         return clientOrderId;
@@ -79,11 +79,11 @@ public class MarginOrder {
         this.isWorking = isWorking;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -135,11 +135,11 @@ public class MarginOrder {
         this.symbol = symbol;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 
@@ -159,11 +159,11 @@ public class MarginOrder {
         this.type = type;
     }
 
-    public Integer getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

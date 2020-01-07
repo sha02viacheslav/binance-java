@@ -9,9 +9,9 @@ public class AccountApiTradingStatus {
 
     private Boolean isLocked;
 
-    private Integer plannedRecoverTime;
+    private Long plannedRecoverTime;
 
-    private Integer updateTime;
+    private Long updateTime;
 
     private TriggerCondition triggerCondition;
 
@@ -25,19 +25,19 @@ public class AccountApiTradingStatus {
         this.isLocked = isLocked;
     }
 
-    public Integer getPlannedRecoverTime() {
+    public Long getPlannedRecoverTime() {
         return plannedRecoverTime;
     }
 
-    public void setPlannedRecoverTime(Integer plannedRecoverTime) {
+    public void setPlannedRecoverTime(Long plannedRecoverTime) {
         this.plannedRecoverTime = plannedRecoverTime;
     }
 
-    public Integer getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

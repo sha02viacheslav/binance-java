@@ -15,9 +15,9 @@ public class SubAccountDepositHistory {
 
     private String coin;
 
-    private Integer insertTime;
+    private Long insertTime;
 
-    private Integer status;
+    private Long status;
 
     private String txId;
 
@@ -53,19 +53,19 @@ public class SubAccountDepositHistory {
         this.coin = coin;
     }
 
-    public Integer getInsertTime() {
+    public Long getInsertTime() {
         return insertTime;
     }
 
-    public void setInsertTime(Integer insertTime) {
+    public void setInsertTime(Long insertTime) {
         this.insertTime = insertTime;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 

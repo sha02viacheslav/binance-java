@@ -9,7 +9,7 @@ public class ExchangeInformation {
 
     private String timezone;
 
-    private Integer serverTime;
+    private Long serverTime;
 
     private List<RateLimit> rateLimits;
 
@@ -25,11 +25,11 @@ public class ExchangeInformation {
         this.timezone = timezone;
     }
 
-    public Integer getServerTime() {
+    public Long getServerTime() {
         return serverTime;
     }
 
-    public void setServerTime(Integer serverTime) {
+    public void setServerTime(Long serverTime) {
         this.serverTime = serverTime;
     }
 

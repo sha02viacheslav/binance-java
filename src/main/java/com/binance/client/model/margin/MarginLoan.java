@@ -11,7 +11,7 @@ public class MarginLoan {
 
     private BigDecimal principal;
 
-    private Integer timestamp;
+    private Long timestamp;
 
     private String status;
 
@@ -31,11 +31,11 @@ public class MarginLoan {
         this.principal = principal;
     }
 
-    public Integer getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Integer timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 

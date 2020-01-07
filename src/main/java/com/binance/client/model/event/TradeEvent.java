@@ -9,21 +9,21 @@ public class TradeEvent {
 
     private String eventType;
 
-    private Integer eventTime;
+    private Long eventTime;
 
     private String symbol;
 
-    private Integer id;
+    private Long id;
 
     private BigDecimal price;
 
     private BigDecimal qty;
 
-    private Integer buyerOrderId;
+    private Long buyerOrderId;
 
-    private Integer sellerOrderId;
+    private Long sellerOrderId;
 
-    private Integer time;
+    private Long time;
 
     private Boolean isBuyerMaker;
 
@@ -37,11 +37,11 @@ public class TradeEvent {
         this.eventType = eventType;
     }
 
-    public Integer getEventTime() {
+    public Long getEventTime() {
         return eventTime;
     }
 
-    public void setEventTime(Integer eventTime) {
+    public void setEventTime(Long eventTime) {
         this.eventTime = eventTime;
     }
 
@@ -53,11 +53,11 @@ public class TradeEvent {
         this.symbol = symbol;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,27 +77,27 @@ public class TradeEvent {
         this.qty = qty;
     }
 
-    public Integer getBuyerOrderId() {
+    public Long getBuyerOrderId() {
         return buyerOrderId;
     }
 
-    public void setBuyerOrderId(Integer buyerOrderId) {
+    public void setBuyerOrderId(Long buyerOrderId) {
         this.buyerOrderId = buyerOrderId;
     }
 
-    public Integer getSellerOrderId() {
+    public Long getSellerOrderId() {
         return sellerOrderId;
     }
 
-    public void setSellerOrderId(Integer sellerOrderId) {
+    public void setSellerOrderId(Long sellerOrderId) {
         this.sellerOrderId = sellerOrderId;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

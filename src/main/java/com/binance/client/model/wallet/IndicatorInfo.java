@@ -9,7 +9,7 @@ public class IndicatorInfo {
 
     private String i;
 
-    private Integer c;
+    private Long c;
 
     private BigDecimal v;
 
@@ -23,11 +23,11 @@ public class IndicatorInfo {
         this.i = i;
     }
 
-    public Integer getC() {
+    public Long getC() {
         return c;
     }
 
-    public void setC(Integer c) {
+    public void setC(Long c) {
         this.c = c;
     }
 

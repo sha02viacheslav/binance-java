@@ -13,9 +13,9 @@ public class MarginTransfer {
 
     private String status;
 
-    private Integer timestamp;
+    private Long timestamp;
 
-    private Integer txId;
+    private Long txId;
 
     private String type;
 
@@ -43,19 +43,19 @@ public class MarginTransfer {
         this.status = status;
     }
 
-    public Integer getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Integer timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 
-    public Integer getTxId() {
+    public Long getTxId() {
         return txId;
     }
 
-    public void setTxId(Integer txId) {
+    public void setTxId(Long txId) {
         this.txId = txId;
     }
 

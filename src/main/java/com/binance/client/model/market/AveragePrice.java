@@ -7,15 +7,15 @@ import java.math.BigDecimal;
 
 public class AveragePrice {
 
-    private Integer mins;
+    private Long mins;
 
     private BigDecimal price;
 
-    public Integer getMins() {
+    public Long getMins() {
         return mins;
     }
 
-    public void setMins(Integer mins) {
+    public void setMins(Long mins) {
         this.mins = mins;
     }
 

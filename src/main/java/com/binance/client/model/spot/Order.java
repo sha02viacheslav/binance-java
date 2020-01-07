@@ -9,9 +9,9 @@ public class Order {
 
     private String symbol;
 
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private String clientOrderId;
 
@@ -35,9 +35,9 @@ public class Order {
 
     private BigDecimal icebergQty;
 
-    private Integer time;
+    private Long time;
 
-    private Integer updateTime;
+    private Long updateTime;
 
     private Boolean isWorking;
 
@@ -51,19 +51,19 @@ public class Order {
         this.symbol = symbol;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 
@@ -155,19 +155,19 @@ public class Order {
         this.icebergQty = icebergQty;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 
-    public Integer getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

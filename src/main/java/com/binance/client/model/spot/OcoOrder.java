@@ -7,7 +7,7 @@ public class OcoOrder {
 
     private String symbol;
 
-    private Integer orderId;
+    private Long orderId;
 
     private String clientOrderId;
 
@@ -19,11 +19,11 @@ public class OcoOrder {
         this.symbol = symbol;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 

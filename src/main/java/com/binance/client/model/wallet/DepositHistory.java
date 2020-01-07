@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class DepositHistory {
 
-    private Integer insertTime;
+    private Long insertTime;
 
     private BigDecimal amount;
 
@@ -16,13 +16,13 @@ public class DepositHistory {
 
     private String txId;
 
-    private Integer status;
+    private Long status;
 
-    public Integer getInsertTime() {
+    public Long getInsertTime() {
         return insertTime;
     }
 
-    public void setInsertTime(Integer insertTime) {
+    public void setInsertTime(Long insertTime) {
         this.insertTime = insertTime;
     }
 
@@ -58,11 +58,11 @@ public class DepositHistory {
         this.txId = txId;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 

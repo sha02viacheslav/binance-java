@@ -9,7 +9,7 @@ public class SymbolMiniTickerEvent {
 
     private String eventType;
 
-    private Integer eventTime;
+    private Long eventTime;
 
     private String symbol;
 
@@ -33,11 +33,11 @@ public class SymbolMiniTickerEvent {
         this.eventType = eventType;
     }
 
-    public Integer getEventTime() {
+    public Long getEventTime() {
         return eventTime;
     }
 
-    public void setEventTime(Integer eventTime) {
+    public void setEventTime(Long eventTime) {
         this.eventTime = eventTime;
     }
 

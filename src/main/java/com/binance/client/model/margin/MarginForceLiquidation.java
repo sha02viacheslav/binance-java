@@ -11,7 +11,7 @@ public class MarginForceLiquidation {
 
     private BigDecimal executedQty;
 
-    private Integer orderId;
+    private Long orderId;
 
     private BigDecimal price;
 
@@ -23,7 +23,7 @@ public class MarginForceLiquidation {
 
     private String timeInForce;
 
-    private Integer updatedTime;
+    private Long updatedTime;
 
     public BigDecimal getAvgPrice() {
         return avgPrice;
@@ -41,11 +41,11 @@ public class MarginForceLiquidation {
         this.executedQty = executedQty;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -89,11 +89,11 @@ public class MarginForceLiquidation {
         this.timeInForce = timeInForce;
     }
 
-    public Integer getUpdatedTime() {
+    public Long getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(Integer updatedTime) {
+    public void setUpdatedTime(Long updatedTime) {
         this.updatedTime = updatedTime;
     }
 

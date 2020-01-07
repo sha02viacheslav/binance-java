@@ -7,17 +7,17 @@ import java.math.BigDecimal;
 
 public class MarginPriceIndex {
 
-    private Integer calcTime;
+    private Long calcTime;
 
     private BigDecimal price;
 
     private String symbol;
 
-    public Integer getCalcTime() {
+    public Long getCalcTime() {
         return calcTime;
     }
 
-    public void setCalcTime(Integer calcTime) {
+    public void setCalcTime(Long calcTime) {
         this.calcTime = calcTime;
     }
 

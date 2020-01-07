@@ -9,19 +9,19 @@ public class CandlestickEvent {
 
     private String eventType;
 
-    private Integer eventTime;
+    private Long eventTime;
 
     private String symbol;
 
-    private Integer startTime;
+    private Long startTime;
 
-    private Integer closeTime;
+    private Long closeTime;
 
     private String interval;
 
-    private Integer firstTradeId;
+    private Long firstTradeId;
 
-    private Integer lastTradeId;
+    private Long lastTradeId;
 
     private BigDecimal open;
 
@@ -33,7 +33,7 @@ public class CandlestickEvent {
 
     private BigDecimal volume;
 
-    private Integer numTrades;
+    private Long numTrades;
 
     private Boolean isClosed;
 
@@ -43,7 +43,7 @@ public class CandlestickEvent {
 
     private BigDecimal takerBuyQuoteAssetVolume;
 
-    private Integer ignore;
+    private Long ignore;
 
     public String getEventType() {
         return eventType;
@@ -53,11 +53,11 @@ public class CandlestickEvent {
         this.eventType = eventType;
     }
 
-    public Integer getEventTime() {
+    public Long getEventTime() {
         return eventTime;
     }
 
-    public void setEventTime(Integer eventTime) {
+    public void setEventTime(Long eventTime) {
         this.eventTime = eventTime;
     }
 
@@ -69,19 +69,19 @@ public class CandlestickEvent {
         this.symbol = symbol;
     }
 
-    public Integer getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Integer startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Integer getCloseTime() {
+    public Long getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Integer closeTime) {
+    public void setCloseTime(Long closeTime) {
         this.closeTime = closeTime;
     }
 
@@ -93,19 +93,19 @@ public class CandlestickEvent {
         this.interval = interval;
     }
 
-    public Integer getFirstTradeId() {
+    public Long getFirstTradeId() {
         return firstTradeId;
     }
 
-    public void setFirstTradeId(Integer firstTradeId) {
+    public void setFirstTradeId(Long firstTradeId) {
         this.firstTradeId = firstTradeId;
     }
 
-    public Integer getLastTradeId() {
+    public Long getLastTradeId() {
         return lastTradeId;
     }
 
-    public void setLastTradeId(Integer lastTradeId) {
+    public void setLastTradeId(Long lastTradeId) {
         this.lastTradeId = lastTradeId;
     }
 
@@ -149,11 +149,11 @@ public class CandlestickEvent {
         this.volume = volume;
     }
 
-    public Integer getNumTrades() {
+    public Long getNumTrades() {
         return numTrades;
     }
 
-    public void setNumTrades(Integer numTrades) {
+    public void setNumTrades(Long numTrades) {
         this.numTrades = numTrades;
     }
 
@@ -189,11 +189,11 @@ public class CandlestickEvent {
         this.takerBuyQuoteAssetVolume = takerBuyQuoteAssetVolume;
     }
 
-    public Integer getIgnore() {
+    public Long getIgnore() {
         return ignore;
     }
 
-    public void setIgnore(Integer ignore) {
+    public void setIgnore(Long ignore) {
         this.ignore = ignore;
     }
 

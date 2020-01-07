@@ -7,27 +7,27 @@ import java.math.BigDecimal;
 
 public class AggregateTrade {
 
-    private Integer id;
+    private Long id;
 
     private BigDecimal price;
 
     private BigDecimal qty;
 
-    private Integer firstId;
+    private Long firstId;
 
-    private Integer lastId;
+    private Long lastId;
 
-    private Integer time;
+    private Long time;
 
     private Boolean isBuyerMaker;
 
     private Boolean isBestMatch;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,27 +47,27 @@ public class AggregateTrade {
         this.qty = qty;
     }
 
-    public Integer getFirstId() {
+    public Long getFirstId() {
         return firstId;
     }
 
-    public void setFirstId(Integer firstId) {
+    public void setFirstId(Long firstId) {
         this.firstId = firstId;
     }
 
-    public Integer getLastId() {
+    public Long getLastId() {
         return lastId;
     }
 
-    public void setLastId(Integer lastId) {
+    public void setLastId(Long lastId) {
         this.lastId = lastId;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

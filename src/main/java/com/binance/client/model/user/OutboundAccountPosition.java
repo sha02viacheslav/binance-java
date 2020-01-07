@@ -9,15 +9,15 @@ import com.binance.client.model.wallet.Balance;
 
 public class OutboundAccountPosition {
 
-    private Integer updateTime;
+    private Long updateTime;
 
     private List<Balance> balances;
 
-    public Integer getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

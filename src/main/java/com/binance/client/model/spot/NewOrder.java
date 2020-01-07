@@ -10,13 +10,13 @@ public class NewOrder {
 
     private String symbol;
 
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private String clientOrderId;
 
-    private Integer transactTime;
+    private Long transactTime;
 
     private BigDecimal price;
 
@@ -44,19 +44,19 @@ public class NewOrder {
         this.symbol = symbol;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 
@@ -68,11 +68,11 @@ public class NewOrder {
         this.clientOrderId = clientOrderId;
     }
 
-    public Integer getTransactTime() {
+    public Long getTransactTime() {
         return transactTime;
     }
 
-    public void setTransactTime(Integer transactTime) {
+    public void setTransactTime(Long transactTime) {
         this.transactTime = transactTime;
     }
 

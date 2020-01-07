@@ -11,11 +11,11 @@ public class DustTransferEntry {
 
     private String fromAsset;
 
-    private Integer operateTime;
+    private Long operateTime;
 
     private BigDecimal serviceChargeAmount;
 
-    private Integer tranId;
+    private Long tranId;
 
     private BigDecimal transferedAmount;
 
@@ -35,11 +35,11 @@ public class DustTransferEntry {
         this.fromAsset = fromAsset;
     }
 
-    public Integer getOperateTime() {
+    public Long getOperateTime() {
         return operateTime;
     }
 
-    public void setOperateTime(Integer operateTime) {
+    public void setOperateTime(Long operateTime) {
         this.operateTime = operateTime;
     }
 
@@ -51,11 +51,11 @@ public class DustTransferEntry {
         this.serviceChargeAmount = serviceChargeAmount;
     }
 
-    public Integer getTranId() {
+    public Long getTranId() {
         return tranId;
     }
 
-    public void setTranId(Integer tranId) {
+    public void setTranId(Long tranId) {
         this.tranId = tranId;
     }
 

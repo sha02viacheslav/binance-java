@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public class SymbolBookTickerEvent {
 
-    private Integer orderBookUpdateId;
+    private Long orderBookUpdateId;
 
     private String symbol;
 
@@ -19,11 +19,11 @@ public class SymbolBookTickerEvent {
 
     private BigDecimal bestAskQty;
 
-    public Integer getOrderBookUpdateId() {
+    public Long getOrderBookUpdateId() {
         return orderBookUpdateId;
     }
 
-    public void setOrderBookUpdateId(Integer orderBookUpdateId) {
+    public void setOrderBookUpdateId(Long orderBookUpdateId) {
         this.orderBookUpdateId = orderBookUpdateId;
     }
 

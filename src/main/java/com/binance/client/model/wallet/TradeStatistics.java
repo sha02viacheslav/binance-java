@@ -37,15 +37,15 @@ public class TradeStatistics {
 
     private BigDecimal quoteVolume;
 
-    private Integer openTime;
+    private Long openTime;
 
-    private Integer closeTime;
+    private Long closeTime;
 
-    private Integer firstId;
+    private Long firstId;
 
-    private Integer lastId;
+    private Long lastId;
 
-    private Integer count;
+    private Long count;
 
     public String getSymbol() {
         return symbol;
@@ -159,43 +159,43 @@ public class TradeStatistics {
         this.quoteVolume = quoteVolume;
     }
 
-    public Integer getOpenTime() {
+    public Long getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Integer openTime) {
+    public void setOpenTime(Long openTime) {
         this.openTime = openTime;
     }
 
-    public Integer getCloseTime() {
+    public Long getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Integer closeTime) {
+    public void setCloseTime(Long closeTime) {
         this.closeTime = closeTime;
     }
 
-    public Integer getFirstId() {
+    public Long getFirstId() {
         return firstId;
     }
 
-    public void setFirstId(Integer firstId) {
+    public void setFirstId(Long firstId) {
         this.firstId = firstId;
     }
 
-    public Integer getLastId() {
+    public Long getLastId() {
         return lastId;
     }
 
-    public void setLastId(Integer lastId) {
+    public void setLastId(Long lastId) {
         this.lastId = lastId;
     }
 
-    public Integer getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(Long count) {
         this.count = count;
     }
 

@@ -11,11 +11,11 @@ public class AssetDividendRecord {
 
     private String asset;
 
-    private Integer divTime;
+    private Long divTime;
 
     private String enInfo;
 
-    private Integer tranId;
+    private Long tranId;
 
     public BigDecimal getAmount() {
         return amount;
@@ -33,11 +33,11 @@ public class AssetDividendRecord {
         this.asset = asset;
     }
 
-    public Integer getDivTime() {
+    public Long getDivTime() {
         return divTime;
     }
 
-    public void setDivTime(Integer divTime) {
+    public void setDivTime(Long divTime) {
         this.divTime = divTime;
     }
 
@@ -49,11 +49,11 @@ public class AssetDividendRecord {
         this.enInfo = enInfo;
     }
 
-    public Integer getTranId() {
+    public Long getTranId() {
         return tranId;
     }
 
-    public void setTranId(Integer tranId) {
+    public void setTranId(Long tranId) {
         this.tranId = tranId;
     }
 

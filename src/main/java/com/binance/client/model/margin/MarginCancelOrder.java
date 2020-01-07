@@ -9,13 +9,13 @@ public class MarginCancelOrder {
 
     private String symbol;
 
-    private Integer orderId;
+    private Long orderId;
 
     private String origClientOrderId;
 
     private String clientOrderId;
 
-    private Integer transactTime;
+    private Long transactTime;
 
     private BigDecimal price;
 
@@ -41,11 +41,11 @@ public class MarginCancelOrder {
         this.symbol = symbol;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -65,11 +65,11 @@ public class MarginCancelOrder {
         this.clientOrderId = clientOrderId;
     }
 
-    public Integer getTransactTime() {
+    public Long getTransactTime() {
         return transactTime;
     }
 
-    public void setTransactTime(Integer transactTime) {
+    public void setTransactTime(Long transactTime) {
         this.transactTime = transactTime;
     }
 

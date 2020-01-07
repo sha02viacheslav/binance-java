@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 
 public class DustLogEntry {
 
-    private Integer tranId;
+    private Long tranId;
 
     private BigDecimal serviceChargeAmount;
 
-    private Integer uid;
+    private Long uid;
 
     private BigDecimal amount;
 
@@ -21,11 +21,11 @@ public class DustLogEntry {
 
     private String fromAsset;
 
-    public Integer getTranId() {
+    public Long getTranId() {
         return tranId;
     }
 
-    public void setTranId(Integer tranId) {
+    public void setTranId(Long tranId) {
         this.tranId = tranId;
     }
 
@@ -37,11 +37,11 @@ public class DustLogEntry {
         this.serviceChargeAmount = serviceChargeAmount;
     }
 
-    public Integer getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 

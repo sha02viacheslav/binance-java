@@ -11,7 +11,7 @@ public class MarginInterest {
 
     private BigDecimal interest;
 
-    private Integer interestAccuredTime;
+    private Long interestAccuredTime;
 
     private BigDecimal interestRate;
 
@@ -35,11 +35,11 @@ public class MarginInterest {
         this.interest = interest;
     }
 
-    public Integer getInterestAccuredTime() {
+    public Long getInterestAccuredTime() {
         return interestAccuredTime;
     }
 
-    public void setInterestAccuredTime(Integer interestAccuredTime) {
+    public void setInterestAccuredTime(Long interestAccuredTime) {
         this.interestAccuredTime = interestAccuredTime;
     }
 

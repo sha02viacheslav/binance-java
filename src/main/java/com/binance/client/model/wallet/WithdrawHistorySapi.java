@@ -18,7 +18,7 @@ public class WithdrawHistorySapi {
 
     private String network;
 
-    private Integer status;
+    private Long status;
 
     private String txId;
 
@@ -70,11 +70,11 @@ public class WithdrawHistorySapi {
         this.network = network;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 

@@ -11,13 +11,13 @@ public class DiffDepthEvent {
 
     private String eventType;
 
-    private Integer eventTime;
+    private Long eventTime;
 
     private String symbol;
 
-    private Integer firstUpdateId;
+    private Long firstUpdateId;
 
-    private Integer finalUpdateId;
+    private Long finalUpdateId;
 
     private List<OrderBookEntry> bids;
 
@@ -31,11 +31,11 @@ public class DiffDepthEvent {
         this.eventType = eventType;
     }
 
-    public Integer getEventTime() {
+    public Long getEventTime() {
         return eventTime;
     }
 
-    public void setEventTime(Integer eventTime) {
+    public void setEventTime(Long eventTime) {
         this.eventTime = eventTime;
     }
 
@@ -47,19 +47,19 @@ public class DiffDepthEvent {
         this.symbol = symbol;
     }
 
-    public Integer getFirstUpdateId() {
+    public Long getFirstUpdateId() {
         return firstUpdateId;
     }
 
-    public void setFirstUpdateId(Integer firstUpdateId) {
+    public void setFirstUpdateId(Long firstUpdateId) {
         this.firstUpdateId = firstUpdateId;
     }
 
-    public Integer getFinalUpdateId() {
+    public Long getFinalUpdateId() {
         return finalUpdateId;
     }
 
-    public void setFinalUpdateId(Integer finalUpdateId) {
+    public void setFinalUpdateId(Long finalUpdateId) {
         this.finalUpdateId = finalUpdateId;
     }
 

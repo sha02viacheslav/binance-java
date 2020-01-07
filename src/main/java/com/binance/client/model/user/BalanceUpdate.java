@@ -11,7 +11,7 @@ public class BalanceUpdate {
 
     private BigDecimal delta;
 
-    private Integer clearTime;
+    private Long clearTime;
 
     public String getAsset() {
         return asset;
@@ -29,11 +29,11 @@ public class BalanceUpdate {
         this.delta = delta;
     }
 
-    public Integer getClearTime() {
+    public Long getClearTime() {
         return clearTime;
     }
 
-    public void setClearTime(Integer clearTime) {
+    public void setClearTime(Long clearTime) {
         this.clearTime = clearTime;
     }
 

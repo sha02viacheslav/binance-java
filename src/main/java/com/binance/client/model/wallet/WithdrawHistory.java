@@ -18,9 +18,9 @@ public class WithdrawHistory {
 
     private String txId;
 
-    private Integer applyTime;
+    private Long applyTime;
 
-    private Integer status;
+    private Long status;
 
     public String getId() {
         return id;
@@ -70,19 +70,19 @@ public class WithdrawHistory {
         this.txId = txId;
     }
 
-    public Integer getApplyTime() {
+    public Long getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(Integer applyTime) {
+    public void setApplyTime(Long applyTime) {
         this.applyTime = applyTime;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 

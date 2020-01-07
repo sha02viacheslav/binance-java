@@ -36,7 +36,7 @@ public class SubAccountFuturesDetail {
 
     private String asset;
 
-    private Integer updateTime;
+    private Long updateTime;
 
     private List<SubAccountFuturesDetailAsset> assets;
 
@@ -152,11 +152,11 @@ public class SubAccountFuturesDetail {
         this.asset = asset;
     }
 
-    public Integer getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

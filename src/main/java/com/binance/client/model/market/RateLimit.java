@@ -9,9 +9,9 @@ public class RateLimit {
 
     private String interval;
 
-    private Integer intervalNum;
+    private Long intervalNum;
 
-    private Integer limit;
+    private Long limit;
 
     public String getRateLimitType() {
         return rateLimitType;
@@ -29,19 +29,19 @@ public class RateLimit {
         this.interval = interval;
     }
 
-    public Integer getIntervalNum() {
+    public Long getIntervalNum() {
         return intervalNum;
     }
 
-    public void setIntervalNum(Integer intervalNum) {
+    public void setIntervalNum(Long intervalNum) {
         this.intervalNum = intervalNum;
     }
 
-    public Integer getLimit() {
+    public Long getLimit() {
         return limit;
     }
 
-    public void setLimit(Integer limit) {
+    public void setLimit(Long limit) {
         this.limit = limit;
     }
 

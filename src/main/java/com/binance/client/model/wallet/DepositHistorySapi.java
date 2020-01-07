@@ -14,11 +14,11 @@ public class DepositHistorySapi {
 
     private String coin;
 
-    private Integer insertTime;
+    private Long insertTime;
 
     private String network;
 
-    private Integer status;
+    private Long status;
 
     private String txId;
 
@@ -54,11 +54,11 @@ public class DepositHistorySapi {
         this.coin = coin;
     }
 
-    public Integer getInsertTime() {
+    public Long getInsertTime() {
         return insertTime;
     }
 
-    public void setInsertTime(Integer insertTime) {
+    public void setInsertTime(Long insertTime) {
         this.insertTime = insertTime;
     }
 
@@ -70,11 +70,11 @@ public class DepositHistorySapi {
         this.network = network;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 

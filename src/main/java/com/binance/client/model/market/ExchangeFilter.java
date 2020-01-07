@@ -7,9 +7,9 @@ public class ExchangeFilter {
 
     private String filterType;
 
-    private Integer maxNumOrders;
+    private Long maxNumOrders;
 
-    private Integer maxNumAlgoOrders;
+    private Long maxNumAlgoOrders;
 
     public String getFilterType() {
         return filterType;
@@ -19,19 +19,19 @@ public class ExchangeFilter {
         this.filterType = filterType;
     }
 
-    public Integer getMaxNumOrders() {
+    public Long getMaxNumOrders() {
         return maxNumOrders;
     }
 
-    public void setMaxNumOrders(Integer maxNumOrders) {
+    public void setMaxNumOrders(Long maxNumOrders) {
         this.maxNumOrders = maxNumOrders;
     }
 
-    public Integer getMaxNumAlgoOrders() {
+    public Long getMaxNumAlgoOrders() {
         return maxNumAlgoOrders;
     }
 
-    public void setMaxNumAlgoOrders(Integer maxNumAlgoOrders) {
+    public void setMaxNumAlgoOrders(Long maxNumAlgoOrders) {
         this.maxNumAlgoOrders = maxNumAlgoOrders;
     }
 

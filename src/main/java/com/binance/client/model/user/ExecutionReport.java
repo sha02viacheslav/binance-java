@@ -25,7 +25,7 @@ public class ExecutionReport {
 
     private BigDecimal icebergQty;
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private String origClientOrderId;
 
@@ -35,7 +35,7 @@ public class ExecutionReport {
 
     private String errorCode;
 
-    private Integer orderId;
+    private Long orderId;
 
     private BigDecimal lastExecutedQty;
 
@@ -43,15 +43,15 @@ public class ExecutionReport {
 
     private BigDecimal lastExecutedPrice;
 
-    private Integer commissionAmount;
+    private Long commissionAmount;
 
     private String commissionAsset;
 
-    private Integer transactionTime;
+    private Long transactionTime;
 
-    private Integer tradeID;
+    private Long tradeID;
 
-    private Integer ignore;
+    private Long ignore;
 
     private Boolean isOrderBook;
 
@@ -59,7 +59,7 @@ public class ExecutionReport {
 
     private Boolean isIgnore;
 
-    private Integer orderCreationTime;
+    private Long orderCreationTime;
 
     private BigDecimal cumulativeQuoteAssetQty;
 
@@ -139,11 +139,11 @@ public class ExecutionReport {
         this.icebergQty = icebergQty;
     }
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 
@@ -179,11 +179,11 @@ public class ExecutionReport {
         this.errorCode = errorCode;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -211,11 +211,11 @@ public class ExecutionReport {
         this.lastExecutedPrice = lastExecutedPrice;
     }
 
-    public Integer getCommissionAmount() {
+    public Long getCommissionAmount() {
         return commissionAmount;
     }
 
-    public void setCommissionAmount(Integer commissionAmount) {
+    public void setCommissionAmount(Long commissionAmount) {
         this.commissionAmount = commissionAmount;
     }
 
@@ -227,27 +227,27 @@ public class ExecutionReport {
         this.commissionAsset = commissionAsset;
     }
 
-    public Integer getTransactionTime() {
+    public Long getTransactionTime() {
         return transactionTime;
     }
 
-    public void setTransactionTime(Integer transactionTime) {
+    public void setTransactionTime(Long transactionTime) {
         this.transactionTime = transactionTime;
     }
 
-    public Integer getTradeID() {
+    public Long getTradeID() {
         return tradeID;
     }
 
-    public void setTradeID(Integer tradeID) {
+    public void setTradeID(Long tradeID) {
         this.tradeID = tradeID;
     }
 
-    public Integer getIgnore() {
+    public Long getIgnore() {
         return ignore;
     }
 
-    public void setIgnore(Integer ignore) {
+    public void setIgnore(Long ignore) {
         this.ignore = ignore;
     }
 
@@ -275,11 +275,11 @@ public class ExecutionReport {
         this.isIgnore = isIgnore;
     }
 
-    public Integer getOrderCreationTime() {
+    public Long getOrderCreationTime() {
         return orderCreationTime;
     }
 
-    public void setOrderCreationTime(Integer orderCreationTime) {
+    public void setOrderCreationTime(Long orderCreationTime) {
         this.orderCreationTime = orderCreationTime;
     }
 

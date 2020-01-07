@@ -7,7 +7,7 @@ public class ListStatus {
 
     private String symbol;
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private String contingencyType;
 
@@ -19,7 +19,7 @@ public class ListStatus {
 
     private String listClientOrderId;
 
-    private Integer transactionTime;
+    private Long transactionTime;
 
     public String getSymbol() {
         return symbol;
@@ -29,11 +29,11 @@ public class ListStatus {
         this.symbol = symbol;
     }
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 
@@ -77,11 +77,11 @@ public class ListStatus {
         this.listClientOrderId = listClientOrderId;
     }
 
-    public Integer getTransactionTime() {
+    public Long getTransactionTime() {
         return transactionTime;
     }
 
-    public void setTransactionTime(Integer transactionTime) {
+    public void setTransactionTime(Long transactionTime) {
         this.transactionTime = transactionTime;
     }
 

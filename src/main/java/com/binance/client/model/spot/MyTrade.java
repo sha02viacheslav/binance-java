@@ -9,11 +9,11 @@ public class MyTrade {
 
     private String symbol;
 
-    private Integer id;
+    private Long id;
 
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private BigDecimal price;
 
@@ -25,7 +25,7 @@ public class MyTrade {
 
     private String commissionAsset;
 
-    private Integer time;
+    private Long time;
 
     private Boolean isBuyer;
 
@@ -41,27 +41,27 @@ public class MyTrade {
         this.symbol = symbol;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 
@@ -105,11 +105,11 @@ public class MyTrade {
         this.commissionAsset = commissionAsset;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

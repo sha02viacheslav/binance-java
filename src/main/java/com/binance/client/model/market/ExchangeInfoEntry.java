@@ -14,11 +14,11 @@ public class ExchangeInfoEntry {
 
     private String baseAsset;
 
-    private Integer baseAssetPrecision;
+    private Long baseAssetPrecision;
 
     private String quoteAsset;
 
-    private Integer quotePrecision;
+    private Long quotePrecision;
 
     private List<String> orderTypes;
 
@@ -56,11 +56,11 @@ public class ExchangeInfoEntry {
         this.baseAsset = baseAsset;
     }
 
-    public Integer getBaseAssetPrecision() {
+    public Long getBaseAssetPrecision() {
         return baseAssetPrecision;
     }
 
-    public void setBaseAssetPrecision(Integer baseAssetPrecision) {
+    public void setBaseAssetPrecision(Long baseAssetPrecision) {
         this.baseAssetPrecision = baseAssetPrecision;
     }
 
@@ -72,11 +72,11 @@ public class ExchangeInfoEntry {
         this.quoteAsset = quoteAsset;
     }
 
-    public Integer getQuotePrecision() {
+    public Long getQuotePrecision() {
         return quotePrecision;
     }
 
-    public void setQuotePrecision(Integer quotePrecision) {
+    public void setQuotePrecision(Long quotePrecision) {
         this.quotePrecision = quotePrecision;
     }
 

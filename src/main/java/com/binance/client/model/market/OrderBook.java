@@ -7,17 +7,17 @@ import java.util.List;
 
 public class OrderBook {
 
-    private Integer lastUpdateId;
+    private Long lastUpdateId;
 
     private List<OrderBookEntry> bids;
 
     private List<OrderBookEntry> asks;
 
-    public Integer getLastUpdateId() {
+    public Long getLastUpdateId() {
         return lastUpdateId;
     }
 
-    public void setLastUpdateId(Integer lastUpdateId) {
+    public void setLastUpdateId(Long lastUpdateId) {
         this.lastUpdateId = lastUpdateId;
     }
 

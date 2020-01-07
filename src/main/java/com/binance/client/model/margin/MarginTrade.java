@@ -11,7 +11,7 @@ public class MarginTrade {
 
     private String commissionAsset;
 
-    private Integer id;
+    private Long id;
 
     private Boolean isBestMatch;
 
@@ -19,7 +19,7 @@ public class MarginTrade {
 
     private Boolean isMaker;
 
-    private Integer orderId;
+    private Long orderId;
 
     private BigDecimal price;
 
@@ -27,7 +27,7 @@ public class MarginTrade {
 
     private String symbol;
 
-    private Integer time;
+    private Long time;
 
     public BigDecimal getCommission() {
         return commission;
@@ -45,11 +45,11 @@ public class MarginTrade {
         this.commissionAsset = commissionAsset;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,11 +77,11 @@ public class MarginTrade {
         this.isMaker = isMaker;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -109,11 +109,11 @@ public class MarginTrade {
         this.symbol = symbol;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

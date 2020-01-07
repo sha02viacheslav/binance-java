@@ -164,7 +164,7 @@ public class Network {
                 .append("name", name).append("network", network).append("resetAddressStatus", resetAddressStatus)
                 .append("specialTips", specialTips).append("withdrawDesc", withdrawDesc)
                 .append("withdrawEnable", withdrawEnable).append("withdrawFee", withdrawFee)
-                .append("withdrawIntegerMultiple", withdrawIntegerMultiple).append("withdrawMin", withdrawMin)
+                .append("withdrawLongMultiple", withdrawIntegerMultiple).append("withdrawMin", withdrawMin)
                 .toString();
     }
 }

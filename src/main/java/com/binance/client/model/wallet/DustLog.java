@@ -12,7 +12,7 @@ public class DustLog {
 
     private BigDecimal serviceChargeTotal;
 
-    private Integer tranId;
+    private Long tranId;
 
     private String operateTime;
 
@@ -34,11 +34,11 @@ public class DustLog {
         this.serviceChargeTotal = serviceChargeTotal;
     }
 
-    public Integer getTranId() {
+    public Long getTranId() {
         return tranId;
     }
 
-    public void setTranId(Integer tranId) {
+    public void setTranId(Long tranId) {
         this.tranId = tranId;
     }
 

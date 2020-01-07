@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Oco {
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private String contingencyType;
 
@@ -17,17 +17,17 @@ public class Oco {
 
     private String listClientOrderId;
 
-    private Integer transactionTime;
+    private Long transactionTime;
 
     private String symbol;
 
     private List<OcoOrder> orders;
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 
@@ -63,11 +63,11 @@ public class Oco {
         this.listClientOrderId = listClientOrderId;
     }
 
-    public Integer getTransactionTime() {
+    public Long getTransactionTime() {
         return transactionTime;
     }
 
-    public void setTransactionTime(Integer transactionTime) {
+    public void setTransactionTime(Long transactionTime) {
         this.transactionTime = transactionTime;
     }
 

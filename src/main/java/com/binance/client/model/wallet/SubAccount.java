@@ -15,7 +15,7 @@ public class SubAccount {
 
     private Boolean gAuth;
 
-    private Integer createTime;
+    private Long createTime;
 
     public String getEmail() {
         return email;
@@ -57,11 +57,11 @@ public class SubAccount {
         this.gAuth = gAuth;
     }
 
-    public Integer getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Integer createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 

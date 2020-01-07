@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public class Trade {
 
-    private Integer id;
+    private Long id;
 
     private BigDecimal price;
 
@@ -15,17 +15,17 @@ public class Trade {
 
     private BigDecimal quoteQty;
 
-    private Integer time;
+    private Long time;
 
     private Boolean isBuyerMaker;
 
     private Boolean isBestMatch;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,11 +53,11 @@ public class Trade {
         this.quoteQty = quoteQty;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

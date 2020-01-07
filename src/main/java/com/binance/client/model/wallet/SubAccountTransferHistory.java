@@ -13,7 +13,7 @@ public class SubAccountTransferHistory {
 
     private String qty;
 
-    private Integer time;
+    private Long time;
 
     public String getFromEmail() {
         return fromEmail;
@@ -47,11 +47,11 @@ public class SubAccountTransferHistory {
         this.qty = qty;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

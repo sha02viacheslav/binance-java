@@ -7,7 +7,7 @@ import java.util.List;
 
 public class NewOco {
 
-    private Integer orderListId;
+    private Long orderListId;
 
     private String contingencyType;
 
@@ -17,7 +17,7 @@ public class NewOco {
 
     private String listClientOrderId;
 
-    private Integer transactionTime;
+    private Long transactionTime;
 
     private String symbol;
 
@@ -25,11 +25,11 @@ public class NewOco {
 
     private List<NewOcoReport> orderReports;
 
-    public Integer getOrderListId() {
+    public Long getOrderListId() {
         return orderListId;
     }
 
-    public void setOrderListId(Integer orderListId) {
+    public void setOrderListId(Long orderListId) {
         this.orderListId = orderListId;
     }
 
@@ -65,11 +65,11 @@ public class NewOco {
         this.listClientOrderId = listClientOrderId;
     }
 
-    public Integer getTransactionTime() {
+    public Long getTransactionTime() {
         return transactionTime;
     }
 
-    public void setTransactionTime(Integer transactionTime) {
+    public void setTransactionTime(Long transactionTime) {
         this.transactionTime = transactionTime;
     }
 
