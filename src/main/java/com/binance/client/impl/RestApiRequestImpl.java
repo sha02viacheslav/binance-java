@@ -1293,7 +1293,7 @@ class RestApiRequestImpl {
                 element.setVolume(item.getBigDecimalAt(5));
                 element.setCloseTime(item.getLongAt(6));
                 element.setQuoteAssetVolume(item.getBigDecimalAt(7));
-                element.setNumTrades(item.getLongAt(8));
+                element.setNumTrades(item.getIntegerAt(8));
                 element.setTakerBuyBaseAssetVolume(item.getBigDecimalAt(9));
                 element.setTakerBuyQuoteAssetVolume(item.getBigDecimalAt(10));
                 element.setIgnore(item.getBigDecimalAt(11));
