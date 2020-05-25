@@ -62,6 +62,10 @@ abstract class RestApiInvoker {
                 throw new BinanceApiException(BinanceApiException.ENV_ERROR,
                         "[Invoking] Cannot get the response from server");
             }
+            if ("".equals(str)) {
+                throw new BinanceApiException(BinanceApiException.ENV_ERROR,
+                        "[Invoking] Cannot get the response from server");
+            }
             log.debug("Response =====> " + str);
             JsonWrapper jsonWrapper = JsonWrapper.parseFromString(str);
             checkResponse(jsonWrapper);
