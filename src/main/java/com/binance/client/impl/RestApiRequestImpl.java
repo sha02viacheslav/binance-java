@@ -2083,29 +2083,32 @@ class RestApiRequestImpl {
             result.setOrderId(jsonWrapper.getLong("orderId"));
             result.setClientOrderId(jsonWrapper.getString("clientOrderId"));
             result.setTransactTime(jsonWrapper.getLong("transactTime"));
-            result.setPrice(jsonWrapper.getBigDecimal("price"));
-            result.setOrigQty(jsonWrapper.getBigDecimal("origQty"));
-            result.setExecutedQty(jsonWrapper.getBigDecimal("executedQty"));
-            result.setCummulativeQuoteQty(jsonWrapper.getBigDecimal("cummulativeQuoteQty"));
-            result.setStatus(jsonWrapper.getString("status"));
-            result.setTimeInForce(jsonWrapper.getString("timeInForce"));
-            result.setType(jsonWrapper.getString("type"));
-            result.setSide(jsonWrapper.getString("side"));
-            result.setMarginBuyBorrowAmount(jsonWrapper.getString("marginBuyBorrowAmount"));
-            result.setMarginBuyBorrowAsset(jsonWrapper.getString("marginBuyBorrowAsset"));
-
-            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("fills");
-            List<Fill> elementList = new LinkedList<>();
-            dataArray.forEach((item) -> {
-                Fill element = new Fill();
-                element.setPrice(item.getBigDecimal("price"));
-                element.setQty(item.getBigDecimal("qty"));
-                element.setCommission(item.getBigDecimal("commission"));
-                element.setCommissionAsset(item.getString("commissionAsset"));
-                elementList.add(element);
-            });
-            result.setFills(elementList);
-            
+            if (newOrderRespType == OrderRespType.RESULT || newOrderRespType == OrderRespType.FULL) {
+                result.setPrice(jsonWrapper.getBigDecimal("price"));
+                result.setOrigQty(jsonWrapper.getBigDecimal("origQty"));
+                result.setExecutedQty(jsonWrapper.getBigDecimal("executedQty"));
+                result.setCummulativeQuoteQty(jsonWrapper.getBigDecimal("cummulativeQuoteQty"));
+                result.setStatus(jsonWrapper.getString("status"));
+                result.setTimeInForce(jsonWrapper.getString("timeInForce"));
+                result.setType(jsonWrapper.getString("type"));
+                result.setSide(jsonWrapper.getString("side"));
+            }
+            if (newOrderRespType == OrderRespType.FULL) {
+                result.setMarginBuyBorrowAmount(jsonWrapper.getString("marginBuyBorrowAmount"));
+                result.setMarginBuyBorrowAsset(jsonWrapper.getString("marginBuyBorrowAsset"));
+    
+                JsonWrapperArray dataArray = jsonWrapper.getJsonArray("fills");
+                List<Fill> elementList = new LinkedList<>();
+                dataArray.forEach((item) -> {
+                    Fill element = new Fill();
+                    element.setPrice(item.getBigDecimal("price"));
+                    element.setQty(item.getBigDecimal("qty"));
+                    element.setCommission(item.getBigDecimal("commission"));
+                    element.setCommissionAsset(item.getString("commissionAsset"));
+                    elementList.add(element);
+                });
+                result.setFills(elementList);
+            }
             return result;
         });
         return request;
