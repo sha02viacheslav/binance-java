@@ -52,9 +52,11 @@ abstract class RestApiInvoker {
             String str;
             log.debug("Request URL " + request.request.url());
             Response response = client.newCall(request.request).execute();
-            // System.out.println(response.body().string());
             if (response != null && response.body() != null) {
                 str = response.body().string();
+                System.out.println("=================Row response================");
+                System.out.println(str);
+                System.out.println("=============================================");
                 response.close();
             } else {
                 throw new BinanceApiException(BinanceApiException.ENV_ERROR,
