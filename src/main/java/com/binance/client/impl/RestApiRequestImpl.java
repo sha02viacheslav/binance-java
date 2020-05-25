@@ -2145,7 +2145,6 @@ class RestApiRequestImpl {
             result.setOrderId(jsonWrapper.getLong("orderId"));
             result.setOrigClientOrderId(jsonWrapper.getString("origClientOrderId"));
             result.setClientOrderId(jsonWrapper.getString("clientOrderId"));
-            result.setTransactTime(jsonWrapper.getLong("transactTime"));
             result.setPrice(jsonWrapper.getBigDecimal("price"));
             result.setOrigQty(jsonWrapper.getBigDecimal("origQty"));
             result.setExecutedQty(jsonWrapper.getBigDecimal("executedQty"));

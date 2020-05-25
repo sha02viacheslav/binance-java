@@ -15,8 +15,6 @@ public class MarginCancelOrder {
 
     private String clientOrderId;
 
-    private Long transactTime;
-
     private BigDecimal price;
 
     private BigDecimal origQty;
@@ -63,14 +61,6 @@ public class MarginCancelOrder {
 
     public void setClientOrderId(String clientOrderId) {
         this.clientOrderId = clientOrderId;
-    }
-
-    public Long getTransactTime() {
-        return transactTime;
-    }
-
-    public void setTransactTime(Long transactTime) {
-        this.transactTime = transactTime;
     }
 
     public BigDecimal getPrice() {
@@ -141,7 +131,7 @@ public class MarginCancelOrder {
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("symbol", symbol)
                 .append("orderId", orderId).append("origClientOrderId", origClientOrderId)
-                .append("clientOrderId", clientOrderId).append("transactTime", transactTime).append("price", price)
+                .append("clientOrderId", clientOrderId).append("price", price)
                 .append("origQty", origQty).append("executedQty", executedQty)
                 .append("cummulativeQuoteQty", cummulativeQuoteQty).append("status", status)
                 .append("timeInForce", timeInForce).append("type", type).append("side", side).toString();
