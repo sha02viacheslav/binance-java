@@ -53,6 +53,8 @@ import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewLoan;
 import com.binance.client.model.margin.MarginNewOrder;
+import com.binance.client.model.margin.MarginNewRepay;
+import com.binance.client.model.margin.MarginNewTransfer;
 import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
@@ -507,7 +509,7 @@ public interface SyncRequestClient {
      *
      * @return Transaction Id.
      */
-    Long postMarginTransfer(String asset, String amount, MarginTransferType type);
+    MarginNewTransfer postMarginTransfer(String asset, String amount, MarginTransferType type);
 
     /**
      * Apply for a loan.
@@ -521,7 +523,7 @@ public interface SyncRequestClient {
      *
      * @return Transaction Id.
      */
-    Long postMarginRepay(String asset, String amount);
+    MarginNewRepay postMarginRepay(String asset, String amount);
 
     /**
      * Get margin pair.

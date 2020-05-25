@@ -53,6 +53,8 @@ import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewLoan;
 import com.binance.client.model.margin.MarginNewOrder;
+import com.binance.client.model.margin.MarginNewRepay;
+import com.binance.client.model.margin.MarginNewTransfer;
 import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
@@ -364,7 +366,7 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
     
     @Override
-    public Long postMarginTransfer(String asset, String amount, MarginTransferType type) {
+    public MarginNewTransfer postMarginTransfer(String asset, String amount, MarginTransferType type) {
         return RestApiInvoker.callSync(requestImpl.postMarginTransfer(asset, amount, type));
     }
     
@@ -374,7 +376,7 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
     
     @Override
-    public Long postMarginRepay(String asset, String amount) {
+    public MarginNewRepay postMarginRepay(String asset, String amount) {
         return RestApiInvoker.callSync(requestImpl.postMarginRepay(asset, amount));
     }
     

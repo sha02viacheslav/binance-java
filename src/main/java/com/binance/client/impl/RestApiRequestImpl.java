@@ -85,6 +85,8 @@ import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
 import com.binance.client.model.margin.MarginNewLoan;
 import com.binance.client.model.margin.MarginNewOrder;
+import com.binance.client.model.margin.MarginNewRepay;
+import com.binance.client.model.margin.MarginNewTransfer;
 import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
 import com.binance.client.model.margin.MarginPriceIndex;
@@ -1928,8 +1930,8 @@ class RestApiRequestImpl {
         return request;
     }
 
-    RestApiRequest<Long> postMarginTransfer(String asset, String amount, MarginTransferType type) {
-        RestApiRequest<Long> request = new RestApiRequest<>();
+    RestApiRequest<MarginNewTransfer> postMarginTransfer(String asset, String amount, MarginTransferType type) {
+        RestApiRequest<MarginNewTransfer> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("asset", asset)
                 .putToUrl("amount", amount)
@@ -1937,7 +1939,8 @@ class RestApiRequestImpl {
         request.request = createRequestByPostWithSignature("/sapi/v1/margin/transfer", builder);
 
         request.jsonParser = (jsonWrapper -> {
-            Long result = jsonWrapper.getLong("tranId");
+            MarginNewTransfer result = new MarginNewTransfer();
+            result.setTranId(jsonWrapper.getLong("tranId"));
             return result;
         });
         return request;
@@ -1958,15 +1961,16 @@ class RestApiRequestImpl {
         return request;
     }
 
-    RestApiRequest<Long> postMarginRepay(String asset, String amount) {
-        RestApiRequest<Long> request = new RestApiRequest<>();
+    RestApiRequest<MarginNewRepay> postMarginRepay(String asset, String amount) {
+        RestApiRequest<MarginNewRepay> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("asset", asset)
                 .putToUrl("amount", amount);
         request.request = createRequestByPostWithSignature("/sapi/v1/margin/repay", builder);
 
         request.jsonParser = (jsonWrapper -> {
-            Long result = jsonWrapper.getLong("tranId");
+            MarginNewRepay result = new MarginNewRepay();
+            result.setTranId(jsonWrapper.getLong("tranId"));
             return result;
         });
         return request;
