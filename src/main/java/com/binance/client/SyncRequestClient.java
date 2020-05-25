@@ -116,7 +116,7 @@ public interface SyncRequestClient {
      * @param symbol The symbol, like "btcusdt". (mandatory)
      * @return Trade statistics, see {@link TradeStatistics}
      */
-    TradeStatistics get24HTradeStatistics(String symbol);
+    List<TradeStatistics> get24HTradeStatistics(String symbol);
 
     /**
      * Fetch system status.

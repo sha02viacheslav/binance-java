@@ -74,7 +74,7 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
-    public TradeStatistics get24HTradeStatistics(String symbol) {
+    public List<TradeStatistics> get24HTradeStatistics(String symbol) {
         return RestApiInvoker.callSync(requestImpl.get24HTradeStatistics(symbol));
     }
 

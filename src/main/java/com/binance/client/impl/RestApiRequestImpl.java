@@ -224,33 +224,43 @@ class RestApiRequestImpl {
         return createRequestWithApikey(serverUrl, address, builder.setMethod("DELETE"));
     }
 
-    RestApiRequest<TradeStatistics> get24HTradeStatistics(String symbol) {
-        InputChecker.checker().checkSymbol(symbol);
-        RestApiRequest<TradeStatistics> request = new RestApiRequest<>();
+    RestApiRequest<List<TradeStatistics>> get24HTradeStatistics(String symbol) {
+        RestApiRequest<List<TradeStatistics>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build().putToUrl("symbol", symbol);
         request.request = createRequestByGet("/api/v3/ticker/24hr", builder);
 
         request.jsonParser = (jsonWrapper -> {
-            TradeStatistics result = new TradeStatistics();
-            result.setSymbol(jsonWrapper.getString("symbol"));
-            result.setPriceChange(jsonWrapper.getBigDecimal("priceChange"));
-            result.setPriceChangePercent(jsonWrapper.getBigDecimal("priceChangePercent"));
-            result.setWeightedAvgPrice(jsonWrapper.getBigDecimal("weightedAvgPrice"));
-            result.setPrevClosePrice(jsonWrapper.getBigDecimal("prevClosePrice"));
-            result.setLastPrice(jsonWrapper.getBigDecimal("lastPrice"));
-            result.setLastQty(jsonWrapper.getBigDecimal("lastQty"));
-            result.setBidPrice(jsonWrapper.getBigDecimal("bidPrice"));
-            result.setAskPrice(jsonWrapper.getBigDecimal("askPrice"));
-            result.setOpenPrice(jsonWrapper.getBigDecimal("openPrice"));
-            result.setHighPrice(jsonWrapper.getBigDecimal("highPrice"));
-            result.setLowPrice(jsonWrapper.getBigDecimal("lowPrice"));
-            result.setVolume(jsonWrapper.getBigDecimal("volume"));
-            result.setQuoteVolume(jsonWrapper.getBigDecimal("quoteVolume"));
-            result.setOpenTime(jsonWrapper.getLong("openTime"));
-            result.setCloseTime(jsonWrapper.getLong("closeTime"));
-            result.setFirstId(jsonWrapper.getLong("firstId"));
-            result.setLastId(jsonWrapper.getLong("lastId"));
-            result.setCount(jsonWrapper.getLong("count"));
+            List<TradeStatistics> result = new LinkedList<>();
+            JsonWrapperArray dataArray = new JsonWrapperArray(new JSONArray());
+            if(jsonWrapper.containKey("data")) {
+                dataArray = jsonWrapper.getJsonArray("data");
+            } else {
+                dataArray.add(jsonWrapper.convert2JsonObject());
+            }
+            dataArray.forEach((item) -> {
+                TradeStatistics element = new TradeStatistics();
+                element.setSymbol(item.getString("symbol"));
+                element.setPriceChange(item.getBigDecimal("priceChange"));
+                element.setPriceChangePercent(item.getBigDecimal("priceChangePercent"));
+                element.setWeightedAvgPrice(item.getBigDecimal("weightedAvgPrice"));
+                element.setPrevClosePrice(item.getBigDecimal("prevClosePrice"));
+                element.setLastPrice(item.getBigDecimal("lastPrice"));
+                element.setLastQty(item.getBigDecimal("lastQty"));
+                element.setBidPrice(item.getBigDecimal("bidPrice"));
+                element.setAskPrice(item.getBigDecimal("askPrice"));
+                element.setOpenPrice(item.getBigDecimal("openPrice"));
+                element.setHighPrice(item.getBigDecimal("highPrice"));
+                element.setLowPrice(item.getBigDecimal("lowPrice"));
+                element.setVolume(item.getBigDecimal("volume"));
+                element.setQuoteVolume(item.getBigDecimal("quoteVolume"));
+                element.setOpenTime(item.getLong("openTime"));
+                element.setCloseTime(item.getLong("closeTime"));
+                element.setFirstId(item.getLong("firstId"));
+                element.setLastId(item.getLong("lastId"));
+                element.setCount(item.getLong("count"));
+                result.add(element);
+            });
+            
             return result;
         });
         return request;
