@@ -309,7 +309,7 @@ class RestApiRequestImpl {
                     Network network = new Network();
                     network.setAddressRegex(val.getString("addressRegex"));
                     network.setCoin(val.getString("coin"));
-                    network.setDepositDesc(val.getString("depositDesc"));
+                    network.setDepositDesc(val.getStringOrDefault("depositDesc", null));
                     network.setDepositEnable(val.getBoolean("depositEnable"));
                     network.setIsDefault(val.getBoolean("isDefault"));
                     network.setMemoRegex(val.getString("memoRegex"));
@@ -317,10 +317,10 @@ class RestApiRequestImpl {
                     network.setNetwork(val.getString("network"));
                     network.setResetAddressStatus(val.getBoolean("resetAddressStatus"));
                     network.setSpecialTips(val.getStringOrDefault("specialTips", ""));
-                    network.setWithdrawDesc(val.getString("withdrawDesc"));
+                    network.setWithdrawDesc(val.getStringOrDefault("withdrawDesc", null));
                     network.setWithdrawEnable(val.getBoolean("withdrawEnable"));
                     network.setWithdrawFee(val.getBigDecimalOrDefault("withdrawFee", null));
-                    network.setWithdrawIntegerMultiple(val.getBigDecimal("withdrawIntegerMultiple"));
+                    network.setWithdrawIntegerMultiple(val.getBigDecimalOrDefault("withdrawIntegerMultiple", null));
                     network.setWithdrawMin(val.getBigDecimalOrDefault("withdrawMin", null));
                     networkList.add(network);
                 });
