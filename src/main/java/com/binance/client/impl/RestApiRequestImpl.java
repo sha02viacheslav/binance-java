@@ -2151,7 +2151,7 @@ class RestApiRequestImpl {
                 .putToUrl("endTime", endTime)
                 .putToUrl("current", current)
                 .putToUrl("size", size);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/transfer", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/transfer", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginTransfer> result = new LinkedList<>();
@@ -2183,7 +2183,7 @@ class RestApiRequestImpl {
                 .putToUrl("endTime", endTime)
                 .putToUrl("current", current)
                 .putToUrl("size", size);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/loan", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/loan", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginLoan> result = new LinkedList<>();
@@ -2213,7 +2213,7 @@ class RestApiRequestImpl {
                 .putToUrl("endTime", endTime)
                 .putToUrl("current", current)
                 .putToUrl("size", size);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/repay", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/repay", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginRepay> result = new LinkedList<>();
@@ -2245,7 +2245,7 @@ class RestApiRequestImpl {
                 .putToUrl("endTime", endTime)
                 .putToUrl("current", current)
                 .putToUrl("size", size);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/interestHistory", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/interestHistory", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginInterest> result = new LinkedList<>();
@@ -2275,7 +2275,7 @@ class RestApiRequestImpl {
                 .putToUrl("endTime", endTime)
                 .putToUrl("current", current)
                 .putToUrl("size", size);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/forceLiquidationRec", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/forceLiquidationRec", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginForceLiquidation> result = new LinkedList<>();
@@ -2341,7 +2341,7 @@ class RestApiRequestImpl {
                 .putToUrl("symbol", symbol)
                 .putToUrl("orderId", orderId)
                 .putToUrl("origClientOrderId", origClientOrderId);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/order", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/order", builder);
 
         request.jsonParser = (jsonWrapper -> {
             MarginOrder result = new MarginOrder();
@@ -2371,7 +2371,7 @@ class RestApiRequestImpl {
         RestApiRequest<List<MarginOrder>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("symbol", symbol);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/openOrders", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/openOrders", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginOrder> result = new LinkedList<>();
@@ -2412,7 +2412,7 @@ class RestApiRequestImpl {
                 .putToUrl("startTime", startTime)
                 .putToUrl("endTime", endTime)
                 .putToUrl("limit", limit);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/allOrders", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/allOrders", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginOrder> result = new LinkedList<>();
@@ -2453,7 +2453,7 @@ class RestApiRequestImpl {
                 .putToUrl("endTime", endTime)
                 .putToUrl("fromId", fromId)
                 .putToUrl("limit", limit);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/myTrades", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/myTrades", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<MarginTrade> result = new LinkedList<>();
@@ -2484,7 +2484,7 @@ class RestApiRequestImpl {
         RestApiRequest<BigDecimal> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("asset", asset);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/maxBorrowable", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/maxBorrowable", builder);
 
         request.jsonParser = (jsonWrapper -> {
             BigDecimal result = jsonWrapper.getBigDecimal("amount");
@@ -2498,7 +2498,7 @@ class RestApiRequestImpl {
         RestApiRequest<BigDecimal> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("asset", asset);
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/maxTransferable", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/maxTransferable", builder);
 
         request.jsonParser = (jsonWrapper -> {
             BigDecimal result = jsonWrapper.getBigDecimal("amount");
