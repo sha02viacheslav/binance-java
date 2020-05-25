@@ -8,7 +8,7 @@ public class SubscribeAggregateTrade {
 
         SubscriptionClient client = SubscriptionClient.create();
    
-        client.subscribeAggregateTradeEvent("btcusdt", ((event) -> {
+        client.subscribeAggregateTradeEvent("BTCUSDT", ((event) -> {
             System.out.println(event);
             client.unsubscribeAll();
         }), null);
