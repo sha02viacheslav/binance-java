@@ -1666,7 +1666,7 @@ class RestApiRequestImpl {
                 element.setTimeInForce(item.getString("timeInForce"));
                 element.setType(item.getString("type"));
                 element.setSide(item.getString("side"));
-                element.setStopPrice(item.getBigDecimal("stopPrice"));
+                element.setStopPrice(item.getBigDecimalOrDefault("stopPrice", null));
                 reportList.add(element);
             });
             result.setOrderReports(reportList);
