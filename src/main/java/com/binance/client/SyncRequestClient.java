@@ -51,6 +51,7 @@ import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginForceLiquidation;
 import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
+import com.binance.client.model.margin.MarginNewLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
@@ -513,7 +514,7 @@ public interface SyncRequestClient {
      *
      * @return Transaction Id.
      */
-    Long postMarginBorrow(String asset, String amount);
+    MarginNewLoan postMarginBorrow(String asset, String amount);
 
     /**
      * Repay loan for margin account.

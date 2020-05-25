@@ -83,6 +83,7 @@ import com.binance.client.model.margin.MarginCancelOrder;
 import com.binance.client.model.margin.MarginForceLiquidation;
 import com.binance.client.model.margin.MarginInterest;
 import com.binance.client.model.margin.MarginLoan;
+import com.binance.client.model.margin.MarginNewLoan;
 import com.binance.client.model.margin.MarginNewOrder;
 import com.binance.client.model.margin.MarginOrder;
 import com.binance.client.model.margin.MarginPair;
@@ -1942,15 +1943,16 @@ class RestApiRequestImpl {
         return request;
     }
 
-    RestApiRequest<Long> postMarginBorrow(String asset, String amount) {
-        RestApiRequest<Long> request = new RestApiRequest<>();
+    RestApiRequest<MarginNewLoan> postMarginBorrow(String asset, String amount) {
+        RestApiRequest<MarginNewLoan> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("asset", asset)
                 .putToUrl("amount", amount);
         request.request = createRequestByPostWithSignature("/sapi/v1/margin/loan", builder);
 
         request.jsonParser = (jsonWrapper -> {
-            Long result = jsonWrapper.getLong("tranId");
+            MarginNewLoan result = new MarginNewLoan();
+            result.setTranId(jsonWrapper.getLong("tranId"));
             return result;
         });
         return request;
