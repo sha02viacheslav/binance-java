@@ -14,8 +14,6 @@ public class MarginNewOrder {
 
     private Long orderId;
 
-    private Long orderListId;
-
     private String clientOrderId;
 
     private Long transactTime;
@@ -56,14 +54,6 @@ public class MarginNewOrder {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    public Long getOrderListId() {
-        return orderListId;
-    }
-
-    public void setOrderListId(Long orderListId) {
-        this.orderListId = orderListId;
     }
 
     public String getClientOrderId() {
@@ -173,7 +163,7 @@ public class MarginNewOrder {
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("symbol", symbol)
-                .append("orderId", orderId).append("orderListId", orderListId).append("clientOrderId", clientOrderId)
+                .append("orderId", orderId).append("clientOrderId", clientOrderId)
                 .append("transactTime", transactTime).append("price", price).append("origQty", origQty)
                 .append("executedQty", executedQty).append("cummulativeQuoteQty", cummulativeQuoteQty)
                 .append("status", status).append("timeInForce", timeInForce).append("type", type).append("side", side)

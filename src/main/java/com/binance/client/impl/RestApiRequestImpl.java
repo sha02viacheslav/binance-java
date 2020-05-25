@@ -2081,7 +2081,6 @@ class RestApiRequestImpl {
             MarginNewOrder result = new MarginNewOrder();
             result.setSymbol(jsonWrapper.getString("symbol"));
             result.setOrderId(jsonWrapper.getLong("orderId"));
-            result.setOrderListId(jsonWrapper.getLong("orderListId"));
             result.setClientOrderId(jsonWrapper.getString("clientOrderId"));
             result.setTransactTime(jsonWrapper.getLong("transactTime"));
             result.setPrice(jsonWrapper.getBigDecimal("price"));
