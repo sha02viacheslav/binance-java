@@ -27,7 +27,7 @@ public class SubscribeUserData {
         syncRequestClient.closeUserDataStream(AccountType.SPOT, listenKey);
         // syncRequestClient.closeUserDataStream(AccountType.MARGIN, listenKey);
 
-        SubscriptionClient client = SubscriptionClient.create(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY);
+        SubscriptionClient client = SubscriptionClient.create();
 
    
         client.subscribeUserDataEvent(listenKey, ((event) -> {
