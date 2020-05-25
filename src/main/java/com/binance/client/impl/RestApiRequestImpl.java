@@ -2303,7 +2303,7 @@ class RestApiRequestImpl {
     RestApiRequest<MarginAccount> getMarginAccount() {
         RestApiRequest<MarginAccount> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
-        request.request = createRequestByGetWithApikey("/sapi/v1/margin/forceLiquidationRec", builder);
+        request.request = createRequestByGetWithSignature("/sapi/v1/margin/account", builder);
 
         request.jsonParser = (jsonWrapper -> {
             MarginAccount result = new MarginAccount();
