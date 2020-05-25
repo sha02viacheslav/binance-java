@@ -1793,7 +1793,7 @@ class RestApiRequestImpl {
                 orderArray.forEach((val) -> {
                     OcoOrder order = new OcoOrder();
                     order.setSymbol(item.getString("symbol"));
-                    order.setOrderId(item.getLong("orderId"));
+                    order.setOrderId(item.getLongOrDefault("orderId", -1));
                     order.setClientOrderId(item.getString("clientOrderId"));
                     orderList.add(order);
                 });
@@ -1828,7 +1828,7 @@ class RestApiRequestImpl {
                 orderArray.forEach((val) -> {
                     OcoOrder order = new OcoOrder();
                     order.setSymbol(item.getString("symbol"));
-                    order.setOrderId(item.getLong("orderId"));
+                    order.setOrderId(item.getLongOrDefault("orderId", -1));
                     order.setClientOrderId(item.getString("clientOrderId"));
                     orderList.add(order);
                 });
