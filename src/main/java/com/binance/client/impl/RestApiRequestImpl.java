@@ -319,9 +319,9 @@ class RestApiRequestImpl {
         return request;
     }
 
-    RestApiRequest<Long> postWithdrawSapi(String coin, String address, String amount, String network, String addressTag,
+    RestApiRequest<String> postWithdrawSapi(String coin, String address, String amount, String network, String addressTag,
             String name) {
-        RestApiRequest<Long> request = new RestApiRequest<>();
+        RestApiRequest<String> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("coin", coin)
                 .putToUrl("address", address)
@@ -332,15 +332,15 @@ class RestApiRequestImpl {
         request.request = createRequestByPostWithSignature("/sapi/v1/capital/withdraw/apply", builder);
 
         request.jsonParser = (jsonWrapper -> {
-            Long result = jsonWrapper.getLong("id");
+            String result = jsonWrapper.getString("id");
             return result;
         });
         return request;
     }
 
-    RestApiRequest<Long> postWithdraw(String asset, String address, String amount, String network, 
+    RestApiRequest<String> postWithdraw(String asset, String address, String amount, String network, 
             String addressTag, String name) {
-        RestApiRequest<Long> request = new RestApiRequest<>();
+        RestApiRequest<String> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("asset", asset)
                 .putToUrl("address", address)
@@ -351,7 +351,7 @@ class RestApiRequestImpl {
         request.request = createRequestByPostWithSignature("/wapi/v3/withdraw.html", builder);
 
         request.jsonParser = (jsonWrapper -> {
-            Long result = jsonWrapper.getLong("id");
+            String result = jsonWrapper.getString("id");
             return result;
         });
         return request;
