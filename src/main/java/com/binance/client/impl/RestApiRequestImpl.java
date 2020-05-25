@@ -556,9 +556,9 @@ class RestApiRequestImpl {
             result.setPlannedRecoverTime(jsondata.getLong("plannedRecoverTime"));
             result.setUpdateTime(jsondata.getLong("updateTime"));
             TriggerCondition triggerCondition = new TriggerCondition();
-            triggerCondition.setGCR(jsondata.getJsonObject("triggerCondition").getString("GCR"));
-            triggerCondition.setIFER(jsondata.getJsonObject("triggerCondition").getString("IFER"));
-            triggerCondition.setUFR(jsondata.getJsonObject("triggerCondition").getString("UFR"));
+            triggerCondition.setGCR(jsondata.getJsonObject("triggerCondition").getString("gCR"));
+            triggerCondition.setIFER(jsondata.getJsonObject("triggerCondition").getString("iFER"));
+            triggerCondition.setUFR(jsondata.getJsonObject("triggerCondition").getString("uFR"));
             result.setTriggerCondition(triggerCondition);
             List<Indicator> indicatorList =  new LinkedList<>();
 
